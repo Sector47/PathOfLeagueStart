@@ -1,0 +1,16 @@
+﻿COL1
+Melee
+Magic
+Ranged
+COL2
+Staff
+Wand
+Bow
+1H Axe
+1H Mace
+1H Sword
+2H Axe
+2H Mace
+2H Sword
+COL3
+COL4
