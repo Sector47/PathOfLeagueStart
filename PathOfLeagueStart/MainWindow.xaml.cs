@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -14,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml;
 
 namespace PathOfLeagueStart
 {
@@ -27,8 +29,9 @@ namespace PathOfLeagueStart
         public MainWindow()
         {
             InitializeComponent();
-            populateListBox();
             checkValidLogPath();
+            UpdateGUI();
+            downloadSkillGemData();
         }
 
         private void checkValidLogPath()
@@ -40,42 +43,24 @@ namespace PathOfLeagueStart
             }
         }
 
+        private void downloadSkillGemData()
+        {
+            //Grab the skill gem data from the poe wiki using cargoquery. Save it as xml/ Create skill gem items using this data.
+            XmlDocument skillGemXml = new XmlDocument();
+            skillGemXml.Load("https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction%20&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=xml");
+            skillGemXml.Save(@"Data/itemData.xml");
+            /*using (WebClient client = new WebClient())
+            {
+                client.DownloadFile("https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction%20&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=xml",
+                    @"Data/itemData.xml");
+            }*/
+        }
+
         private void enterLogPath()
         {
             // prompt user for valid log path. Change that 
             logFilePath = Microsoft.VisualBasic.Interaction.InputBox("Please enter a valid location for the Path of exile log file. This is required for the program to work. It should be located in the game directory Grinding Gear Games\\Path of Exile\\logs ", "Title", "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs");
             checkValidLogPath();
-        }
-
-        private void populateListBox()
-        {
-            string line;
-            int columnToWriteTo = 0;
-            System.IO.StreamReader file = new StreamReader(@"Data/listBoxData.txt");
-            while ((line = file.ReadLine()) != null)
-            {
-                if (line.Contains("COL"))
-                {
-                    columnToWriteTo = Convert.ToInt32(Regex.Replace(line, "[^0-9]", string.Empty));
-                }
-                else
-                {
-                    switch (columnToWriteTo)
-                    {
-                        case 1:
-                            ListBoxType.Items.Add(line);
-                            break;
-                        case 2:
-                            ListBoxWeapon.Items.Add(line);
-                            break;
-                        case 3:
-                            ListBoxSkills.Items.Add(line);
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
         }
 
         private void populateListBox(string selectedItem)
@@ -95,6 +80,31 @@ namespace PathOfLeagueStart
         private void UpdateGUI()
         {
             // Update GUI
+            // Fills First 2 list boxes using the listBoxData.txt
+            string line;
+            int columnToWriteTo = 0;
+            System.IO.StreamReader file = new StreamReader(@"Data/listBoxData.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                columnToWriteTo = Convert.ToInt32(Char.GetNumericValue(line, 3));
+
+                switch (columnToWriteTo)
+                {
+                    case 1:
+                        ListBoxType.Items.Add(line.Substring(5, line.Length - 5));
+                        break;
+                    case 2:
+                        ListBoxWeapon.Items.Add(line.Substring(5, line.Length - 5));
+                        break;
+                    default:
+                        break;
+                }
+            }
+            // populate the list box 3 using the itemData.xml based on the item restrictions vs the selected weapon.
+            ListBoxType.Items.Clear();
+            //foreach()
+            // Populate the support gems based on the selected skill gems.
+
         }
 
         private void UpdateConfig()
