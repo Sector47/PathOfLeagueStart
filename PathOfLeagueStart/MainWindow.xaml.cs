@@ -26,12 +26,14 @@ namespace PathOfLeagueStart
     {
         private string logFilePath = File.ReadLines(@"Data/config.txt").Take(1).First()
             .Substring(13, File.ReadLines(@"Data/config.txt").Take(1).First().Length - 14);
+        private List<Gem> allSkillGems;
+
         public MainWindow()
         {
             InitializeComponent();
-            checkValidLogPath();
-            UpdateGUI();
-            downloadSkillGemData();
+            this.checkValidLogPath();
+            this.UpdateGUI();
+            this.downloadSkillGemData();
         }
 
         private void checkValidLogPath()
@@ -45,22 +47,26 @@ namespace PathOfLeagueStart
 
         private void downloadSkillGemData()
         {
+            // download json file.
+
             //Grab the skill gem data from the poe wiki using cargoquery. Save it as xml/ Create skill gem items using this data.
+            /*
             XmlDocument skillGemXml = new XmlDocument();
-            skillGemXml.Load("https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction%20&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=xml");
+            skillGemXml.Load("https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction,skill_gems.gem_tags,items.stat_text&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=xml");
             skillGemXml.Save(@"Data/itemData.xml");
-            /*using (WebClient client = new WebClient())
+            Console.WriteLine(skillGemXml.DocumentElement.Name);
+            foreach (XmlNode xNode in skillGemXml.DocumentElement.ChildNodes[2].ChildNodes)
             {
-                client.DownloadFile("https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction%20&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=xml",
-                    @"Data/itemData.xml");
-            }*/
+                //Console.WriteLine();
+            }
+            */
         }
 
         private void enterLogPath()
         {
             // prompt user for valid log path. Change that 
             logFilePath = Microsoft.VisualBasic.Interaction.InputBox("Please enter a valid location for the Path of exile log file. This is required for the program to work. It should be located in the game directory Grinding Gear Games\\Path of Exile\\logs ", "Title", "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs");
-            checkValidLogPath();
+            this.checkValidLogPath();
         }
 
         private void populateListBox(string selectedItem)
@@ -101,9 +107,14 @@ namespace PathOfLeagueStart
                 }
             }
             // populate the list box 3 using the itemData.xml based on the item restrictions vs the selected weapon.
-            ListBoxType.Items.Clear();
+            // first clear previous list
+            ListBoxSkills.Items.Clear();
+            // Then read the list of gems we created when downloading skill gem xml
+            // Insert any gems that match the selected weapon tag. If magic is selected list all spells instead.
             //foreach()
             // Populate the support gems based on the selected skill gems.
+            // If a skill gem is selected we will search stat_text(stat.20.text) for weapon names ie: axes to see if the support and support the selected skill by verifying it matches the current weapon and the skills tags?
+            // For now it will just populate all support gems because of no easy query for this. Possibly grab poedb.tw data? Otherwise parse the stat_text for can be used by or cannot be used with
 
         }
 
