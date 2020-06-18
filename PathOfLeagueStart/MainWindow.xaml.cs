@@ -113,6 +113,8 @@ namespace PathOfLeagueStart
             this.updateGUI();
             // restore previous selections if possible
             this.restorePreviousSelection();
+            // Update the known info
+            this.updateKnownInfo();
             // Save new current selection to config.
             this.UpdateConfig();
         }
@@ -121,9 +123,13 @@ namespace PathOfLeagueStart
         {
             // Clear the supports
             ListBoxSupports.Items.Clear();
+            // Store current selected skills for updating known info
+            this.savePreviousSelection();
             // Update the list boxes with current valid options
             // overload update gui to only update the supports listbox.
             this.updateGUI("skills");
+            // Update the known info
+            this.updateKnownInfo();
             // Save new current selection to config.
             this.UpdateConfig();
         }
@@ -139,6 +145,8 @@ namespace PathOfLeagueStart
             this.updateGUI();
             // restore previous selections if possible
             this.restorePreviousSelection();
+            // Update the known info
+            this.updateKnownInfo();
             // Save new current selection to config.
             this.UpdateConfig();
         }
@@ -180,6 +188,8 @@ namespace PathOfLeagueStart
             {
                 ListBoxSkills.SelectedItems.Add(s);
             }
+            // Clear saved selected items and refresh them.
+            this.savePreviousSelection();
         }
         private void updateGUI()
         {
@@ -205,10 +215,38 @@ namespace PathOfLeagueStart
             // ie: if you pass through Sunder it will fill in all supports able to support Sunder in the support list box using the selected weapon from weapon list box
             // If a skill gem is selected we will search stat_text(stat.20.text) for weapon names ie: axes to see if the support and support the selected skill by verifying it matches the current weapon and the skills tags?
             // For now it will just populate all support gems because of no easy query for this. Possibly grab poedb.tw data? Otherwise parse the stat_text for can be used by or cannot be used with
+        }
 
+        // overloaded updategui to handle only skill or support listbox change selection so as not to duplicate items in listbox
+        private void updateGUI(string listBoxName)
+        {
+            foreach (Gem g in allSkillGems)
+            {
+                if (g.gem_tags.Contains("Support") && listBoxName == "skills")
+                {
+                    // TODO add checks to correct supports being generated
+                    ListBoxSupports.Items.Add(g.name);
+                     
+                }
+            }
+        }
+
+        // update the display of known info with all known info.
+        private void updateKnownInfo()
+        {
             // Fill known information text block with known information.
             TextBlockKnownInformation.Text =
-                "Character Level: " + /*insertcharacterlevel*/"\n";
+                "Character Level: " + /*insertcharacterlevel*/"\n\n";
+            // Show current zone
+            TextBlockKnownInformation.Text += "Current Zone: " + "\n\n";
+            // show next area
+
+            // show skill gems available in town this will go in seperate text block
+            TextBlockAvailableGems.Text = "These gems are available in town from vendors:\n" + "\n" +
+                                          "\nThese gems are available as a quest reward\n";
+            // show any current quest commands
+            TextBlockCommands.Text = "To send a command whisper \"a\" in game.\n\nCommands:\n\nCompleted current quest = @a:y\n\nCurrent Character level = x @a:level x\nx must be an integer between 1-100 This will update on it's own upon level up.\n\nClear available gem x @a:x\n x is the number next to the gem";
+
             if (selectedSkillGems != null)
             {
                 TextBlockKnownInformation.Text += "Selected Active Skill Gems: ";
@@ -221,25 +259,22 @@ namespace PathOfLeagueStart
                 }
                 // Cull the extra comma and space
                 TextBlockKnownInformation.Text = TextBlockKnownInformation.Text.Substring(0, TextBlockKnownInformation.Text.Length - 2);
-            }
-        }
 
-        // overloaded updategui to handle only skill or support listbox change selection so as not to duplicate items in listbox
-        private void updateGUI(string listBoxName)
-        {
-            foreach (Gem g in allSkillGems)
-            {
-                if (g.gem_tags.Contains("Support") && listBoxName == "skills")
+                TextBlockKnownInformation.Text += "\n\nSelected Support Gems: ";
+                foreach (Gem g in selectedSupportGems)
                 {
-                    if (g.item_class_id_restriction == string.Empty ||
-                        g.item_class_id_restriction.Contains(ListBoxWeapon.SelectedItem.ToString()))
+                    if (g != null)
                     {
-                        ListBoxSupports.Items.Add(g.name);
+                        TextBlockKnownInformation.Text += g.name + ", ";
                     }
-
                 }
+                // Cull the extra comma and space
+                TextBlockKnownInformation.Text = TextBlockKnownInformation.Text.Substring(0, TextBlockKnownInformation.Text.Length - 2);
+
+                
             }
         }
+
         // Gets the gem with the given name
         private Gem getGem(string gemName)
         {
@@ -255,6 +290,52 @@ namespace PathOfLeagueStart
         private void UpdateConfig()
         {
 
+        }
+
+        private void ListBoxSupports_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Store data of current selected items
+            this.savePreviousSelection();
+            // Update the known info
+            this.updateKnownInfo();
+            // Save new current selection to config.
+            this.UpdateConfig();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            // toggle visibility of listboxes to freeze skill gem selection
+            if (ListBoxType.Visibility == Visibility.Visible)
+            {
+                ListBoxType.Visibility = Visibility.Collapsed;
+                ListBoxSkills.Visibility = Visibility.Collapsed;
+                ListBoxWeapon.Visibility = Visibility.Collapsed;
+                ListBoxSupports.Visibility = Visibility.Collapsed;
+                foreach (var s in GridDisplay.Children)
+                {
+                    if (s is ScrollViewer)
+                    {
+                        ScrollViewer sv = s as ScrollViewer;
+                        Grid.SetRow(sv, 0);
+                    }
+                    
+                }
+            }
+            else
+            {
+                ListBoxType.Visibility = Visibility.Visible;
+                ListBoxSkills.Visibility = Visibility.Visible;
+                ListBoxWeapon.Visibility = Visibility.Visible;
+                ListBoxSupports.Visibility = Visibility.Visible;
+                foreach (var s in GridDisplay.Children)
+                {
+                    if (s is ScrollViewer)
+                    {
+                        ScrollViewer sv = s as ScrollViewer;
+                        Grid.SetRow(sv, 1);
+                    }
+                }
+            }
         }
     }
 }

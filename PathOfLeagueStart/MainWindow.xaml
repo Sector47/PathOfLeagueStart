@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:PathOfLeagueStart"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid x:Name="GridDisplay">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
@@ -14,15 +14,23 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
         <ListBox x:Name="ListBoxType" Grid.Column="0" SelectionChanged="ListBoxType_SelectionChanged"/>
         <ListBox x:Name="ListBoxWeapon" Grid.Column="1" SelectionChanged="ListBoxWeapon_SelectionChanged"/>
         <ListBox x:Name="ListBoxSkills" Grid.Column="2"  SelectionMode="Multiple" SelectionChanged="ListBoxSkills_SelectionChanged"/>
-        <ListBox x:Name="ListBoxSupports" Grid.Column="3" SelectionMode="Multiple"/>
-        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+        <ListBox x:Name="ListBoxSupports" Grid.Column="3" SelectionMode="Multiple" SelectionChanged="ListBoxSupports_SelectionChanged"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="TextBlockKnownInformation"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6A6"/>
         </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="TextBlockAvailableGems"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6B6"/>
+        </ScrollViewer>
+        <ScrollViewer Grid.Row="1" Grid.Column="3" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="TextBlockCommands"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6A6"/>
+        </ScrollViewer>
+        <Button Content="Toggle Selections" Grid.Column="3" Grid.Row="2" Click="Button_Click"/>
     </Grid>
 </Window>
