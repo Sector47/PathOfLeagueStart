@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml;
+using Newtonsoft.Json.Linq;
 
 namespace PathOfLeagueStart
 {
@@ -26,13 +28,15 @@ namespace PathOfLeagueStart
     {
         private string logFilePath = File.ReadLines(@"Data/config.txt").Take(1).First()
             .Substring(13, File.ReadLines(@"Data/config.txt").Take(1).First().Length - 14);
-        private List<Gem> allSkillGems;
+        List<Gem> allSkillGems = new List<Gem>();
+        private List<Gem> selectedSkillGems = new List<Gem>();
+        private List<Gem> selectedSupportGems = new List<Gem>();
 
         public MainWindow()
         {
             InitializeComponent();
             this.checkValidLogPath();
-            this.UpdateGUI();
+            this.populateListBox();
             this.downloadSkillGemData();
         }
 
@@ -48,18 +52,21 @@ namespace PathOfLeagueStart
         private void downloadSkillGemData()
         {
             // download json file.
-
-            //Grab the skill gem data from the poe wiki using cargoquery. Save it as xml/ Create skill gem items using this data.
-            /*
-            XmlDocument skillGemXml = new XmlDocument();
-            skillGemXml.Load("https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction,skill_gems.gem_tags,items.stat_text&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=xml");
-            skillGemXml.Save(@"Data/itemData.xml");
-            Console.WriteLine(skillGemXml.DocumentElement.Name);
-            foreach (XmlNode xNode in skillGemXml.DocumentElement.ChildNodes[2].ChildNodes)
+            using (WebClient wc = new WebClient())
             {
-                //Console.WriteLine();
+                string jsonFile = wc.DownloadString(
+                    "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction,skill_gems.gem_tags,items.stat_text&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=json");
+
+                // Make a JObject from parsing the json file, then make a list of json Tokens from that jobject skipping through the blank parent, cargoquery parent, and title parent. Use this list of tokens to create skill gems
+                JObject gemJObject = JObject.Parse(jsonFile);
+                List<JToken> results = gemJObject["cargoquery"].Children().Children().Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    Gem gem = result.ToObject<Gem>();
+                    allSkillGems.Add(gem);
+                }
             }
-            */
         }
 
         private void enterLogPath()
@@ -69,23 +76,8 @@ namespace PathOfLeagueStart
             this.checkValidLogPath();
         }
 
-        private void populateListBox(string selectedItem)
+        private void populateListBox()
         {
-            // will populate skill gem or support gem list box depending on name of item selected
-            // ie: if you pass through magic it will ignore weapon choice and fill in all spells in skill list box
-            // ie: if you pass through 2h axe and have selected melee it will fill the skill gems with all gems able to be used by 2h Axes in the skill gem list box
-            // ie: if you pass through Sunder it will fill in all supports able to support Sunder in the support list box using the selected weapon from weapon list box
-        }
-
-        private void ListBoxType_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            this.UpdateGUI();
-            this.UpdateConfig();
-        }
-
-        private void UpdateGUI()
-        {
-            // Update GUI
             // Fills First 2 list boxes using the listBoxData.txt
             string line;
             int columnToWriteTo = 0;
@@ -106,16 +98,111 @@ namespace PathOfLeagueStart
                         break;
                 }
             }
+        }
+
+        private void ListBoxType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.UpdateGUI();
+            this.UpdateConfig();
+        }
+
+        private void ListBoxSkills_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.UpdateGUI();
+            this.UpdateConfig();
+        }
+
+        private void ListBoxWeapon_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.UpdateGUI();
+            this.UpdateConfig();
+        }
+
+        private void UpdateGUI()
+        {
+            // Update GUI
             // populate the list box 3 using the itemData.xml based on the item restrictions vs the selected weapon.
-            // first clear previous list
+            // Clear temp selected skill gems
+            selectedSkillGems.Clear();
+            selectedSupportGems.Clear();
+            // First store the previous selected active skills to select them if they are still available and support gems.
+            foreach (var selectedItem in ListBoxSkills.SelectedItems)
+            {
+                selectedSkillGems.Add(getGem(selectedItem.ToString()));
+            }
+            // then clear previous lists
             ListBoxSkills.Items.Clear();
+            ListBoxSupports.Items.Clear();
             // Then read the list of gems we created when downloading skill gem xml
             // Insert any gems that match the selected weapon tag. If magic is selected list all spells instead.
-            //foreach()
             // Populate the support gems based on the selected skill gems.
+            // will populate skill gem or support gem list box depending on name of item selected
+            foreach (Gem g in allSkillGems)
+            {
+                if (g.gem_tags.Contains("Support"))
+                {
+                    ListBoxSupports.Items.Add(g.name);
+                }
+                else if(ListBoxWeapon.SelectedItem != null)
+                {
+                    string test = ListBoxWeapon.SelectedItem.ToString();
+                    if(g.item_class_id_restriction.Contains(ListBoxWeapon.SelectedItem.ToString()))
+                    ListBoxSkills.Items.Add(g.name);
+                }
+            }
+            // Reselect items that were previously selected if they are still valid
+            foreach (Gem g in selectedSkillGems)
+            {
+                foreach (var i in ListBoxSkills.Items)
+                {
+                    if (i.ToString() == g.name)
+                    {
+                        ListBoxSkills.SelectedItem = g.name;
+                    }
+                }
+            }
+
+            foreach (Gem g in selectedSupportGems)
+            {
+
+            }
+
+
+
+
+            // ie: if you pass through magic it will ignore weapon choice and fill in all spells in skill list box
+            // ie: if you pass through 2h axe and have selected melee it will fill the skill gems with all gems able to be used by 2h Axes in the skill gem list box
+            // ie: if you pass through Sunder it will fill in all supports able to support Sunder in the support list box using the selected weapon from weapon list box
             // If a skill gem is selected we will search stat_text(stat.20.text) for weapon names ie: axes to see if the support and support the selected skill by verifying it matches the current weapon and the skills tags?
             // For now it will just populate all support gems because of no easy query for this. Possibly grab poedb.tw data? Otherwise parse the stat_text for can be used by or cannot be used with
 
+            // Fill known information text block with known information.
+            TextBlockKnownInformation.Text =
+                "Character Level: " + /*insertcharacterlevel*/"\n";
+            if (selectedSkillGems != null)
+            {
+                TextBlockKnownInformation.Text += "Selected Active Skill Gems: ";
+                foreach (Gem g in selectedSkillGems)
+                {
+                    if (g != null)
+                    {
+                        TextBlockKnownInformation.Text += g.name + ", ";
+                    }
+                }
+                // Cull the extra comma and space
+                TextBlockKnownInformation.Text = TextBlockKnownInformation.Text.Substring(0, TextBlockKnownInformation.Text.Length - 2);
+            }
+        }
+        // Gets the gem with the given name
+        private Gem getGem(string gemName)
+        {
+            foreach (Gem g in allSkillGems)
+            {
+                if (g.name == gemName)
+                    return g;
+            }
+
+            return null;
         }
 
         private void UpdateConfig()

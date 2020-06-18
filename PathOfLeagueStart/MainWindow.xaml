@@ -18,8 +18,11 @@
             <RowDefinition Height="3*"/>
         </Grid.RowDefinitions>
         <ListBox x:Name="ListBoxType" Grid.Column="0" SelectionChanged="ListBoxType_SelectionChanged"/>
-        <ListBox x:Name="ListBoxWeapon" Grid.Column="1" SelectionChanged="ListBoxType_SelectionChanged"/>
-        <ListBox x:Name="ListBoxSkills" Grid.Column="2" SelectionChanged="ListBoxType_SelectionChanged"/>
-        <ListBox x:Name="ListBoxSupports" Grid.Column="3" SelectionChanged="ListBoxType_SelectionChanged"/>
+        <ListBox x:Name="ListBoxWeapon" Grid.Column="1" SelectionChanged="ListBoxWeapon_SelectionChanged"/>
+        <ListBox x:Name="ListBoxSkills" Grid.Column="2"  SelectionMode="Multiple" SelectionChanged="ListBoxSkills_SelectionChanged"/>
+        <ListBox x:Name="ListBoxSupports" Grid.Column="3" SelectionMode="Multiple"/>
+        <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="TextBlockKnownInformation"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True"/>
+        </ScrollViewer>
     </Grid>
 </Window>
