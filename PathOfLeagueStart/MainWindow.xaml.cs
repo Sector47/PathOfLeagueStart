@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -102,26 +103,48 @@ namespace PathOfLeagueStart
 
         private void ListBoxType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.UpdateGUI();
+            Console.WriteLine(sender.ToString());
+            // save previous selections
+            this.savePreviousSelection();
+            // Clear the skills and supports
+            ListBoxSkills.Items.Clear();
+            ListBoxSupports.Items.Clear();
+            // Update the list boxes with current valid options
+            this.updateGUI();
+            // restore previous selections if possible
+            this.restorePreviousSelection();
+            // Save new current selection to config.
             this.UpdateConfig();
         }
 
         private void ListBoxSkills_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.UpdateGUI();
+            // Clear the supports
+            ListBoxSupports.Items.Clear();
+            // Update the list boxes with current valid options
+            // overload update gui to only update the supports listbox.
+            this.updateGUI("skills");
+            // Save new current selection to config.
             this.UpdateConfig();
         }
 
         private void ListBoxWeapon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            this.UpdateGUI();
+            // save previous selections
+            this.savePreviousSelection();
+            // Clear the skills and supports
+            ListBoxSkills.Items.Clear();
+            ListBoxSupports.Items.Clear();
+            // Update the list boxes with current valid options
+            this.updateGUI();
+            // restore previous selections if possible
+            this.restorePreviousSelection();
+            // Save new current selection to config.
             this.UpdateConfig();
         }
 
-        private void UpdateGUI()
+        private void savePreviousSelection()
         {
-            // Update GUI
-            // populate the list box 3 using the itemData.xml based on the item restrictions vs the selected weapon.
             // Clear temp selected skill gems
             selectedSkillGems.Clear();
             selectedSupportGems.Clear();
@@ -130,13 +153,39 @@ namespace PathOfLeagueStart
             {
                 selectedSkillGems.Add(getGem(selectedItem.ToString()));
             }
-            // then clear previous lists
-            ListBoxSkills.Items.Clear();
-            ListBoxSupports.Items.Clear();
-            // Then read the list of gems we created when downloading skill gem xml
+            foreach (var selectedItem in ListBoxSupports.SelectedItems)
+            {
+                selectedSupportGems.Add(getGem(selectedItem.ToString()));
+            }
+        }
+
+        private void restorePreviousSelection()
+        {
+            // List to store which items to select after looping through listbox because you can't continue searching through a listbox after modifying it.
+            List<string> foundMatches = new List<string>();
+            // Reselect items that were previously selected if they are still valid
+            foreach (Gem g in selectedSkillGems)
+            {
+                foreach (var i in ListBoxSkills.Items)
+                {
+                    Console.Write("asdlf");
+                    if (i.ToString() == g.name)
+                    {
+                        foundMatches.Add(i.ToString());
+                    }
+                }
+            }
+
+            foreach (string s in foundMatches)
+            {
+                ListBoxSkills.SelectedItems.Add(s);
+            }
+        }
+        private void updateGUI()
+        {
+            // Update GUI
+            // populate the list box 3 using the downloaded json
             // Insert any gems that match the selected weapon tag. If magic is selected list all spells instead.
-            // Populate the support gems based on the selected skill gems.
-            // will populate skill gem or support gem list box depending on name of item selected
             foreach (Gem g in allSkillGems)
             {
                 if (g.gem_tags.Contains("Support"))
@@ -147,28 +196,9 @@ namespace PathOfLeagueStart
                 {
                     string test = ListBoxWeapon.SelectedItem.ToString();
                     if(g.item_class_id_restriction.Contains(ListBoxWeapon.SelectedItem.ToString()))
-                    ListBoxSkills.Items.Add(g.name);
+                        ListBoxSkills.Items.Add(g.name);
                 }
             }
-            // Reselect items that were previously selected if they are still valid
-            foreach (Gem g in selectedSkillGems)
-            {
-                foreach (var i in ListBoxSkills.Items)
-                {
-                    if (i.ToString() == g.name)
-                    {
-                        ListBoxSkills.SelectedItem = g.name;
-                    }
-                }
-            }
-
-            foreach (Gem g in selectedSupportGems)
-            {
-
-            }
-
-
-
 
             // ie: if you pass through magic it will ignore weapon choice and fill in all spells in skill list box
             // ie: if you pass through 2h axe and have selected melee it will fill the skill gems with all gems able to be used by 2h Axes in the skill gem list box
@@ -191,6 +221,23 @@ namespace PathOfLeagueStart
                 }
                 // Cull the extra comma and space
                 TextBlockKnownInformation.Text = TextBlockKnownInformation.Text.Substring(0, TextBlockKnownInformation.Text.Length - 2);
+            }
+        }
+
+        // overloaded updategui to handle only skill or support listbox change selection so as not to duplicate items in listbox
+        private void updateGUI(string listBoxName)
+        {
+            foreach (Gem g in allSkillGems)
+            {
+                if (g.gem_tags.Contains("Support") && listBoxName == "skills")
+                {
+                    if (g.item_class_id_restriction == string.Empty ||
+                        g.item_class_id_restriction.Contains(ListBoxWeapon.SelectedItem.ToString()))
+                    {
+                        ListBoxSupports.Items.Add(g.name);
+                    }
+
+                }
             }
         }
         // Gets the gem with the given name

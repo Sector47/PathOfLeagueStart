@@ -22,7 +22,7 @@
         <ListBox x:Name="ListBoxSkills" Grid.Column="2"  SelectionMode="Multiple" SelectionChanged="ListBoxSkills_SelectionChanged"/>
         <ListBox x:Name="ListBoxSupports" Grid.Column="3" SelectionMode="Multiple"/>
         <ScrollViewer Grid.Row="1" Grid.Column="0" VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="TextBlockKnownInformation"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True"/>
+            <TextBlock x:Name="TextBlockKnownInformation"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6A6"/>
         </ScrollViewer>
     </Grid>
 </Window>
