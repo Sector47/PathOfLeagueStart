@@ -1,0 +1,1283 @@
+<?xml version="1.0"?>
+<api>
+  <cargoquery>
+    <p>
+      <title name="Abyssal Cry" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Added Chaos Damage Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Added Cold Damage Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Added Fire Damage Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Added Lightning Damage Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Additional Accuracy Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Advanced Traps Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ancestral Call Support" _level.20.requirement="4" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ancestral Protector" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Unarmed,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Ancestral Warchief" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Unarmed,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Anger" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Animate Guardian" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Animate Weapon" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Arc" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Arcane Cloak" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Arcane Surge Support" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Archmage Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Arctic Armour" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Arctic Armour" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Arctic Breath" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Armageddon Brand" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Arrow Nova Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Artillery Ballista" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Assassin's Mark" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Added Chaos Damage Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Added Cold Damage Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Added Fire Damage Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Added Lightning Damage Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Ancestral Call Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Arrow Nova Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Blasphemy Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Brutality Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Burning Damage Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Cast On Critical Strike Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Cast While Channelling Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Chain Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Cold Penetration Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Controlled Destruction Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Curse On Hit Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Deadly Ailments Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Elemental Damage With Attacks Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Elemental Focus Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Fire Penetration Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Fork Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Generosity Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Greater Multiple Projectiles Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Increased Area Of Effect Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Lightning Penetration Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Melee Physical Damage Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Melee Splash Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Minion Damage Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Multistrike Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Spell Cascade Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Spell Echo Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Swift Affliction Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Unbound Ailments Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Unleash Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Vicious Projectiles Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Awakened Void Manipulation Support" _level.20.requirement="72" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ballista Totem Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bane" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Barrage" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Bow,Wand" />
+    </p>
+    <p>
+      <title name="Barrage Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bear Trap" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Berserk" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blade Blast" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blade Flurry" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Blade Vortex" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bladefall" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bladestorm" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe" />
+    </p>
+    <p>
+      <title name="Blasphemy Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blast Rain" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Blastchain Mine Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blight" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blind Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blink Arrow" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Block Chance Reduction Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blood and Sand" _level.20.requirement="4" tags="level_capped_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blood Magic Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Blood Rage" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bloodlust Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bodyswap" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bone Offering" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bone Offering" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Bonechill Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Brand Recall" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Brutality Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Burning Arrow" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Burning Damage Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cast On Critical Strike Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cast on Death Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cast on Melee Kill Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cast when Damage Taken Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cast when Stunned Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cast while Channelling Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Caustic Arrow" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Chain Hook" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre" />
+    </p>
+    <p>
+      <title name="Chain Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Chance to Bleed Support" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Chance to Flee Support" _level.20.requirement="8" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Charged Dash" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Charged Mines Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Charged Traps Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Clarity" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cleave" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,One Hand Axe,Two Hand Sword,Two Hand Axe" />
+    </p>
+    <p>
+      <title name="Close Combat Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cluster Traps Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cobra Lash" _level.20.requirement="1" tags="gem,default" _item.20.class.20.id.20.restriction="Dagger,Claw,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Cold Penetration Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cold Snap" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cold to Fire Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Combustion Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Concentrated Effect Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Conductivity" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Consecrated Path" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe,One Hand Mace,Sceptre,Two Hand Mace,Staff,Unarmed,Warstaff" />
+    </p>
+    <p>
+      <title name="Contagion" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Controlled Destruction Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Conversion Trap" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Convocation" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cremation" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Culling Strike Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Curse On Hit Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Cyclone" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Unarmed,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Damage on Full Life Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Dark Pact" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Dash" _level.20.requirement="4" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Deadly Ailments Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Deathmark Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Decay Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Decoy Totem" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Desecrate" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Despair" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Determination" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Detonate Dead" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Detonate Mines" _level.20.requirement="8" tags="level_capped_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Devouring Totem" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Discharge" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Discipline" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Divine Ire" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Dominating Blow" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe,One Hand Mace,Sceptre,Two Hand Mace,Staff,Dagger,Claw,Unarmed,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Double Strike" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Dread Banner" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Dual Strike" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Two Hand Axe,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Earthquake" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Axe,Two Hand Mace,Warstaff" />
+    </p>
+    <p>
+      <title name="Efficacy Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Elemental Army Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Elemental Damage with Attacks Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Elemental Focus Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Elemental Hit" _level.20.requirement="12" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Elemental Proliferation Support" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Elemental Weakness" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Empower Support" _level.20.requirement="1" tags="level_capped_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Endurance Charge on Melee Stun Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Enduring Cry" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Energy Leech Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Enfeeble" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Enhance Support" _level.20.requirement="1" tags="level_capped_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Enlighten Support" _level.20.requirement="1" tags="level_capped_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ensnaring Arrow" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Essence Drain" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ethereal Knives" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Explosive Arrow" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Explosive Trap" _level.20.requirement="1" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Faster Attacks Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Faster Casting Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Faster Projectiles Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Feeding Frenzy Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Fire Penetration Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Fire Trap" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Fireball" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Firestorm" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flame Dash" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flame Surge" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flameblast" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flamethrower Trap" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flammability" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flesh and Stone" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flesh Offering" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flesh Offering" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Flicker Strike" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Fork Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Fortify Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Freezing Pulse" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Frenzy" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Frost Blades" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Frost Bomb" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Frost Wall" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Frostbite" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Frostblink" _level.20.requirement="4" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Frostbolt" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Galvanic Arrow" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Generosity Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Glacial Cascade" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Glacial Hammer" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Mace,Sceptre,Two Hand Mace,Staff,Warstaff" />
+    </p>
+    <p>
+      <title name="Grace" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Greater Multiple Projectiles Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Greater Volley Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ground Slam" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Mace,Sceptre,Staff,Two Hand Mace,One Hand Axe,Two Hand Axe,Warstaff" />
+    </p>
+    <p>
+      <title name="Haste" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Hatred" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Heavy Strike" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,One Hand Sword,Thrusting One Hand Sword,Warstaff" />
+    </p>
+    <p>
+      <title name="Herald of Agony" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Herald of Ash" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Herald of Ice" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Herald of Purity" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Herald of Thunder" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="High-Impact Mine Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Holy Flame Totem" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Hypothermia Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ice Bite Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ice Crash" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Unarmed,Warstaff" />
+    </p>
+    <p>
+      <title name="Ice Nova" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ice Shot" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Ice Spear" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ice Trap" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Icicle Mine" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Ignite Proliferation Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Immolate Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Immortal Call" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Impale Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Incinerate" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Increased Area of Effect Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Increased Critical Damage Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Increased Critical Strikes Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Increased Duration Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Infernal Blow" _level.20.requirement="12" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe,One Hand Mace,Sceptre,Two Hand Mace,Staff,Unarmed,Warstaff" />
+    </p>
+    <p>
+      <title name="Infernal Legion Support" _level.20.requirement="8" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Infused Channelling Support" _level.20.requirement="4" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Innervate Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Inspiration Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Intensify Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Iron Grip Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Iron Will Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Item Quantity Support" _level.20.requirement="24" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Item Rarity Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Kinetic Blast" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Wand" />
+    </p>
+    <p>
+      <title name="Kinetic Bolt" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Wand" />
+    </p>
+    <p>
+      <title name="Knockback Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lacerate" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe,Thrusting One Hand Sword" />
+    </p>
+    <p>
+      <title name="Lancing Steel" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe" />
+    </p>
+    <p>
+      <title name="Leap Slam" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff" />
+    </p>
+    <p>
+      <title name="Less Duration Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lesser Multiple Projectiles Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lesser Poison Support" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Life Gain on Hit Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Life Leech Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lightning Arrow" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Lightning Penetration Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lightning Spire Trap" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lightning Strike" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Lightning Tendrils" _level.20.requirement="1" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lightning Trap" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Lightning Warp" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Magma Orb" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Maim Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Malevolence" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Mana Leech Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Meat Shield Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Melee Physical Damage Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Melee Splash Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Minefield Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Minion Damage Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Minion Life Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Minion Speed Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Mirage Archer Support" _level.20.requirement="4" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Mirror Arrow" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Molten Shell" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Molten Strike" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Multiple Totems Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Multiple Traps Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Multistrike Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Nightblade Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Onslaught Support" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Orb of Storms" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Perforate" _level.20.requirement="1" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe" />
+    </p>
+    <p>
+      <title name="Pestilent Strike" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Phase Run" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Physical to Lightning Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Pierce Support" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Plague Bearer" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Poacher's Mark" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Point Blank Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Poison Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Power Charge On Critical Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Power Siphon" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Wand" />
+    </p>
+    <p>
+      <title name="Precision" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Pride" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Projectile Weakness" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Pulverise Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Puncture" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow,Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Punishment" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Purifying Flame" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Purity of Elements" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Purity of Fire" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Purity of Ice" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Purity of Lightning" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Pyroclast Mine" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Rage Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Rain of Arrows" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Raise Spectre" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Raise Zombie" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Rallying Cry" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Reave" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Reckoning" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Unarmed,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Rejuvenation Totem" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Righteous Fire" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Riposte" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Unarmed,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Ruthless Support" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Scorching Ray" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Scourge Arrow" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Searing Bond" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Second Wind Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Seismic Trap" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Shattering Steel" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe" />
+    </p>
+    <p>
+      <title name="Shield Charge" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="Shield" />
+    </p>
+    <p>
+      <title name="Shock Nova" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Shockwave Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Mace,Sceptre,Two Hand Mace,Staff,Warstaff" />
+    </p>
+    <p>
+      <title name="Shockwave Totem" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Shrapnel Ballista" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Siege Ballista" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Siphoning Trap" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Slower Projectiles Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Smite" _level.20.requirement="1" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,One Hand Axe,Two Hand Axe,One Hand Mace,Sceptre,Two Hand Mace,Staff,Unarmed,Warstaff" />
+    </p>
+    <p>
+      <title name="Smoke Mine" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Soulrend" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Spark" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Spectral Shield Throw" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Shield" />
+    </p>
+    <p>
+      <title name="Spectral Throw" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Spell Cascade Support" _level.20.requirement="4" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Spell Echo Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Spell Totem Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Spellslinger" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Spirit Offering" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Split Arrow" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Static Strike" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Steelskin" _level.20.requirement="4" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Storm Brand" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Storm Burst" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Storm Call" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Stormbind" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Stormblast Mine" _level.20.requirement="1" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Stun Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Carrion Golem" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Chaos Golem" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Flame Golem" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Holy Relic" _level.20.requirement="4" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Ice Golem" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Lightning Golem" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Phantasm Support" _level.20.requirement="4" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Raging Spirit" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Skeletons" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Skitterbots" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Summon Stone Golem" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Sunder" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Mace,Sceptre,Staff,Two Hand Mace,One Hand Axe,Two Hand Axe,Warstaff" />
+    </p>
+    <p>
+      <title name="Sweep" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Staff,Two Hand Axe,Two Hand Mace,Two Hand Sword,Warstaff" />
+    </p>
+    <p>
+      <title name="Swift Affliction Support" _level.20.requirement="31" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Swift Assembly Support" _level.20.requirement="4" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Tectonic Slam" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Mace,Sceptre,Staff,Two Hand Mace,One Hand Axe,Two Hand Axe,One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,Unarmed,Warstaff" />
+    </p>
+    <p>
+      <title name="Tempest Shield" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Temporal Chains" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Tornado Shot" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Toxic Rain" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Trap and Mine Damage Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Trap Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Unbound Ailments Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Unearth" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Unleash Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Ancestral Warchief" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Unarmed,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vaal Arc" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Blade Vortex" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Blight" _level.20.requirement="1" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Breach" _level.20.requirement="10" tags="level_capped_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Burning Arrow" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Vaal Clarity" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Cold Snap" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Cyclone" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Unarmed,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vaal Detonate Dead" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Discipline" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Double Strike" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vaal Earthquake" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Axe,Two Hand Mace,Warstaff" />
+    </p>
+    <p>
+      <title name="Vaal Fireball" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Flameblast" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Glacial Hammer" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Mace,Sceptre,Two Hand Mace,Staff,Warstaff" />
+    </p>
+    <p>
+      <title name="Vaal Grace" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Ground Slam" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="One Hand Mace,Sceptre,Staff,Two Hand Mace,One Hand Axe,Two Hand Axe,Warstaff" />
+    </p>
+    <p>
+      <title name="Vaal Haste" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Ice Nova" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Immortal Call" _level.20.requirement="34" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Impurity of Fire" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Impurity of Ice" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Impurity of Lightning" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Lightning Strike" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vaal Lightning Trap" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Lightning Warp" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Molten Shell" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Power Siphon" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Wand" />
+    </p>
+    <p>
+      <title name="Vaal Rain of Arrows" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Bow" />
+    </p>
+    <p>
+      <title name="Vaal Reave" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vaal Righteous Fire" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Spark" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Spectral Throw" _level.20.requirement="1" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vaal Storm Call" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vaal Summon Skeletons" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vengeance" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Venom Gyre" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vicious Projectiles Support" _level.20.requirement="18" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vigilant Strike" _level.20.requirement="4" tags="up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vile Toxins Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Viper Strike" _level.20.requirement="1" tags="up_to_level_2_gem,up_to_level_8_gem,gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,Two Hand Sword,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Vitality" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Void Manipulation Support" _level.20.requirement="8" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Volatile Dead" _level.20.requirement="12" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Volley Support" _level.20.requirement="4" tags="up_to_level_8_gem,support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vortex" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Vulnerability" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="War Banner" _level.20.requirement="4" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Warlord's Mark" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Wave of Conviction" _level.20.requirement="16" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Whirling Blades" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="Dagger,One Hand Sword,Thrusting One Hand Sword,Claw,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Wild Strike" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="Claw,Dagger,One Hand Sword,Thrusting One Hand Sword,One Hand Axe,One Hand Mace,Sceptre,Staff,Two Hand Sword,Two Hand Axe,Two Hand Mace,Warstaff,Rune Dagger" />
+    </p>
+    <p>
+      <title name="Winter Orb" _level.20.requirement="28" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Wither" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Withering Step" _level.20.requirement="10" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Withering Touch Support" _level.20.requirement="38" tags="support_gem,gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Wrath" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+    <p>
+      <title name="Zealotry" _level.20.requirement="24" tags="gem,default" _item.20.class.20.id.20.restriction="" />
+    </p>
+  </cargoquery>
+</api>
