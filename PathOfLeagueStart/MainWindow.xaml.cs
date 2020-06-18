@@ -17,6 +17,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using System.Xml;
 using Newtonsoft.Json.Linq;
 
@@ -35,26 +36,43 @@ namespace PathOfLeagueStart
         private List<Quest> questRewardsList = new List<Quest>();
         private List<Vendor> vendorRewardList = new List<Vendor>();
         private List<Area> arealList = new List<Area>();
+        private StreamReader logReader;
+
+        // Variables used for currentKnownInformation
+        private int characterLevel = 0;
+        private string currentArea;
+        // areasEntered is used to verify which currentArea you are in as some areas share a name depending on the act like solaris temple level 1 has an act 3 and act 8 version.
         private List<string> areasEntered = new List<string>();
+
+
 
         public MainWindow()
         {
             InitializeComponent();
-            this.checkValidLogPath();
-            this.populateListBox();
-            this.downloadJSONData();
+            this.CheckValidLogPath();
+            this.PopulateListBox();
+            this.DownloadJSONData();
+            this.CreateFileWatcher(logFilePath);
+
+            // create a dispatchertimer to read the byte on a 1 second timer.
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick +=  new EventHandler(DispatcherTimer_Tick);
+            // set timer interval to 1 seconds and start timer
+            dispatcherTimer.Interval = new TimeSpan(0,0,0,0,100);
+            dispatcherTimer.Start();
+
         }
 
-        private void checkValidLogPath()
+        private void CheckValidLogPath()
         {
             // TODO fix check for valid file path. Maybe check to make the sure the file is the log file?
             if (logFilePath == null || logFilePath == "ENTERLOGPATHHERE")
             {
-                this.enterLogPath();
+                this.EnterLogPath();
             }
         }
 
-        private void downloadJSONData()
+        private void DownloadJSONData()
         {
             // download skill gem data
             using (WebClient wc = new WebClient())
@@ -129,14 +147,14 @@ namespace PathOfLeagueStart
 
         }
 
-        private void enterLogPath()
+        private void EnterLogPath()
         {
             // prompt user for valid log path. Change that 
             logFilePath = Microsoft.VisualBasic.Interaction.InputBox("Please enter a valid location for the Path of exile log file. This is required for the program to work. It should be located in the game directory Grinding Gear Games\\Path of Exile\\logs ", "Title", "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs");
-            this.checkValidLogPath();
+            this.CheckValidLogPath();
         }
 
-        private void populateListBox()
+        private void PopulateListBox()
         {
             // Fills First 2 list boxes using the listBoxData.txt
             string line;
@@ -320,9 +338,11 @@ namespace PathOfLeagueStart
         {
             // TODO Fill known information text block with known information.
             TextBlockKnownInformation.Text =
-                "Character Level: " + /*insertcharacterlevel*/"\n\n";
+                "Character Level: " + characterLevel + "\n\n";
             // Show current zone
-            TextBlockKnownInformation.Text += "Current Zone: " + "\n\n";
+            TextBlockKnownInformation.Text += "Current Zone: " + currentArea + "\n\n";
+            // Check if character level is too far below zone;
+            // if()
             // show next area 
 
             // show skill gems available in town this will go in seperate text block
@@ -373,9 +393,91 @@ namespace PathOfLeagueStart
             return null;
         }
 
+        // Gets the area with the given name
+        private Area getArea(string areaName)
+        {
+            foreach (Area a in arealList)
+            {
+                if (a.name == areaName)
+                {
+                    return a;
+                }
+            }
+
+            return null;
+        }
+
         private void UpdateConfig()
         {
 
+        }
+
+        private void CreateFileWatcher(string path)
+        {
+            // instead of FileSystemWatcher which can't update the file itself to view changes
+            // make a streamreader with filesharereadwrite.
+            // move streamreader to the end of file this allows us to know the lines that have changed since the streamreader was created
+            logReader = new StreamReader(new FileStream(logFilePath + "\\Client.txt", FileMode.Open, FileAccess.Read,
+                FileShare.ReadWrite)); // , Encoding.GetEncoding("windows-1252"));
+            logReader.ReadToEnd();
+
+        }
+
+        private void ReadLine(string line)
+        {
+            Console.WriteLine(line);
+            if (line.Contains("is now level "))
+            {
+                LevelChange(line);
+            }
+
+            if (line.Contains("You have entered "))
+            {
+                AreaChange(line, line.IndexOf("You have entered ") + 17);
+            }
+
+            updateKnownInfo();
+        }
+
+        private void LevelChange(string line)
+        {
+            try
+            {
+                characterLevel = Convert.ToInt32(line.Substring(line.Length - 2, 2));
+
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Probably a whisper\nCharacter level was not valid");
+            }
+        }
+
+        private void AreaChange(string line, int indexOfArea)
+        {
+            Console.WriteLine(indexOfArea + "\n\n" + line + "\n\n" + line.Substring(indexOfArea, line.Substring(indexOfArea).Length-1));
+            currentArea = line.Substring(indexOfArea, line.Substring(indexOfArea).Length - 1);
+        }
+
+        private void DispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            // Whenever the timer ticks we read through the lines until the end of the file using the streamreader we created.
+            // this allows read lines that have been added since the previous tick/creation
+            if (logReader != null)
+            {
+                string line;
+
+                while ((line = logReader.ReadLine()) != null)
+                {
+                    ReadLine(line);
+                }
+            }
+        }
+
+        // Define event handlers for the file system watcher.
+        private static void OnChanged(object source, FileSystemEventArgs e)
+        {
+            // Specify what is done when a file is changed, created, or deleted.
+            Console.WriteLine("File: " + e.FullPath + " " + e.ChangeType + DateTime.Now);
         }
 
         private void ListBoxSupports_SelectionChanged(object sender, SelectionChangedEventArgs e)

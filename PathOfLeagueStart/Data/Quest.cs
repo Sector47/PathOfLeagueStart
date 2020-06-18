@@ -14,7 +14,7 @@ namespace PathOfLeagueStart
         public string questName { get; set; }
 
         [JsonProperty("reward")]
-        public string teward { get; set; }
+        public string reward { get; set; }
 
         [JsonProperty("classes")]
         public string classes { get; set; }
