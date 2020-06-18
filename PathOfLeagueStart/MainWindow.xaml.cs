@@ -32,13 +32,17 @@ namespace PathOfLeagueStart
         List<Gem> allSkillGems = new List<Gem>();
         private List<Gem> selectedSkillGems = new List<Gem>();
         private List<Gem> selectedSupportGems = new List<Gem>();
+        private List<Quest> questRewardsList = new List<Quest>();
+        private List<Vendor> vendorRewardList = new List<Vendor>();
+        private List<Area> arealList = new List<Area>();
+        private List<string> areasEntered = new List<string>();
 
         public MainWindow()
         {
             InitializeComponent();
             this.checkValidLogPath();
             this.populateListBox();
-            this.downloadSkillGemData();
+            this.downloadJSONData();
         }
 
         private void checkValidLogPath()
@@ -50,11 +54,12 @@ namespace PathOfLeagueStart
             }
         }
 
-        private void downloadSkillGemData()
+        private void downloadJSONData()
         {
-            // download json file.
+            // download skill gem data
             using (WebClient wc = new WebClient())
             {
+
                 string jsonFile = wc.DownloadString(
                     "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction,skill_gems.gem_tags,items.stat_text&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=json");
 
@@ -68,6 +73,60 @@ namespace PathOfLeagueStart
                     allSkillGems.Add(gem);
                 }
             }
+            // download quest reward data
+            using (WebClient wc = new WebClient())
+            {
+
+                string jsonFile = wc.DownloadString(
+                    "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=quest_rewards&fields=quest,reward,classes&limit=500&format=json");
+
+                // Make a JObject from parsing the json file, then make a list of json Tokens from that jobject skipping through the blank parent, cargoquery parent, and title parent. Use this list of tokens to create skill gems
+                JObject questJObject = JObject.Parse(jsonFile);
+                List<JToken> results = questJObject["cargoquery"].Children().Children().Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    Quest quest = result.ToObject<Quest>();
+                    questRewardsList.Add(quest);
+                }
+            }
+
+            // download vendor reward data
+            using (WebClient wc = new WebClient())
+            {
+
+                string jsonFile = wc.DownloadString(
+                    "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=vendor_rewards&fields=quest,reward,classes,npc&limit=500&format=json");
+
+                // Make a JObject from parsing the json file, then make a list of json Tokens from that jobject skipping through the blank parent, cargoquery parent, and title parent. Use this list of tokens to create skill gems
+                JObject vendorJObject = JObject.Parse(jsonFile);
+                List<JToken> results = vendorJObject["cargoquery"].Children().Children().Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    Vendor vendor = result.ToObject<Vendor>();
+                    vendorRewardList.Add(vendor);
+                }
+            }
+            // download area data
+            using (WebClient wc = new WebClient())
+            {
+
+                string jsonFile = wc.DownloadString(
+                    "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=areas&fields=area_level,has_waypoint,name,main_page&where=is_labyrinth_area=%22no%22%20AND%20main_page!=%22%22%20AND%20area_level%20%3C%2068&group_by=main_page&limit=500&format=json");
+
+                // Make a JObject from parsing the json file, then make a list of json Tokens from that jobject skipping through the blank parent, cargoquery parent, and title parent. Use this list of tokens to create skill gems
+                JObject areaJObject = JObject.Parse(jsonFile);
+                List<JToken> results = areaJObject["cargoquery"].Children().Children().Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    Area area = result.ToObject<Area>();
+                    arealList.Add(area);
+                }
+            }
+
+
         }
 
         private void enterLogPath()
@@ -153,9 +212,16 @@ namespace PathOfLeagueStart
 
         private void savePreviousSelection()
         {
-            // Clear temp selected skill gems
-            selectedSkillGems.Clear();
-            selectedSupportGems.Clear();
+            if (ListBoxSkills.Items.Count != 0)
+            {
+                selectedSkillGems.Clear();
+            }
+
+            if (ListBoxSupports.Items.Count != 0)
+            {
+                selectedSupportGems.Clear();
+            }
+
             // First store the previous selected active skills to select them if they are still available and support gems.
             foreach (var selectedItem in ListBoxSkills.SelectedItems)
             {
@@ -176,7 +242,6 @@ namespace PathOfLeagueStart
             {
                 foreach (var i in ListBoxSkills.Items)
                 {
-                    Console.Write("asdlf");
                     if (i.ToString() == g.name)
                     {
                         foundMatches.Add(i.ToString());
@@ -188,14 +253,33 @@ namespace PathOfLeagueStart
             {
                 ListBoxSkills.SelectedItems.Add(s);
             }
-            // Clear saved selected items and refresh them.
-            this.savePreviousSelection();
+
+            foundMatches.Clear();
+
+            foreach (Gem g in selectedSupportGems)
+            {
+                foreach (var i in ListBoxSupports.Items)
+                {
+                    if (i.ToString() == g.name)
+                    {
+                        foundMatches.Add(i.ToString());
+                    }
+                }
+            }
+
+            foreach (string s in foundMatches)
+            {
+                ListBoxSupports.SelectedItems.Add(s);
+            }
+            // Clear temp selected skill gems
+            selectedSkillGems.Clear();
+            selectedSupportGems.Clear();
         }
         private void updateGUI()
         {
             // Update GUI
             // populate the list box 3 using the downloaded json
-            // Insert any gems that match the selected weapon tag. If magic is selected list all spells instead.
+            // Insert any gems that match the selected weapon tag. If magic is selected list all spells as well.
             foreach (Gem g in allSkillGems)
             {
                 if (g.gem_tags.Contains("Support"))
@@ -205,7 +289,7 @@ namespace PathOfLeagueStart
                 else if(ListBoxWeapon.SelectedItem != null)
                 {
                     string test = ListBoxWeapon.SelectedItem.ToString();
-                    if(g.item_class_id_restriction.Contains(ListBoxWeapon.SelectedItem.ToString()))
+                    if(g.item_class_id_restriction.Contains(ListBoxWeapon.SelectedItem.ToString()) || g.item_class_id_restriction == string.Empty)
                         ListBoxSkills.Items.Add(g.name);
                 }
             }
@@ -234,16 +318,18 @@ namespace PathOfLeagueStart
         // update the display of known info with all known info.
         private void updateKnownInfo()
         {
-            // Fill known information text block with known information.
+            // TODO Fill known information text block with known information.
             TextBlockKnownInformation.Text =
                 "Character Level: " + /*insertcharacterlevel*/"\n\n";
             // Show current zone
             TextBlockKnownInformation.Text += "Current Zone: " + "\n\n";
-            // show next area
+            // show next area 
 
             // show skill gems available in town this will go in seperate text block
             TextBlockAvailableGems.Text = "These gems are available in town from vendors:\n" + "\n" +
                                           "\nThese gems are available as a quest reward\n";
+            // Show quests remaining. 
+
             // show any current quest commands
             TextBlockCommands.Text = "To send a command whisper \"a\" in game.\n\nCommands:\n\nCompleted current quest = @a:y\n\nCurrent Character level = x @a:level x\nx must be an integer between 1-100 This will update on it's own upon level up.\n\nClear available gem x @a:x\n x is the number next to the gem";
 
