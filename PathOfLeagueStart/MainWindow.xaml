@@ -29,7 +29,7 @@
             <TextBlock x:Name="TextBlockAvailableGems"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6B6"/>
         </ScrollViewer>
         <ScrollViewer Grid.Row="1" Grid.Column="2" Grid.RowSpan="3"  VerticalScrollBarVisibility="Auto">
-            <TextBlock x:Name="TextBlockQuests"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6CF"/>
+            <TextBlock x:Name="TextBlockWeapons"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6CF"/>
         </ScrollViewer>
         <ScrollViewer Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" VerticalScrollBarVisibility="Auto">
             <TextBlock x:Name="TextBlockCommands"  TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" Background="#FFA6A6A6"/>

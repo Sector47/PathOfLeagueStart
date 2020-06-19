@@ -1,12 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PathOfLeagueStart
+﻿namespace PathOfLeagueStart
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+
+    /// <summary>
+    /// Class to hold quest data
+    /// </summary>
     public class Quest
     {
 
