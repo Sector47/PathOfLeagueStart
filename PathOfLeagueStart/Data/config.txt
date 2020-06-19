@@ -1,1 +1,1 @@
-﻿LOGFILEPATH="ENTERLOGPATHHERE"
+﻿LOGFILEPATH="C:\Games\Grinding Gear Games\Path Of Exile\logs\"

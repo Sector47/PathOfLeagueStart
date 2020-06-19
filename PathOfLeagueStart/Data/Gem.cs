@@ -27,24 +27,5 @@ namespace PathOfLeagueStart
 
         [JsonProperty("stat text")]
         public string stat_text { get; set; }
-        
-
-        /*
-        private int requiredLvl;
-        private List<string> compatibleWeapons;
-        private List<string> gemTags;
-
-
-
-
-        // constructor for gem. Requires Name, ReqLvl, Compatible weapons, Gem tags.
-        public Gem(string name, int requiredLvl, List<string> compatibleWeapons, List<string> gemTags)
-        {
-            this.name = name;
-            this.requiredLvl = requiredLvl;
-            this.compatibleWeapons = compatibleWeapons;
-            this.gemTags = gemTags;
-        }
-        */
     }
 }
