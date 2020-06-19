@@ -11,7 +11,7 @@ namespace PathOfLeagueStart
     {
 
         [JsonProperty("quest")]
-        public string quest { get; set; }
+        public string questName { get; set; }
 
         [JsonProperty("reward")]
         public string reward { get; set; }
@@ -21,5 +21,15 @@ namespace PathOfLeagueStart
 
         [JsonProperty("npc")]
         public string npc { get; set; }
+
+        public string initialZone { get; set; }
+
+        public string finishZone { get; set; }
+
+        public string prerequisiteQuest { get; set; }
+
+        public bool isCompleted { get; set; }
+
+        public bool isStarted { get; set; }
     }
 }

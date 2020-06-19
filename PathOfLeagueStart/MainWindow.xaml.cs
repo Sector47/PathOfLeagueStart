@@ -34,7 +34,7 @@ namespace PathOfLeagueStart
         private List<Gem> selectedSkillGems = new List<Gem>();
         private List<Gem> selectedSupportGems = new List<Gem>();
         private List<Quest> questRewardsList = new List<Quest>();
-        private List<Vendor> vendorRewardList = new List<Vendor>();
+        private List<Vendor> vendorRewardsList = new List<Vendor>();
         private List<Quest> questList = new List<Quest>();
         private List<Area> arealList = new List<Area>();
         private StreamReader logReader;
@@ -42,9 +42,10 @@ namespace PathOfLeagueStart
         // Variables used for currentKnownInformation
         private int characterLevel = 0;
         private string currentArea;
-        private string characterClass;
+        private string characterClass ="unknown";
         private List<Quest> startedQuests = new List<Quest>();
         private List<Quest> completedQuests = new List<Quest>();
+        private List<string> acquiredGems = new List<string>();
 
         // areasEntered is used to auto complete some quests and for tracking progress
         private List<string> areasEntered = new List<string>();
@@ -66,6 +67,8 @@ namespace PathOfLeagueStart
             // set timer interval to 1 seconds and start timer
             dispatcherTimer.Interval = new TimeSpan(0,0,0,0,100);
             dispatcherTimer.Start();
+
+            
 
         }
 
@@ -129,7 +132,32 @@ namespace PathOfLeagueStart
                 foreach (JToken result in results)
                 {
                     Vendor vendor = result.ToObject<Vendor>();
-                    vendorRewardList.Add(vendor);
+                    vendorRewardsList.Add(vendor);
+                }
+
+                jsonFile = wc.DownloadString(
+                    "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=vendor_rewards&fields=quest,reward,classes,npc&limit=500&offset=500&format=json");
+
+                // Make a JObject from parsing the json file, then make a list of json Tokens from that jobject skipping through the blank parent, cargoquery parent, and title parent. Use this list of tokens to create skill gems
+                vendorJObject = JObject.Parse(jsonFile);
+                results = vendorJObject["cargoquery"].Children().Children().Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    Vendor vendor = result.ToObject<Vendor>();
+                    vendorRewardsList.Add(vendor);
+                }
+                jsonFile = wc.DownloadString(
+                    "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=vendor_rewards&fields=quest,reward,classes,npc&limit=500&offset=1000&format=json");
+
+                // Make a JObject from parsing the json file, then make a list of json Tokens from that jobject skipping through the blank parent, cargoquery parent, and title parent. Use this list of tokens to create skill gems
+                vendorJObject = JObject.Parse(jsonFile);
+                results = vendorJObject["cargoquery"].Children().Children().Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    Vendor vendor = result.ToObject<Vendor>();
+                    vendorRewardsList.Add(vendor);
                 }
             }
             // download area data
@@ -178,6 +206,12 @@ namespace PathOfLeagueStart
             // prompt user for valid log path. Change that 
             logFilePath = Microsoft.VisualBasic.Interaction.InputBox("Please enter a valid location for the Path of exile log file. This is required for the program to work. It should be located in the game directory Grinding Gear Games\\Path of Exile\\logs ", "Title", "C:\\Program Files (x86)\\Grinding Gear Games\\Path of Exile\\logs");
             this.CheckValidLogPath();
+        }
+
+        private int GetNumbersFromString(string text)
+        {
+            int foundNumber = Convert.ToInt32(Regex.Replace(text, "[^0-9]", string.Empty));
+            return foundNumber;
         }
 
         private void PopulateListBox()
@@ -362,6 +396,7 @@ namespace PathOfLeagueStart
         // update the display of known info with all known info.
         private void UpdateKnownInfo()
         {
+            UpdateQuestData();
             // TODO Fill known information text block with known information.
             TextBlockKnownInformation.Text =
                 characterClass +" Level: " + characterLevel + "\n\n";
@@ -404,16 +439,29 @@ namespace PathOfLeagueStart
             }
 
 
+            // show skill gems available in town this will go in separate text block
 
-            // show next area 
+            TextBlockAvailableGems.Text = "These gems are available as a quest reward:\n";
+            foreach (string s in GetAvailableGems())
+            {
+                TextBlockAvailableGems.Text += GetAvailableGems().IndexOf(s) + " " + s + "\n";
+            }
+            TextBlockAvailableGems.Text += "\nThese gems are available in town from vendors: \n";
+            foreach (string s in GetAvailableVendorGems())
+            {
+                if (!GetAvailableGems().Contains(s))
+                {
+                    TextBlockAvailableGems.Text += (GetAvailableVendorGems().IndexOf(s)+GetAvailableGems().Count)+ " " + s + " from " + GetNpc(s) + "\n";
+                }
+            }
 
-            // show skill gems available in town this will go in seperate text block
-            TextBlockAvailableGems.Text = "These gems are available in town from vendors:\n" + "\n" +
-                                          "\nThese gems are available as a quest reward\n";
             
 
-            // show any current quest commands
-            TextBlockCommands.Text = "To send a command whisper \"a\" in game.\n\nCommands:\n\nCompleted current quest = @a:y\n\nCurrent Character level = x @a:level x\nx must be an integer between 1-100 This will update on it's own upon level up.\n\nClear available gem x @a:x\n x is the number next to the gem";
+            
+
+
+                // show any current quest commands
+                TextBlockCommands.Text = "To send a command whisper \"a\" in game.\n\nCommands:\n\nCompleted current quest = @a:y\n\nCurrent Character level = x @a:level x\nx must be an integer between 1-100 This will update on it's own upon level up.\n\nClear available gem x @a:x\n x is the number next to the gem";
 
             if (selectedSkillGems != null)
             {
@@ -455,6 +503,19 @@ namespace PathOfLeagueStart
             return null;
         }
 
+        private string GetNpc(string gemName)
+        {
+            foreach (Vendor v in vendorRewardsList)
+            {
+                if (v.reward == gemName && v.isCompleted)
+                {
+                    return v.npc;
+                }
+            }
+
+            return null;
+        }
+
         // Gets the area with the given name
         private Area GetArea(string areaName)
         {
@@ -482,10 +543,157 @@ namespace PathOfLeagueStart
             return foundArea;
         }
 
+        private List<string> GetAvailableGems()
+        {
+            List<string> availableGemsList = new List<string>();
+            foreach (var g in selectedSkillGems.Zip(selectedSupportGems, Tuple.Create))
+            {
+                Gem skillGem = g.Item1;
+                Gem supportGem = g.Item2;
+
+                // get a list of gems available
+                
+
+                for (int i = 0; i < questRewardsList.Count; i++)
+                {
+                    bool alreadyAvailable = false;
+                    foreach (string s in availableGemsList)
+                    {
+                        if (s == skillGem.name || s == supportGem.name)
+                        {
+                            alreadyAvailable = true;
+                        }
+                    }
+
+
+                    if (questRewardsList[i].reward == skillGem.name && questRewardsList[i].isCompleted && (questRewardsList[i].classes.Contains(characterClass) || questRewardsList[i].classes == String.Empty) && !alreadyAvailable)
+                    {
+                        availableGemsList.Add(skillGem.name);
+                    }
+                    if (questRewardsList[i].reward == supportGem.name && questRewardsList[i].isCompleted && (questRewardsList[i].classes.Contains(characterClass) || questRewardsList[i].classes == String.Empty) && !alreadyAvailable)
+                    {
+                        availableGemsList.Add(supportGem.name);
+                    }
+                }
+            }
+
+            // remove any acquired gems from list
+            List<string> removeList = new List<string>();
+            foreach (string s in availableGemsList)
+            {
+                if (acquiredGems.Contains(s))
+                {
+                    if (acquiredGems[acquiredGems.IndexOf(s)] == s)
+                    {
+                        removeList.Add(s);
+                    }
+                }
+            }
+
+            foreach (string s in removeList)
+            {
+                availableGemsList.Remove(s);
+            }
+            
+            return availableGemsList;
+        }
+
+        private List<string> GetAvailableVendorGems()
+        {
+            List<string> availableGemsList = new List<string>();
+            foreach (var g in selectedSkillGems.Zip(selectedSupportGems, Tuple.Create))
+            {
+                Gem skillGem = g.Item1;
+                Gem supportGem = g.Item2;
+
+                
+
+                for (int i = 0; i < vendorRewardsList.Count; i++)
+                {
+                    // get a list of gems available
+                    bool alreadyAvailable = false;
+                    foreach (string s in availableGemsList)
+                    {
+                        if (s == skillGem.name || s == supportGem.name)
+                        {
+                            alreadyAvailable = true;
+                        }
+                    }
+
+                    if (vendorRewardsList[i].reward == skillGem.name && vendorRewardsList[i].isCompleted && (vendorRewardsList[i].classes.Contains(characterClass) || vendorRewardsList[i].classes == String.Empty) && !alreadyAvailable)
+                    {
+                        availableGemsList.Add(skillGem.name);
+                    }
+                    if (vendorRewardsList[i].reward == supportGem.name && vendorRewardsList[i].isCompleted && (vendorRewardsList[i].classes.Contains(characterClass) || vendorRewardsList[i].classes == String.Empty) && !alreadyAvailable)
+                    {
+                        availableGemsList.Add(supportGem.name);
+                    }
+                }
+            }
+
+            // remove any acquired gems from list
+            List<string> removeList = new List<string>();
+            foreach (string s in availableGemsList)
+            {
+                if (acquiredGems.Contains(s))
+                {
+                    if (acquiredGems[acquiredGems.IndexOf(s)] == s)
+                    {
+                        removeList.Add(s);
+                    }
+                }
+            }
+
+            foreach (string s in removeList)
+            {
+                availableGemsList.Remove(s);
+            }
+
+            return availableGemsList;
+        }
+
         private void UpdateQuestData()
         {
             // Grab data from entered areas to see if you've received any new quests
             // Add them to list of current quests, ignoring quests that were already added.
+
+            // TODO complete quests if done
+            foreach (Quest q in questList)
+            {
+                if (areasEntered.Contains(q.finishZone))
+                {
+                    q.isCompleted = true;
+                }
+
+                if (areasEntered.Contains(q.initialZone))
+                {
+                    q.isStarted = true;
+                }
+            }
+
+            foreach (Quest qr in questRewardsList)
+            {
+                foreach (Quest q in questList)
+                {
+                    if (qr.questName == q.questName && q.isCompleted)
+                    {
+                        qr.isCompleted = true;
+                    }
+                }
+            }
+
+            foreach (Vendor v in vendorRewardsList)
+            {
+                foreach (Quest q in questList)
+                {
+
+                    if (v.questName == q.questName && q.isCompleted)
+                    {
+                        v.isCompleted = true;
+                    }
+
+                }
+            }
         }
 
         private void UpdateConfig()
@@ -511,13 +719,39 @@ namespace PathOfLeagueStart
             {
                 LevelChange(line);
             }
-
-            if (line.Contains("You have entered "))
+            else if (line.Contains("You have entered "))
             {
                 AreaChange(line, line.IndexOf("You have entered ") + 17);
             }
+            else if (line.Contains("@To a: "))
+            {
+                ExecuteCommand(line, line.IndexOf("@To a: ") + 7);
+            }
 
             UpdateKnownInfo();
+        }
+
+        private void ExecuteCommand(string line, int index)
+        {
+            string command = line.Substring(index);
+            int gemCount = GetAvailableGems().Count;
+            int numbersFromString = GetNumbersFromString(command);
+            if (command.Contains("g "))
+            {
+                if (GetNumbersFromString(command) < GetAvailableGems().Count)
+                {
+                    acquiredGems.Add(GetAvailableGems()[GetNumbersFromString(command)]);
+                }
+                else if (numbersFromString > gemCount && numbersFromString < GetAvailableVendorGems().Count)
+                {
+                    acquiredGems.Add(GetAvailableVendorGems()[GetNumbersFromString(command) - GetAvailableGems().Count]);
+                }
+                else
+                {
+                    Console.WriteLine("Number was not found");
+                }
+            }
+            
         }
 
         private void LevelChange(string line)

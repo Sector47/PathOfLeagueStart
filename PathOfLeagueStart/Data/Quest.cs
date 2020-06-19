@@ -25,6 +25,10 @@ namespace PathOfLeagueStart
 
         public string prerequisiteQuest { get; set; }
 
+        public bool isCompleted { get; set; }
+
+        public bool isStarted { get; set; }
+
         // constructor for a quest object without rewards
         public Quest(string questName, string intInitialZone, string finishZone,
             string prerequisiteQuest)
