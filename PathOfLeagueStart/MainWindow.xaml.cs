@@ -415,6 +415,7 @@ namespace PathOfLeagueStart
         // update the display of known info with all known info.
         private void UpdateKnownInfo()
         {
+            int currentZoneLevel = Convert.ToInt32(GetArea(currentArea).AreaLevel);
             UpdateQuestData();
             // TODO Fill known information text block with known information.
             TextBlockKnownInformation.Text =
@@ -423,7 +424,6 @@ namespace PathOfLeagueStart
             TextBlockKnownInformation.Text += "Current Zone: " + currentArea + "\n\n";
             if (GetArea(currentArea) != null)
             {
-                int currentZoneLevel = Convert.ToInt32(GetArea(currentArea).AreaLevel);
                 TextBlockKnownInformation.Text += "Zone Level: " + currentZoneLevel + "\n\n";
                 // Check if character level is too far below zone;
                 int safeDistance = ((3 + characterLevel) / 16);
@@ -473,19 +473,21 @@ namespace PathOfLeagueStart
                     TextBlockAvailableGems.Text += (GetAvailableVendorGems().IndexOf(s)+GetAvailableGems().Count)+ " " + s + " from " + GetNpc(s) + "\n";
                 }
             }
-            /*
+            
             // show highest required level item that is available to drop in this zone.
-            TextBlockWeapon.Text = "Highest required level axe available to drop: ";
-            foreach (string s in GetWeaponList())
+            TextBlockWeapons.Text = "Highest required level axe available to drop: ";
+            Weapon displayAxe = new Weapon();
+            displayAxe.requiredLevel = 0;
+            foreach (Weapon w in weaponList)
             {
-                if (s.requiredLevel < currentZoneLevel && displayAxe.requiredLevel < s.requiredLevel)
+                if (w.requiredLevel < currentZoneLevel && displayAxe.requiredLevel < w.requiredLevel)
                 {
-                    displayAxe = s
+                    displayAxe.name = w.name;
                 }
             }
-            TextBlockAvailableGems.Text += displayAxe + "\n";
+            TextBlockWeapons.Text += displayAxe + "\n";
 
-    */
+    
 
 
 

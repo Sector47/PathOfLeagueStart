@@ -62,7 +62,7 @@
     <Compile Include="Area.cs" />
     <Compile Include="Data\Quest.cs" />
     <Compile Include="Data\Vendor.cs" />
-    <Compile Include="Weapon.cs" />
+    <Compile Include="Data\Weapon.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
