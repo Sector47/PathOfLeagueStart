@@ -35,13 +35,18 @@ namespace PathOfLeagueStart
         private List<Gem> selectedSupportGems = new List<Gem>();
         private List<Quest> questRewardsList = new List<Quest>();
         private List<Vendor> vendorRewardList = new List<Vendor>();
+        private List<Quest> questList = new List<Quest>();
         private List<Area> arealList = new List<Area>();
         private StreamReader logReader;
 
         // Variables used for currentKnownInformation
         private int characterLevel = 0;
         private string currentArea;
-        // areasEntered is used to verify which currentArea you are in as some areas share a name depending on the act like solaris temple level 1 has an act 3 and act 8 version.
+        private string characterClass;
+        private List<Quest> startedQuests = new List<Quest>();
+        private List<Quest> completedQuests = new List<Quest>();
+
+        // areasEntered is used to auto complete some quests and for tracking progress
         private List<string> areasEntered = new List<string>();
 
 
@@ -53,6 +58,7 @@ namespace PathOfLeagueStart
             this.PopulateListBox();
             this.DownloadJSONData();
             this.CreateFileWatcher(logFilePath);
+            this.FillQuestList();
 
             // create a dispatchertimer to read the byte on a 1 second timer.
             DispatcherTimer dispatcherTimer = new DispatcherTimer();
@@ -147,6 +153,26 @@ namespace PathOfLeagueStart
 
         }
 
+        private void FillQuestList()
+        {
+            string line;
+            string[] lineStrings = new string[4];
+            int count = 0;
+
+            System.IO.StreamReader file = new StreamReader(@"Data/questProgression.txt");
+            while ((line = file.ReadLine()) != null)
+            {
+                lineStrings = line.Split('.');
+                questList.Add(new Quest(lineStrings[0], lineStrings[1], lineStrings[2], lineStrings[3]));
+                count++;
+            }
+
+            foreach (Quest q in questList)
+            {
+                Console.WriteLine(q.questName + " " + q.initialZone + " " + q.finishZone + " " + q.prerequisiteQuest);
+            }
+        }
+
         private void EnterLogPath()
         {
             // prompt user for valid log path. Change that 
@@ -182,16 +208,16 @@ namespace PathOfLeagueStart
         {
             Console.WriteLine(sender.ToString());
             // save previous selections
-            this.savePreviousSelection();
+            this.SavePreviousSelection();
             // Clear the skills and supports
             ListBoxSkills.Items.Clear();
             ListBoxSupports.Items.Clear();
             // Update the list boxes with current valid options
-            this.updateGUI();
+            this.UpdateGUI();
             // restore previous selections if possible
-            this.restorePreviousSelection();
+            this.RestorePreviousSelection();
             // Update the known info
-            this.updateKnownInfo();
+            this.UpdateKnownInfo();
             // Save new current selection to config.
             this.UpdateConfig();
         }
@@ -201,12 +227,12 @@ namespace PathOfLeagueStart
             // Clear the supports
             ListBoxSupports.Items.Clear();
             // Store current selected skills for updating known info
-            this.savePreviousSelection();
+            this.SavePreviousSelection();
             // Update the list boxes with current valid options
             // overload update gui to only update the supports listbox.
-            this.updateGUI("skills");
+            this.UpdateGUI("skills");
             // Update the known info
-            this.updateKnownInfo();
+            this.UpdateKnownInfo();
             // Save new current selection to config.
             this.UpdateConfig();
         }
@@ -214,21 +240,21 @@ namespace PathOfLeagueStart
         private void ListBoxWeapon_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // save previous selections
-            this.savePreviousSelection();
+            this.SavePreviousSelection();
             // Clear the skills and supports
             ListBoxSkills.Items.Clear();
             ListBoxSupports.Items.Clear();
             // Update the list boxes with current valid options
-            this.updateGUI();
+            this.UpdateGUI();
             // restore previous selections if possible
-            this.restorePreviousSelection();
+            this.RestorePreviousSelection();
             // Update the known info
-            this.updateKnownInfo();
+            this.UpdateKnownInfo();
             // Save new current selection to config.
             this.UpdateConfig();
         }
 
-        private void savePreviousSelection()
+        private void SavePreviousSelection()
         {
             if (ListBoxSkills.Items.Count != 0)
             {
@@ -243,15 +269,15 @@ namespace PathOfLeagueStart
             // First store the previous selected active skills to select them if they are still available and support gems.
             foreach (var selectedItem in ListBoxSkills.SelectedItems)
             {
-                selectedSkillGems.Add(getGem(selectedItem.ToString()));
+                selectedSkillGems.Add(GetGem(selectedItem.ToString()));
             }
             foreach (var selectedItem in ListBoxSupports.SelectedItems)
             {
-                selectedSupportGems.Add(getGem(selectedItem.ToString()));
+                selectedSupportGems.Add(GetGem(selectedItem.ToString()));
             }
         }
 
-        private void restorePreviousSelection()
+        private void RestorePreviousSelection()
         {
             // List to store which items to select after looping through listbox because you can't continue searching through a listbox after modifying it.
             List<string> foundMatches = new List<string>();
@@ -293,7 +319,7 @@ namespace PathOfLeagueStart
             selectedSkillGems.Clear();
             selectedSupportGems.Clear();
         }
-        private void updateGUI()
+        private void UpdateGUI()
         {
             // Update GUI
             // populate the list box 3 using the downloaded json
@@ -320,7 +346,7 @@ namespace PathOfLeagueStart
         }
 
         // overloaded updategui to handle only skill or support listbox change selection so as not to duplicate items in listbox
-        private void updateGUI(string listBoxName)
+        private void UpdateGUI(string listBoxName)
         {
             foreach (Gem g in allSkillGems)
             {
@@ -334,21 +360,57 @@ namespace PathOfLeagueStart
         }
 
         // update the display of known info with all known info.
-        private void updateKnownInfo()
+        private void UpdateKnownInfo()
         {
             // TODO Fill known information text block with known information.
             TextBlockKnownInformation.Text =
-                "Character Level: " + characterLevel + "\n\n";
+                characterClass +" Level: " + characterLevel + "\n\n";
             // Show current zone
             TextBlockKnownInformation.Text += "Current Zone: " + currentArea + "\n\n";
-            // Check if character level is too far below zone;
-            // if()
+            if (GetArea(currentArea) != null)
+            {
+                int currentZoneLevel = Convert.ToInt32(GetArea(currentArea).areaLevel);
+                TextBlockKnownInformation.Text += "Zone Level: " + currentZoneLevel + "\n\n";
+                // Check if character level is too far below zone;
+                int safeDistance = ((3 + characterLevel) / 16);
+                if (Math.Abs(characterLevel - currentZoneLevel) > safeDistance)
+                {
+                    double xpPenalty =
+                        Math.Pow(
+                            ((characterLevel + 5) /
+                             (characterLevel + 5 + Math.Pow((currentZoneLevel - characterLevel), 2.5))), 1.5);
+                    if (characterLevel > currentZoneLevel)
+                    {
+                        TextBlockKnownInformation.Text += "WARNING you are too high a level for the zone and will have an xp penalty multiplier of: " +
+                                                          xpPenalty.ToString("p") + "\n\n";
+                    }
+
+                    if (characterLevel < currentZoneLevel)
+                    {
+                        TextBlockKnownInformation.Text += "WARNING you are too low a level for the zone and will have an xp penalty multiplier of: " + 
+                                                         xpPenalty.ToString("p") + "\n\n";
+                    }
+                    TextBlockKnownInformation.Background = new SolidColorBrush(Colors.Orange);
+                }
+                else if (Math.Abs(characterLevel - currentZoneLevel) == safeDistance)
+                {
+                    TextBlockKnownInformation.Text += "You are close to receiving an xp penalty";
+                    TextBlockKnownInformation.Background = new SolidColorBrush(Colors.Yellow);
+                }
+                else
+                {
+                    TextBlockKnownInformation.Background = new SolidColorBrush(Colors.Gray);
+                }
+            }
+
+
+
             // show next area 
 
             // show skill gems available in town this will go in seperate text block
             TextBlockAvailableGems.Text = "These gems are available in town from vendors:\n" + "\n" +
                                           "\nThese gems are available as a quest reward\n";
-            // Show quests remaining. 
+            
 
             // show any current quest commands
             TextBlockCommands.Text = "To send a command whisper \"a\" in game.\n\nCommands:\n\nCompleted current quest = @a:y\n\nCurrent Character level = x @a:level x\nx must be an integer between 1-100 This will update on it's own upon level up.\n\nClear available gem x @a:x\n x is the number next to the gem";
@@ -382,7 +444,7 @@ namespace PathOfLeagueStart
         }
 
         // Gets the gem with the given name
-        private Gem getGem(string gemName)
+        private Gem GetGem(string gemName)
         {
             foreach (Gem g in allSkillGems)
             {
@@ -394,17 +456,36 @@ namespace PathOfLeagueStart
         }
 
         // Gets the area with the given name
-        private Area getArea(string areaName)
+        private Area GetArea(string areaName)
         {
+            Area foundArea = new Area();
+            List<Area> possibleAreas = new List<Area>();
+
             foreach (Area a in arealList)
             {
                 if (a.name == areaName)
                 {
-                    return a;
+                    possibleAreas.Add(a);
                 }
             }
 
-            return null;
+            int levelDifference = 100;
+            foreach (Area a in possibleAreas)
+            {
+                if (a.areaLevel != string.Empty && levelDifference > Math.Abs(characterLevel - Convert.ToInt32(a.areaLevel)))
+                {
+                    levelDifference = Math.Abs(characterLevel - Convert.ToInt32(a.areaLevel));
+                    foundArea = a;
+                }
+            }
+
+            return foundArea;
+        }
+
+        private void UpdateQuestData()
+        {
+            // Grab data from entered areas to see if you've received any new quests
+            // Add them to list of current quests, ignoring quests that were already added.
         }
 
         private void UpdateConfig()
@@ -426,7 +507,7 @@ namespace PathOfLeagueStart
         private void ReadLine(string line)
         {
             Console.WriteLine(line);
-            if (line.Contains("is now level "))
+            if (line.Contains(") is now level "))
             {
                 LevelChange(line);
             }
@@ -436,7 +517,7 @@ namespace PathOfLeagueStart
                 AreaChange(line, line.IndexOf("You have entered ") + 17);
             }
 
-            updateKnownInfo();
+            UpdateKnownInfo();
         }
 
         private void LevelChange(string line)
@@ -450,18 +531,28 @@ namespace PathOfLeagueStart
             {
                 Console.WriteLine("Probably a whisper\nCharacter level was not valid");
             }
+            // Also grab character class because level up says CHARACTERNAME (CLASSNAME) is now level x
+            int indexStart;
+            int indexEnd;
+            indexStart = line.IndexOf("(");
+            indexEnd = line.IndexOf(")");
+            characterClass = line.Substring(indexStart + 1, indexEnd - indexStart-1);
+
         }
 
         private void AreaChange(string line, int indexOfArea)
         {
-            Console.WriteLine(indexOfArea + "\n\n" + line + "\n\n" + line.Substring(indexOfArea, line.Substring(indexOfArea).Length-1));
             currentArea = line.Substring(indexOfArea, line.Substring(indexOfArea).Length - 1);
+            // Add the area to list of areas entered.
+            areasEntered.Add(currentArea);
+            // Update Quest data
+            UpdateQuestData();
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             // Whenever the timer ticks we read through the lines until the end of the file using the streamreader we created.
-            // this allows read lines that have been added since the previous tick/creation
+            // this allows us to read lines that have been added since the previous tick/creation
             if (logReader != null)
             {
                 string line;
@@ -473,19 +564,12 @@ namespace PathOfLeagueStart
             }
         }
 
-        // Define event handlers for the file system watcher.
-        private static void OnChanged(object source, FileSystemEventArgs e)
-        {
-            // Specify what is done when a file is changed, created, or deleted.
-            Console.WriteLine("File: " + e.FullPath + " " + e.ChangeType + DateTime.Now);
-        }
-
         private void ListBoxSupports_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Store data of current selected items
-            this.savePreviousSelection();
+            this.SavePreviousSelection();
             // Update the known info
-            this.updateKnownInfo();
+            this.UpdateKnownInfo();
             // Save new current selection to config.
             this.UpdateConfig();
         }

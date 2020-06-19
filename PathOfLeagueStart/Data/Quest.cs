@@ -18,6 +18,22 @@ namespace PathOfLeagueStart
 
         [JsonProperty("classes")]
         public string classes { get; set; }
+
+        public string initialZone { get; set; }
+
+        public string finishZone { get; set; }
+
+        public string prerequisiteQuest { get; set; }
+
+        // constructor for a quest object without rewards
+        public Quest(string questName, string intInitialZone, string finishZone,
+            string prerequisiteQuest)
+        {
+            this.questName = questName;
+            this.initialZone = intInitialZone;
+            this.finishZone = finishZone;
+            this.prerequisiteQuest = prerequisiteQuest;
+        }
     }
 
 }
