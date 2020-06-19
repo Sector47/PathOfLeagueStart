@@ -37,6 +37,7 @@ namespace PathOfLeagueStart
         private List<Vendor> vendorRewardsList = new List<Vendor>();
         private List<Quest> questList = new List<Quest>();
         private List<Area> arealList = new List<Area>();
+        private List<Weapon> weaponList = new List<Weapon>();
         private StreamReader logReader;
 
         // Variables used for currentKnownInformation
@@ -175,6 +176,24 @@ namespace PathOfLeagueStart
                 {
                     Area area = result.ToObject<Area>();
                     arealList.Add(area);
+                }
+            }
+
+            // download weapon data
+            using (WebClient wc = new WebClient())
+            {
+
+                string jsonFile = wc.DownloadString(
+                    "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items&fields=items.required_level,items.name&where=items.class_id=%22Two%20Hand%20Axe%22%20AND%20items.frame_type=%22normal%22&limit=500&format=json");
+
+                // Make a JObject from parsing the json file, then make a list of json Tokens from that jobject skipping through the blank parent, cargoquery parent, and title parent. Use this list of tokens to create skill gems
+                JObject weaponJObject = JObject.Parse(jsonFile);
+                List<JToken> results = weaponJObject["cargoquery"].Children().Children().Children().ToList();
+
+                foreach (JToken result in results)
+                {
+                    Weapon weapon = result.ToObject<Weapon>();
+                    weaponList.Add(weapon);
                 }
             }
 
@@ -404,7 +423,7 @@ namespace PathOfLeagueStart
             TextBlockKnownInformation.Text += "Current Zone: " + currentArea + "\n\n";
             if (GetArea(currentArea) != null)
             {
-                int currentZoneLevel = Convert.ToInt32(GetArea(currentArea).areaLevel);
+                int currentZoneLevel = Convert.ToInt32(GetArea(currentArea).AreaLevel);
                 TextBlockKnownInformation.Text += "Zone Level: " + currentZoneLevel + "\n\n";
                 // Check if character level is too far below zone;
                 int safeDistance = ((3 + characterLevel) / 16);
@@ -454,14 +473,24 @@ namespace PathOfLeagueStart
                     TextBlockAvailableGems.Text += (GetAvailableVendorGems().IndexOf(s)+GetAvailableGems().Count)+ " " + s + " from " + GetNpc(s) + "\n";
                 }
             }
+            /*
+            // show highest required level item that is available to drop in this zone.
+            TextBlockWeapon.Text = "Highest required level axe available to drop: ";
+            foreach (string s in GetWeaponList())
+            {
+                if (s.requiredLevel < currentZoneLevel && displayAxe.requiredLevel < s.requiredLevel)
+                {
+                    displayAxe = s
+                }
+            }
+            TextBlockAvailableGems.Text += displayAxe + "\n";
 
-            
-
-            
+    */
 
 
-                // show any current quest commands
-                TextBlockCommands.Text = "To send a command whisper \"a\" in game.\n\nCommands:\n\nCompleted current quest = @a:y\n\nCurrent Character level = x @a:level x\nx must be an integer between 1-100 This will update on it's own upon level up.\n\nClear available gem x @a:x\n x is the number next to the gem";
+
+            // show any current quest commands
+            TextBlockCommands.Text = "To send a command whisper \"a\" in game.\n\nCommands:\n\nCompleted current quest = @a:y\n\nCurrent Character level = x @a:level x\nx must be an integer between 1-100 This will update on it's own upon level up.\n\nClear available gem x @a:x\n x is the number next to the gem";
 
             if (selectedSkillGems != null)
             {
@@ -524,7 +553,7 @@ namespace PathOfLeagueStart
 
             foreach (Area a in arealList)
             {
-                if (a.name == areaName)
+                if (a.Name == areaName)
                 {
                     possibleAreas.Add(a);
                 }
@@ -533,9 +562,9 @@ namespace PathOfLeagueStart
             int levelDifference = 100;
             foreach (Area a in possibleAreas)
             {
-                if (a.areaLevel != string.Empty && levelDifference > Math.Abs(characterLevel - Convert.ToInt32(a.areaLevel)))
+                if (a.AreaLevel != string.Empty && levelDifference > Math.Abs(characterLevel - Convert.ToInt32(a.AreaLevel)))
                 {
-                    levelDifference = Math.Abs(characterLevel - Convert.ToInt32(a.areaLevel));
+                    levelDifference = Math.Abs(characterLevel - Convert.ToInt32(a.AreaLevel));
                     foundArea = a;
                 }
             }

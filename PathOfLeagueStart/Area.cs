@@ -1,26 +1,28 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PathOfLeagueStart
+﻿namespace PathOfLeagueStart
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization.Formatters;
+    using System.Text;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json;
+
+    /// <summary>
+    /// Class to hold Area data
+    /// </summary>
     public class Area
     {
-
         [JsonProperty("area level")]
-        public string areaLevel { get; set; }
+        public string AreaLevel { get; set; }
 
         [JsonProperty("has waypoint")]
-        public string hasWaypoint { get; set; }
+        public string HasWaypoint { get; set; }
 
         [JsonProperty("name")]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [JsonProperty("main page")]
-        public string mainPage { get; set; }
+        public string MainPage { get; set; }
     }
-
-}
+} 
