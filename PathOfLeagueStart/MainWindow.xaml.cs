@@ -20,6 +20,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Xml;
 using Newtonsoft.Json.Linq;
+using PathOfLeagueStart.Data;
 
 namespace PathOfLeagueStart
 {
@@ -68,9 +69,6 @@ namespace PathOfLeagueStart
             // set timer interval to 1 seconds and start timer
             dispatcherTimer.Interval = new TimeSpan(0,0,0,0,100);
             dispatcherTimer.Start();
-
-            
-
         }
 
         private void CheckValidLogPath()
@@ -87,7 +85,6 @@ namespace PathOfLeagueStart
             // download skill gem data
             using (WebClient wc = new WebClient())
             {
-
                 string jsonFile = wc.DownloadString(
                     "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=items,skill_gems,skill_levels,skill&fields=items.name,skill_levels.level_requirement,items.tags,skill.item_class_id_restriction,skill_gems.gem_tags,items.stat_text&where=items.frame_type=%22gem%22%20AND%20skill_levels.level=%221%22&join_on=items.name=skill_gems._pageName,skill_gems._pageName=skill_levels._pageName,skill_gems._pageName=skill._pageName&limit=500&format=json");
 
@@ -104,7 +101,6 @@ namespace PathOfLeagueStart
             // download quest reward data
             using (WebClient wc = new WebClient())
             {
-
                 string jsonFile = wc.DownloadString(
                     "https://pathofexile.gamepedia.com/api.php?action=cargoquery&tables=quest_rewards&fields=quest,reward,classes&limit=500&format=json");
 
@@ -426,8 +422,8 @@ namespace PathOfLeagueStart
             {
                 TextBlockKnownInformation.Text += "Zone Level: " + currentZoneLevel + "\n\n";
                 // Check if character level is too far below zone;
-                int safeDistance = ((3 + characterLevel) / 16);
-                if (Math.Abs(characterLevel - currentZoneLevel) > safeDistance)
+                int safeDistance = 3 + ((this.characterLevel) / 16);
+                if (Math.Abs(this.characterLevel - currentZoneLevel) > safeDistance)
                 {
                     double xpPenalty =
                         Math.Pow(
@@ -480,12 +476,12 @@ namespace PathOfLeagueStart
             displayAxe.requiredLevel = 0;
             foreach (Weapon w in weaponList)
             {
-                if (w.requiredLevel < currentZoneLevel && displayAxe.requiredLevel < w.requiredLevel)
+                if (w.requiredLevel < currentZoneLevel + 2 && displayAxe.requiredLevel < w.requiredLevel)
                 {
                     displayAxe.name = w.name;
                 }
             }
-            TextBlockWeapons.Text += displayAxe + "\n";
+            TextBlockWeapons.Text += displayAxe.name + "\n";
 
     
 
@@ -686,7 +682,7 @@ namespace PathOfLeagueStart
         private void UpdateQuestData()
         {
             // Grab data from entered areas to see if you've received any new quests
-            // Add them to list of current quests, ignoring quests that were already added.
+            // Add them to list of current quests, ignoring quests that were already added
 
             // TODO complete quests if done
             foreach (Quest q in questList)
@@ -717,19 +713,17 @@ namespace PathOfLeagueStart
             {
                 foreach (Quest q in questList)
                 {
-
                     if (v.questName == q.questName && q.isCompleted)
                     {
                         v.isCompleted = true;
                     }
-
                 }
             }
         }
 
+        // This will update the config with client.txt file location as well as any other option that is saved
         private void UpdateConfig()
         {
-
         }
 
         private void CreateFileWatcher(string path)
@@ -737,10 +731,11 @@ namespace PathOfLeagueStart
             // instead of FileSystemWatcher which can't update the file itself to view changes
             // make a streamreader with filesharereadwrite.
             // move streamreader to the end of file this allows us to know the lines that have changed since the streamreader was created
-            logReader = new StreamReader(new FileStream(logFilePath + "\\Client.txt", FileMode.Open, FileAccess.Read,
+            this.logReader = new StreamReader(new FileStream(this.logFilePath + "\\Client.txt",
+                FileMode.Open,
+                FileAccess.Read,
                 FileShare.ReadWrite)); // , Encoding.GetEncoding("windows-1252"));
-            logReader.ReadToEnd();
-
+            this.logReader.ReadToEnd();
         }
 
         private void ReadLine(string line)
@@ -748,41 +743,40 @@ namespace PathOfLeagueStart
             Console.WriteLine(line);
             if (line.Contains(") is now level "))
             {
-                LevelChange(line);
+                this.LevelChange(line);
             }
             else if (line.Contains("You have entered "))
             {
-                AreaChange(line, line.IndexOf("You have entered ") + 17);
+                this.AreaChange(line, line.IndexOf("You have entered ") + 17);
             }
             else if (line.Contains("@To a: "))
             {
-                ExecuteCommand(line, line.IndexOf("@To a: ") + 7);
+                this.ExecuteCommand(line, line.IndexOf("@To a: ") + 7);
             }
 
-            UpdateKnownInfo();
+            this.UpdateKnownInfo();
         }
 
         private void ExecuteCommand(string line, int index)
         {
             string command = line.Substring(index);
-            int gemCount = GetAvailableGems().Count;
-            int numbersFromString = GetNumbersFromString(command);
+            int gemCount = this.GetAvailableGems().Count;
+            int numbersFromString = this.GetNumbersFromString(command);
             if (command.Contains("g "))
             {
-                if (GetNumbersFromString(command) < GetAvailableGems().Count)
+                if (this.GetNumbersFromString(command) < this.GetAvailableGems().Count)
                 {
-                    acquiredGems.Add(GetAvailableGems()[GetNumbersFromString(command)]);
+                    this.acquiredGems.Add(this.GetAvailableGems()[this.GetNumbersFromString(command)]);
                 }
                 else if (numbersFromString > gemCount && numbersFromString < GetAvailableVendorGems().Count)
                 {
-                    acquiredGems.Add(GetAvailableVendorGems()[GetNumbersFromString(command) - GetAvailableGems().Count]);
+                    this.acquiredGems.Add(this.GetAvailableVendorGems()[this.GetNumbersFromString(command) - this.GetAvailableGems().Count]);
                 }
                 else
                 {
                     Console.WriteLine("Number was not found");
                 }
             }
-            
         }
 
         private void LevelChange(string line)
@@ -790,41 +784,38 @@ namespace PathOfLeagueStart
             try
             {
                 characterLevel = Convert.ToInt32(line.Substring(line.Length - 2, 2));
-
             }
             catch (FormatException)
             {
                 Console.WriteLine("Probably a whisper\nCharacter level was not valid");
             }
             // Also grab character class because level up says CHARACTERNAME (CLASSNAME) is now level x
-            int indexStart;
-            int indexEnd;
-            indexStart = line.IndexOf("(");
-            indexEnd = line.IndexOf(")");
-            characterClass = line.Substring(indexStart + 1, indexEnd - indexStart-1);
+            int indexStart = line.IndexOf("(");
+            int indexEnd = line.IndexOf(")");
 
+            this.characterClass = line.Substring(indexStart + 1, indexEnd - indexStart - 1);
         }
 
         private void AreaChange(string line, int indexOfArea)
         {
-            currentArea = line.Substring(indexOfArea, line.Substring(indexOfArea).Length - 1);
+            this.currentArea = line.Substring(indexOfArea, line.Substring(indexOfArea).Length - 1);
             // Add the area to list of areas entered.
-            areasEntered.Add(currentArea);
+            this.areasEntered.Add(this.currentArea);
             // Update Quest data
-            UpdateQuestData();
+            this.UpdateQuestData();
         }
 
         private void DispatcherTimer_Tick(object sender, EventArgs e)
         {
             // Whenever the timer ticks we read through the lines until the end of the file using the streamreader we created.
             // this allows us to read lines that have been added since the previous tick/creation
-            if (logReader != null)
+            if (this.logReader != null)
             {
                 string line;
 
-                while ((line = logReader.ReadLine()) != null)
+                while ((line = this.logReader.ReadLine()) != null)
                 {
-                    ReadLine(line);
+                    this.ReadLine(line);
                 }
             }
         }
@@ -842,12 +833,12 @@ namespace PathOfLeagueStart
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             // toggle visibility of listboxes to freeze skill gem selection
-            if (ListBoxType.Visibility == Visibility.Visible)
+            if (this.ListBoxType.Visibility == Visibility.Visible)
             {
-                ListBoxType.Visibility = Visibility.Collapsed;
-                ListBoxSkills.Visibility = Visibility.Collapsed;
-                ListBoxWeapon.Visibility = Visibility.Collapsed;
-                ListBoxSupports.Visibility = Visibility.Collapsed;
+                this.ListBoxType.Visibility = Visibility.Collapsed;
+                this.ListBoxSkills.Visibility = Visibility.Collapsed;
+                this.ListBoxWeapon.Visibility = Visibility.Collapsed;
+                this.ListBoxSupports.Visibility = Visibility.Collapsed;
                 foreach (var s in GridDisplay.Children)
                 {
                     if (s is ScrollViewer)
@@ -855,15 +846,14 @@ namespace PathOfLeagueStart
                         ScrollViewer sv = s as ScrollViewer;
                         Grid.SetRow(sv, 0);
                     }
-                    
                 }
             }
             else
             {
-                ListBoxType.Visibility = Visibility.Visible;
-                ListBoxSkills.Visibility = Visibility.Visible;
-                ListBoxWeapon.Visibility = Visibility.Visible;
-                ListBoxSupports.Visibility = Visibility.Visible;
+                this.ListBoxType.Visibility = Visibility.Visible;
+                this.ListBoxSkills.Visibility = Visibility.Visible;
+                this.ListBoxWeapon.Visibility = Visibility.Visible;
+                this.ListBoxSupports.Visibility = Visibility.Visible;
                 foreach (var s in GridDisplay.Children)
                 {
                     if (s is ScrollViewer)
@@ -876,3 +866,16 @@ namespace PathOfLeagueStart
         }
     }
 }
+/*
+This file uses the Newtonsoft.Json library available under the MIT license as follows:
+
+The MIT License (MIT)
+
+Copyright (c) 2007 James Newton-King
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+*/
