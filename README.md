@@ -14,4 +14,6 @@ The hotkeys provided follow their guidelines as outlined in the above link.
 Images and Game Credit: [Grinding Gear Games](https://www.pathofexile.com)
 This product isn't affiliated with or endorsed by Grinding Gear Games in any way.
 
+Thanks to the [Path of Exile Wiki](https://pathofexile.fandom.com/wiki/Path_of_Exile_Wiki) for the api and various information.
+
 For 3rd party licenses, refer to LICENSE.MD
