@@ -3,3 +3,5 @@ A small tool to help with league start in the game Path of exile. It reads the l
 
 
 Rewrite in progress.
+
+For 3rd party licenses, refer to LICENSE.MD
