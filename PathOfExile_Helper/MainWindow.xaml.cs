@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PathOfExile_Helper.Data;
-using PathOfExile_Helper.Classes;
+using PathOfLeagueStart.Data;
+using PathOfLeagueStart.Classes;
 
-namespace PathOfExile_Helper
+namespace PathOfLeagueStart
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PathOfExile_Helper.Classes
+namespace PathOfLeagueStart.Classes
 {
     /// <summary>
     /// This class will request data from the pathofexile gamepedia api once per league or when manually initiated.

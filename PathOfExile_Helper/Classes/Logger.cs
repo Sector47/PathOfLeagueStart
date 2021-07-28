@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PathOfExile_Helper.Classes
+namespace PathOfLeagueStart.Classes
 {
     /// <summary>
     /// A class to handle logging information.

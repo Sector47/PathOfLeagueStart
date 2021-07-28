@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Collections.Specialized;
 using Microsoft.Win32;
 using System.Windows;
-using PathOfExile_Helper.Classes;
+using PathOfLeagueStart.Classes;
 
-namespace PathOfExile_Helper.Data
+namespace PathOfLeagueStart.Data
 {
     class SettingsDisplayData
     {

@@ -1,4 +1,4 @@
-﻿namespace PathOfExile_Helper
+﻿namespace PathOfLeagueStart
 {
     using Newtonsoft.Json;
     using System;

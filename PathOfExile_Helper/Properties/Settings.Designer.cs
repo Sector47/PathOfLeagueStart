@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PathOfExile_Helper.Properties {
+namespace PathOfLeagueStart.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

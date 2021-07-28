@@ -1,4 +1,4 @@
-﻿namespace PathOfExile_Helper
+﻿namespace PathOfLeagueStart
 {
     using System;
     using System.Collections.Generic;
