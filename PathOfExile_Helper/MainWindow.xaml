@@ -1,0 +1,317 @@
+﻿<Window x:Class="PathOfExile_Helper.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PathOfExile_Helper"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Main">
+                <Grid Background="#FFE5E5E5" x:Name="MainTabBackground" ShowGridLines="False">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid x:Name="gridEquipmentIcons" Grid.RowSpan="4" Grid.Row="0" Grid.Column="0" Background="DarkGray" ShowGridLines="False" RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!--#region Inventory Icons -->
+                            <!--#region Helmet Icons -->
+                                <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/helmetIcon.png"/>
+                                <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                                <Image Grid.Row="2" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="1" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="2" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="1" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                            <!--#endregion-->
+
+
+
+                            <!--#region Body Armor Icons -->
+                                <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/bodyArmorIcon.png"/>
+                                <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                                <Image Grid.Row="4" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="5" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="6" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="4" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="5" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="6" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                            <!--#endregion-->
+
+                            <!--#region Weapon Icons -->
+                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/weaponIcon.png" />
+                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                                <Image Grid.Row="3" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="4" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="5" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="3" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="4" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="5" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                            <!--#endregion-->
+
+                            <!--#region Offhand Icons -->
+                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/offHandIcon.png" />
+                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                                <Image Grid.Row="3" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="4" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="5" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="3" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="4" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="5" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                            <!--#endregion-->
+
+                            <!--#region Boots Icons -->
+                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/bootsIcon.png" />
+                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                                <Image Grid.Row="7" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="8" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="7" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="8" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                            <!--#endregion-->
+
+                            <!--#region Gloves Icons -->
+                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/glovesIcon.png" />
+                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                                <Image Grid.Row="7" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="8" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                                <Image Grid.Row="7" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                                <Image Grid.Row="8" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                            <!--#endregion -->
+
+                            <!--#region Amulet Icons -->
+                                <Image Grid.Row="3" Grid.Column="5" Source="Assets/amuletIcon.png"/>
+                                <Image Grid.Row="3" Grid.Column="5" Source="Assets/tinyIconBox.png" />
+                                <Image Grid.Row="3" Grid.Column="5" Source="Assets/whiteSocket.png"/>
+                            <!--#endregion-->
+
+                            <!--#region Right Ring Icons -->
+                                <Image Grid.Row="5" Grid.Column="5" Source="Assets/ringIcon.png"/>
+                                <Image Grid.Row="5" Grid.Column="5" Source="Assets/tinyIconBox.png" />
+                                <Image Grid.Row="5" Grid.Column="5" Source="Assets/whiteSocket.png"/>
+                            <!--#endregion-->
+
+                            <!--#region Left Ring Icons -->
+                                <Image Grid.Row="5" Grid.Column="2" Source="Assets/ringIcon.png"/>
+                                <Image Grid.Row="5" Grid.Column="2" Source="Assets/tinyIconBox.png" />
+                                <Image Grid.Row="5" Grid.Column="2" Source="Assets/whiteSocket.png"/>
+                            <!--#endregion-->
+
+                        <!--#endregion-->
+                        <Button x:Name="lockGemsButton" Grid.Row="9" Grid.Column="7" Click="lockGemsButton_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                            Lock Gems
+                        </Button>
+                    </Grid>
+
+                    <Viewbox Grid.Row="0" Grid.Column="1">
+                        <TextBlock>Zone Info<LineBreak/> Character Level<LineBreak/> Xp Penalty <LineBreak/> Colored background if xp penalty is active.</TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="1" Grid.Column="1">
+                        <TextBlock>Next Zone<LineBreak/> Next Passive <LineBreak/> Current Quest <LineBreak/></TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="2" Grid.Column="1">
+                        <TextBlock> Recent whispers<LineBreak/> Name of person to reply or auto invite</TextBlock>
+                    </Viewbox>
+                    <Viewbox Grid.Row="3" Grid.Column="1">
+                        <TextBlock>Maybe display the zone maps or current hotkeys</TextBlock>
+                    </Viewbox>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Settings">
+                <Grid Background="#FFE5E5E5">
+                    <ScrollViewer>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="9*"></RowDefinition>
+                                <RowDefinition Height="1*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="4*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path:</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0">Client.Txt File Path</Label>
+                                    <TextBox Grid.Column="2">Location</TextBox>
+                                </Grid>
+                                <Separator Margin="5"/>
+                            </StackPanel>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition></ColumnDefinition>
+                                    <ColumnDefinition></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Button Grid.Column="1">Save Settings</Button>
+                            </Grid>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

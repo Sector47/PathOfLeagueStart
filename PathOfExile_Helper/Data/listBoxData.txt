@@ -1,0 +1,18 @@
+﻿COL1.Melee
+COL1.Magic
+COL1.Ranged
+COL2.Staff
+COL2.Wand
+COL2.Bow
+COL2.Claw
+COL2.Thrusting One Hand Sword
+COL2.One Hand Axe
+COL2.One Hand Mace
+COL2.Sceptre
+COL2.One Hand Sword
+COL2.Two Hand Axe
+COL2.Two Hand Mace
+COL2.Two Hand Sword
+COL2.Unarmed
+COL2.Warstaff
+COL2.Rune Dagger
