@@ -7,12 +7,20 @@ using Newtonsoft.Json;
 
 namespace PathOfLeagueStart
 {
-    class Weapon
+    public class Weapon
     {
         [JsonProperty("required level")]
         public int requiredLevel { get; set; }
 
+        [JsonProperty("drop level")]
+        public int dropLevel { get; set; }
+
         [JsonProperty("name")]
         public string name { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }

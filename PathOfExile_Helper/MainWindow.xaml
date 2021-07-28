@@ -133,7 +133,7 @@
                             <!--#endregion-->
 
                         <!--#endregion-->
-                        <Button x:Name="lockGemsButton" Grid.Row="9" Grid.Column="7" Click="lockGemsButton_Click">
+                        <Button x:Name="lockGemsButton" Grid.Row="9" Grid.Column="6" Grid.ColumnSpan="2" Click="lockGemsButton_Click">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -141,11 +141,33 @@
                             </Button.Resources>
                             Lock Gems
                         </Button>
+
+                        <Button x:Name="changeWeaponButton" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Click="changeWeaponButton_Click">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </Button.Resources>
+                            Change Weapon
+                        </Button>
                     </Grid>
 
-                    <Viewbox Grid.Row="0" Grid.Column="1">
-                        <TextBlock>Zone Info<LineBreak/> Character Level<LineBreak/> Xp Penalty <LineBreak/> Colored background if xp penalty is active.</TextBlock>
-                    </Viewbox>
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="AreaNameTextBlock" Grid.Column="0" Grid.Row="0" Text="Area Name"/>
+                        <TextBlock x:Name="AreaLevelTextBlock" Grid.Column="1" Grid.Row="0" Text="Area Level"/>
+                        <TextBlock x:Name="CharacterNameTextBlock" Grid.Column="0" Grid.Row="1" Text="Character Name"/>
+                        <TextBlock x:Name="CharacterLevelTextBlock" Grid.Column="1" Grid.Row="1" Text="Character Level"/>
+                        <TextBlock x:Name="XpPenaltyTextBlock" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Xp Penalty" FontWeight="Bold"></TextBlock>
+                    </Grid>
                     <Viewbox Grid.Row="1" Grid.Column="1">
                         <TextBlock>Next Zone<LineBreak/> Next Passive <LineBreak/> Current Quest <LineBreak/></TextBlock>
                     </Viewbox>

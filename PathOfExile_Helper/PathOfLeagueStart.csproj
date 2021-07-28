@@ -61,7 +61,14 @@
     </ApplicationDefinition>
     <Compile Include="Classes\APIDataFetcher.cs" />
     <Compile Include="Classes\Logger.cs" />
+    <Compile Include="Data\Area.cs" />
     <Compile Include="Settings.cs" />
+    <Compile Include="Views\GemSelectionWindow.xaml.cs">
+      <DependentUpon>GemSelectionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WeaponSelectionWindow.xaml.cs">
+      <DependentUpon>WeaponSelectionWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +86,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\GemSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WeaponSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -152,6 +167,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\blueSocket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\redGem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\blueGem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\greenGem.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\noneGem.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

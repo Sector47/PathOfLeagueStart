@@ -29,5 +29,13 @@
 
         [JsonProperty("stat text")]
         public string stat_text { get; set; }
+
+        [JsonProperty("primary attribute")]
+        public string primary_attribute { get; set; }
+
+        public override string ToString()
+        {
+            return name;
+        }
     }
 }
