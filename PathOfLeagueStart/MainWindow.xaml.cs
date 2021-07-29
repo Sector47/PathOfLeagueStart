@@ -29,17 +29,22 @@ namespace PathOfLeagueStart
         private APIDataFetcher dataFetcher;
         private Weapon selectedWeapon;
         private Area currentArea = new Area();
+        private List<Area> areasEntered = new List<Area>();
         private int currentLevel = 1;
         private string characterName;
-        private string characterClass;
+        private string characterClass = "Scion";
         private string lastWhisperName;
         private Quest currentQuest;
+        private List<Quest> allQuests = new List<Quest>();
         private List<string[]> recentWhispers = new List<string[]>();
         // Binding for our whispers listview
         private System.ComponentModel.BindingList<string> listItems = new System.ComponentModel.BindingList<string>();
         private StreamReader logReader;
         private SettingsDisplayData settings;
         private DispatcherTimer dispatcherTimer;
+
+        private List<Quest> startedQuests = new List<Quest>();
+        private List<Quest> completedQuests = new List<Quest>();
 
         public MainWindow()
         {
@@ -50,6 +55,7 @@ namespace PathOfLeagueStart
             CreateFileWatcher(settings.getClientTxtFilePath);
             StartDispatcherTimer();
             SetCurrentArea("The Twilight Strand");
+            FillQuestList();
 
             WhisperLogView.ItemsSource = listItems;
             UpdateDataInUI();
@@ -77,6 +83,32 @@ namespace PathOfLeagueStart
             // It will also allow us to update those settings.
             settings = new SettingsDisplayData();
             Logger.Log("The settings were successfully loaded");
+        }
+
+        private void FillQuestList()
+        {
+            string line;
+            string[] lineStrings = new string[4];
+            int count = 0;
+
+
+
+            // Get our file location to store data
+            string questProgressionFileLocation = @"Data\questProgression.txt";
+
+            System.IO.StreamReader streamReader = new StreamReader(questProgressionFileLocation);
+
+            while ((line = streamReader.ReadLine()) != null)
+            {
+                lineStrings = line.Split('.');
+                allQuests.Add(new Quest(lineStrings[0], lineStrings[1], lineStrings[2], lineStrings[3]));
+                count++;
+            }
+
+            foreach (Quest q in allQuests)
+            {
+                Logger.LogDebug(q.questName + " " + q.initialZone + " " + q.finishZone + " " + q.prerequisiteQuest);
+            }
         }
 
         private void AddSocketListeners()
@@ -137,63 +169,150 @@ namespace PathOfLeagueStart
             }
              if (line.Contains("@From "))
             {
-                // whisper message received
-                // Add our whisper to recent whispers for displaying in the scrollviewer.
-                // record the name of who sent the whisper for replying / quick invite
-                int start = line.IndexOf("@From ") + "@From ".Length;
-                // For getting the end of their name we need to look for the first : after the @from message
-                int end = line.Substring(start).IndexOf(":");
-                lastWhisperName = line.Substring(start, end);
-                string lastMessage = line.Substring(end + start + ":".Length);
-                string[] compiledMessage = new string[2] { lastWhisperName, lastMessage };
-
-                recentWhispers.Add(compiledMessage);
-                UpdateDataInUI();
+                UpdateWhispers(line);
             }
             else if (line.Contains(") is now level "))
             {
-                // Check if character name has not been set yet, if so set the character name. This can also be done from the settings.
-                if (string.IsNullOrEmpty(characterName))
-                {
-                    int start = line.LastIndexOf(": ") + ": ".Length;
-                    int end = line.LastIndexOf(" (");
-                    characterName = line.Substring(start, end - start);
-                }
-                // once we have character name we can see if the line is for them or a party member
-                if(!string.IsNullOrEmpty(characterName) && line.Contains(characterName) && line.Contains(") is now level "))
-                {
-                    // Set our character Class
-                    int start = line.IndexOf("(") + "(".Length;
-                    int end = line.LastIndexOf(")");
-                    characterClass = line.Substring(start, end - start);
-
-
-                    // To avoid magic numbers we will count the length of our string.
-                    string nowLevel = "now level ";
-                    int indexOfLevel = line.IndexOf(nowLevel) + nowLevel.Length;
-
-                    // to get current level we just read the remaining end of the line.                
-                    currentLevel = int.Parse(line.Substring(indexOfLevel));
-                    Logger.LogDebug(CharacterNameTextBlock + " is now level: " + currentLevel.ToString());
-                }
-                
-                UpdateDataInUI();
+                UpdateLevel(line);
             }
             else if (line.Contains("You have entered "))
             {
-                // To avoid magic numbers we will count the length of our string.
-                String areaEnter = "You have entered ";
-                int indexOfArea = line.IndexOf(areaEnter) + areaEnter.Length;
-                // to get areaName, we go to index of You have entered in the string, and take the remaining string in the line by going to end of line with a substring.
-                // Line - index location - length of "You have entered " and the line ends with a period we don't want, so -1;
-                string currentAreaName = line.Substring(indexOfArea, (line.Length - 1 - areaEnter.Length - line.IndexOf(areaEnter)));
-                SetCurrentArea(currentAreaName);
-                Logger.LogDebug("Entering Area: " + currentArea);
-                UpdateDataInUI();
+                UpdateArea(line);
             }
             else if (line.Contains("@To a: "))
             {
                 //ExecuteCommand(line, line.IndexOf("@To a: ") + 7);
+            }
+        }
+
+        private void UpdateArea(string line)
+        {
+            // To avoid magic numbers we will count the length of our string.
+            String areaEnter = "You have entered ";
+            int indexOfArea = line.IndexOf(areaEnter) + areaEnter.Length;
+            // to get areaName, we go to index of You have entered in the string, and take the remaining string in the line by going to end of line with a substring.
+            // Line - index location - length of "You have entered " and the line ends with a period we don't want, so -1;
+            string currentAreaName = line.Substring(indexOfArea, (line.Length - 1 - areaEnter.Length - line.IndexOf(areaEnter)));
+            SetCurrentArea(currentAreaName);
+            Logger.LogDebug("Entering Area: " + currentArea);
+            UpdateDataInUI();
+        }
+
+        private void UpdateLevel(string line)
+        {
+            // Check if character name has not been set yet, if so set the character name. This can also be done from the settings.
+            if (string.IsNullOrEmpty(characterName))
+            {
+                int start = line.LastIndexOf(": ") + ": ".Length;
+                int end = line.LastIndexOf(" (");
+                characterName = line.Substring(start, end - start);
+            }
+            // once we have character name we can see if the line is for them or a party member
+            if (!string.IsNullOrEmpty(characterName) && line.Contains(characterName) && line.Contains(") is now level "))
+            {
+                // Set our character Class
+                int start = line.IndexOf("(") + "(".Length;
+                int end = line.LastIndexOf(")");
+                characterClass = line.Substring(start, end - start);
+
+
+                // To avoid magic numbers we will count the length of our string.
+                string nowLevel = "now level ";
+                int indexOfLevel = line.IndexOf(nowLevel) + nowLevel.Length;
+
+                // to get current level we just read the remaining end of the line.                
+                currentLevel = int.Parse(line.Substring(indexOfLevel));
+                Logger.LogDebug(CharacterNameTextBlock + " is now level: " + currentLevel.ToString());
+            }
+
+            UpdateDataInUI();
+        }
+
+        private void UpdateWhispers(string line)
+        {
+            // whisper message received
+            // Add our whisper to recent whispers for displaying in the scrollviewer.
+            // record the name of who sent the whisper for replying / quick invite
+            int start = line.IndexOf("@From ") + "@From ".Length;
+            // For getting the end of their name we need to look for the first : after the @from message
+            int end = line.Substring(start).IndexOf(":");
+            lastWhisperName = line.Substring(start, end);
+            string lastMessage = line.Substring(end + start + ":".Length);
+            string[] compiledMessage = new string[2] { lastWhisperName, lastMessage };
+
+            recentWhispers.Add(compiledMessage);
+            UpdateDataInUI();
+        }
+
+        private void UpdateQuestData()
+        {
+            // Grab data from entered areas to see if you've received any new quests
+            // Add them to list of current quests, ignoring quests that were already added.
+
+            // TODO complete quests if done
+            foreach (Quest q in allQuests)
+            {
+                if (areasEntered.Find(a => a.name == q.finishZone) != null)
+                {
+                    q.isCompleted = true;
+                }
+
+                if (areasEntered.Find(a => a.name == q.initialZone) != null)
+                {
+                    q.isStarted = true;
+                    currentQuest = q;
+                }
+            }
+            List<Vendor> listVr = new List<Vendor>();
+            List<Quest> listQr = new List<Quest>();
+
+            foreach (Quest q in allQuests)
+            {
+                if (q.isCompleted)
+                {
+                    // All vendor rewards that match the quest that was completed
+                   listVr = dataFetcher.VendorRewardsList.Where(vr => vr.questName == q.questName && vr.classes.Contains(characterClass)).ToList();
+                   listQr = dataFetcher.QuestRewardsList.Where(qr => qr.questName == q.questName && qr.classes.Contains(characterClass)).ToList();
+                }
+            }
+            List<string> compiledGemNames = new List<string>();
+            foreach(Quest q in listQr)
+            {
+                if(compiledGemNames.Find(g => g == q.reward) == null)
+                {
+                    compiledGemNames.Add(q.reward);
+                }
+            }
+            foreach (Vendor v in listVr)
+            {
+                if (compiledGemNames.Find(g => g == v.reward) == null)
+                {
+                    compiledGemNames.Add(v.reward);
+                }
+            }
+            HighLightGems(compiledGemNames);
+        }
+
+        private void HighLightGems(List<string> gemsToHighlight)
+        {
+            foreach(string gem in gemsToHighlight)
+            {
+                CreateHighlight(gem);
+            }
+        }
+
+        private void CreateHighlight(string gemName)
+        {
+            foreach(Object obj in gridEquipmentIcons.Children)
+            {
+                if(obj is Image)
+                {
+                    Image img = obj as Image;
+                    if(img.Source.ToString().Contains("Socket") && img.Tag != null && img.Tag.ToString() == gemName)
+                    {
+                        // Create Highlight on socket at same grid location. Delete it on click :)img.Source = new BitmapImage(new Uri(@"/Assets/weaponIcon.png", UriKind.Relative));
+                    }
+                }
             }
         }
 
@@ -262,6 +381,8 @@ namespace PathOfLeagueStart
         private void SetCurrentArea(string currentAreaName)
         {
             currentArea = dataFetcher.AreaList.FirstOrDefault((a => a.name == currentAreaName));
+            areasEntered.Add(currentArea);
+            UpdateQuestData();
         }
 
         private void SocketIcon_Clicked(object sender, RoutedEventArgs e)

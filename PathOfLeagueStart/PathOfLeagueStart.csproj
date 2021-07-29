@@ -125,7 +125,9 @@
     <Resource Include="Data\config.txt" />
     <Resource Include="Data\skillGemData.xml" />
     <Resource Include="Data\listBoxData.txt" />
-    <Resource Include="Data\questProgression.txt" />
+    <Content Include="Data\questProgression.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\helmetIcon.png" />

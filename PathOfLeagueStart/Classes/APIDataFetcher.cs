@@ -79,13 +79,10 @@ namespace PathOfLeagueStart.Classes
             }
 
             // if we are out of date, download json data otherwise pull from db
-            // TODO invert this once db is setup
             if (!isLeagueUpToDate)
             {
                 DownloadJSONData();
                 SaveData();
-
-                
             }
             else
             {

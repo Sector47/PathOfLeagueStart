@@ -55,7 +55,8 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
-                            <RowDefinition/>
+                            
+                            
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
@@ -69,83 +70,83 @@
                         </Grid.ColumnDefinitions>
                         <!--#region Inventory Icons -->
                         <!--#region Helmet Icons -->
-                        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
-                        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/helmetIcon.png"/>
-                        <Image Grid.Row="2" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                        <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/helmetIcon.png"/>
                         <Image Grid.Row="1" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                        <Image Grid.Row="2" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="0" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="1" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="0" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <!--#endregion-->
 
 
 
                         <!--#region Body Armor Icons -->
-                        <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
-                        <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/bodyArmorIcon.png"/>
+                        <Image Grid.Row="2" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                        <Image Grid.Row="2" Grid.RowSpan="5" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/bodyArmorIcon.png"/>
+                        <Image Grid.Row="3" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="4" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="5" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                        <Image Grid.Row="6" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="3" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="4" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="5" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                        <Image Grid.Row="6" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <!--#endregion-->
 
                         <!--#region Weapon Icons -->
-                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
-                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/weaponIcon.png" />
+                        <Image Grid.Row="1" Grid.RowSpan="5" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                        <Image Grid.Row="2" Grid.RowSpan="3" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/weaponIcon.png" />
+                        <Image Grid.Row="2" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="3" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="4" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                        <Image Grid.Row="5" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="2" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="3" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="4" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                        <Image Grid.Row="5" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <!--#endregion-->
 
                         <!--#region Offhand Icons -->
-                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
-                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/offHandIcon.png" />
+                        <Image Grid.Row="1" Grid.RowSpan="5" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                        <Image Grid.Row="1" Grid.RowSpan="5" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/offHandIcon.png" />
+                        <Image Grid.Row="2" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="3" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="4" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                        <Image Grid.Row="5" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="2" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="3" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="4" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                        <Image Grid.Row="5" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <!--#endregion-->
 
                         <!--#region Boots Icons -->
-                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
-                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/bootsIcon.png" />
+                        <Image Grid.Row="6" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                        <Image Grid.Row="6" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/bootsIcon.png" />
+                        <Image Grid.Row="6" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="7" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                        <Image Grid.Row="8" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="6" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="7" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                        <Image Grid.Row="8" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <!--#endregion-->
 
                         <!--#region Gloves Icons -->
-                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
-                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/glovesIcon.png" />
+                        <Image Grid.Row="6" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                        <Image Grid.Row="6" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/glovesIcon.png" />
+                        <Image Grid.Row="6" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
                         <Image Grid.Row="7" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                        <Image Grid.Row="8" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="6" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <Image Grid.Row="7" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                        <Image Grid.Row="8" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
                         <!--#endregion -->
 
                         <!--#region Amulet Icons -->
-                        <Image Grid.Row="3" Grid.Column="5" Source="Assets/tinyIconBox.png" />
-                        <Image Grid.Row="3" Grid.Column="5" Source="Assets/amuletIcon.png"/>
-                        <Image Grid.Row="3" Grid.Column="5" Source="Assets/whiteSocket.png"/>
+                        <Image Grid.Row="2" Grid.Column="5" Source="Assets/tinyIconBox.png" />
+                        <Image Grid.Row="2" Grid.Column="5" Source="Assets/amuletIcon.png"/>
+                        <Image Grid.Row="2" Grid.Column="5" Source="Assets/whiteSocket.png"/>
                         <!--#endregion-->
 
                         <!--#region Right Ring Icons -->
-                        <Image Grid.Row="5" Grid.Column="5" Source="Assets/tinyIconBox.png" />
-                        <Image Grid.Row="5" Grid.Column="5" Source="Assets/ringIcon.png"/>
-                        <Image Grid.Row="5" Grid.Column="5" Source="Assets/whiteSocket.png"/>
+                        <Image Grid.Row="4" Grid.Column="5" Source="Assets/tinyIconBox.png" />
+                        <Image Grid.Row="4" Grid.Column="5" Source="Assets/ringIcon.png"/>
+                        <Image Grid.Row="4" Grid.Column="5" Source="Assets/whiteSocket.png"/>
                         <!--#endregion-->
 
                         <!--#region Left Ring Icons -->
-                        <Image Grid.Row="5" Grid.Column="2" Source="Assets/tinyIconBox.png" />
-                        <Image Grid.Row="5" Grid.Column="2" Source="Assets/ringIcon.png"/>
-                        <Image Grid.Row="5" Grid.Column="2" Source="Assets/whiteSocket.png"/>
+                        <Image Grid.Row="4" Grid.Column="2" Source="Assets/tinyIconBox.png" />
+                        <Image Grid.Row="4" Grid.Column="2" Source="Assets/ringIcon.png"/>
+                        <Image Grid.Row="4" Grid.Column="2" Source="Assets/whiteSocket.png"/>
                         <!--#endregion-->
 
                         <!--#endregion-->

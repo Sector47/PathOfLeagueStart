@@ -13,7 +13,7 @@
         [JsonProperty("quest")]
         public string questName { get; set; }
 
-        [JsonProperty("reward")]
+        [JsonProperty("Page")]
         public string reward { get; set; }
 
         [JsonProperty("classes")]
