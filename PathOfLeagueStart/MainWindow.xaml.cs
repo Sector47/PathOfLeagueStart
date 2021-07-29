@@ -173,6 +173,7 @@ namespace PathOfLeagueStart
                                 gridEquipmentIcons.Children.Add(image);
                                 Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                 Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
+                                
 
                                 // Make the images horizontal alignment match the alignment of the socket clicked.
                                 image.HorizontalAlignment = socketClicked.HorizontalAlignment;
@@ -181,7 +182,8 @@ namespace PathOfLeagueStart
                                 image.IsHitTestVisible = false;
 
                                 // Set the tag for the gem to the selected gem's name so that we can highlight it later.
-                                image.Tag = selectedGem.name;
+                                socketClicked.Tag = selectedGem.name;
+                                ToolTipService.SetToolTip(socketClicked, socketClicked.Tag);
                                 break;
                             }
                         case "dexterity":
@@ -204,7 +206,8 @@ namespace PathOfLeagueStart
                                 image.IsHitTestVisible = false;
 
                                 // Set the tag for the gem to the selected gem's name so that we can highlight it later.
-                                image.Tag = selectedGem.name;
+                                socketClicked.Tag = selectedGem.name;
+                                ToolTipService.SetToolTip(socketClicked, socketClicked.Tag);
                                 break;
                             }
                         case "intelligence":
@@ -227,7 +230,8 @@ namespace PathOfLeagueStart
                                 image.IsHitTestVisible = false;
 
                                 // Set the tag for the gem to the selected gem's name so that we can highlight it later.
-                                image.Tag = selectedGem.name;
+                                socketClicked.Tag = selectedGem.name;
+                                ToolTipService.SetToolTip(socketClicked, socketClicked.Tag);
                                 break;
                             }
                         default:
@@ -242,6 +246,7 @@ namespace PathOfLeagueStart
                                     // TODO change this based on skill vs support gem
                                     Image image = new Image();
                                     image.Source = new BitmapImage(new Uri(@"/Assets/redGem.png", UriKind.Relative));
+
                                     gridEquipmentIcons.Children.Add(image);
                                     Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                     Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
@@ -253,7 +258,8 @@ namespace PathOfLeagueStart
                                     image.IsHitTestVisible = false;
 
                                     // Set the tag for the gem to the selected gem's name so that we can highlight it later.
-                                    image.Tag = selectedGem.name;
+                                    socketClicked.Tag = selectedGem.name;
+                                    ToolTipService.SetToolTip(socketClicked, socketClicked.Tag);
                                 }
                                 else
                                 {
@@ -275,7 +281,8 @@ namespace PathOfLeagueStart
                                     image.IsHitTestVisible = false;
 
                                     // Set the tag for the gem to the selected gem's name so that we can highlight it later.
-                                    image.Tag = selectedGem.name;
+                                    socketClicked.Tag = selectedGem.name;
+                                    ToolTipService.SetToolTip(socketClicked, socketClicked.Tag);
                                 }
 
                                 
