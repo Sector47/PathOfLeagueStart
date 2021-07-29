@@ -170,6 +170,10 @@ namespace PathOfLeagueStart
                                 // TODO change this based on skill vs support gem
                                 Image image = new Image();
                                 image.Source = new BitmapImage(new Uri(@"/Assets/redGem.png", UriKind.Relative));
+
+                                // Remove previous gem icons
+                                RemovePreviousGemImage(GetGridLocation(socketClicked).ElementAt(0), GetGridLocation(socketClicked).ElementAt(1));
+
                                 gridEquipmentIcons.Children.Add(image);
                                 Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                 Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
@@ -195,6 +199,10 @@ namespace PathOfLeagueStart
                                 // TODO change this based on skill vs support gem
                                 Image image = new Image();
                                 image.Source = new BitmapImage(new Uri(@"/Assets/greenGem.png", UriKind.Relative));
+
+                                // Remove previous gem icons
+                                RemovePreviousGemImage(GetGridLocation(socketClicked).ElementAt(0), GetGridLocation(socketClicked).ElementAt(1));
+
                                 gridEquipmentIcons.Children.Add(image);
                                 Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                 Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
@@ -219,6 +227,10 @@ namespace PathOfLeagueStart
                                 // TODO change this based on skill vs support gem
                                 Image image = new Image();
                                 image.Source = new BitmapImage(new Uri(@"/Assets/blueGem.png", UriKind.Relative));
+
+                                // Remove previous gem icons
+                                RemovePreviousGemImage(GetGridLocation(socketClicked).ElementAt(0), GetGridLocation(socketClicked).ElementAt(1));
+
                                 gridEquipmentIcons.Children.Add(image);
                                 Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                 Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
@@ -247,9 +259,14 @@ namespace PathOfLeagueStart
                                     Image image = new Image();
                                     image.Source = new BitmapImage(new Uri(@"/Assets/redGem.png", UriKind.Relative));
 
+                                    // Remove previous gem icons
+                                    RemovePreviousGemImage(GetGridLocation(socketClicked).ElementAt(0), GetGridLocation(socketClicked).ElementAt(1));
+
                                     gridEquipmentIcons.Children.Add(image);
                                     Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                     Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
+
+                                    
 
                                     // Make the images horizontal alignment match the alignment of the socket clicked.
                                     image.HorizontalAlignment = socketClicked.HorizontalAlignment;
@@ -270,6 +287,10 @@ namespace PathOfLeagueStart
                                     // TODO change this based on skill vs support gem
                                     Image image = new Image();
                                     image.Source = new BitmapImage(new Uri(@"/Assets/noneGem.png", UriKind.Relative));
+
+                                    // Remove previous gem icons
+                                    RemovePreviousGemImage(GetGridLocation(socketClicked).ElementAt(0), GetGridLocation(socketClicked).ElementAt(1));
+
                                     gridEquipmentIcons.Children.Add(image);
                                     Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                     Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
@@ -304,6 +325,33 @@ namespace PathOfLeagueStart
             result[1] = Grid.GetRow(uiElement);
 
             return result;
+        }
+
+        /// <summary>
+        /// Remove gem icon at given grid coordinate
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        private void RemovePreviousGemImage(int x, int y)
+        {
+            // loop through the grid of images and find the image at that location.
+            foreach(object obj in gridEquipmentIcons.Children)
+            {
+                if(obj is Image)
+                {
+                    Image img = obj as Image;
+                   
+                    int[] imgLocation = GetGridLocation(img);
+                    if (imgLocation[0] == x && imgLocation[1] == y && img.Source.ToString().Contains("Gem"))
+                    {
+                        // Remove the img
+                        gridEquipmentIcons.Children.Remove(img);
+                        // break so that we do not throw an exception for changing the collection.
+                        break;
+                        
+                    }
+                }
+            }
         }
 
         private void lockGemsButton_Click(object sender, RoutedEventArgs e)
