@@ -179,5 +179,11 @@
   <ItemGroup>
     <Resource Include="Assets\noneGem.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\gridRockBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\gridStoneBackground.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

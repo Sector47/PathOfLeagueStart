@@ -29,9 +29,14 @@ namespace PathOfLeagueStart
         private APIDataFetcher dataFetcher;
         private Weapon selectedWeapon;
         private Area currentArea = new Area();
-        private int currentLevel;
+        private int currentLevel = 1;
+        private string characterName;
+        private string characterClass;
+        private string lastWhisperName;
         private Quest currentQuest;
-        private List<String[]> recentWhispers;
+        private List<string[]> recentWhispers = new List<string[]>();
+        // Binding for our whispers listview
+        private System.ComponentModel.BindingList<string> listItems = new System.ComponentModel.BindingList<string>();
         private StreamReader logReader;
         private SettingsDisplayData settings;
         private DispatcherTimer dispatcherTimer;
@@ -44,6 +49,10 @@ namespace PathOfLeagueStart
             dataFetcher = FetchData();
             CreateFileWatcher(settings.getClientTxtFilePath);
             StartDispatcherTimer();
+            SetCurrentArea("The Twilight Strand");
+
+            WhisperLogView.ItemsSource = listItems;
+            UpdateDataInUI();
         }
 
         
@@ -121,12 +130,58 @@ namespace PathOfLeagueStart
         private void ReadLine(string line)
         {
             Logger.LogDebug("Reading Line: " + line);
-            if (line.Contains(") is now level "))
+            //if (line.Contains("@To "))
             {
-                //LevelChange(line);
+                // whisper message sent ignore this for now, later we can add custom commands through here maybe?
+                // Probably just do commands through hotkeys or through local messages instead.
+            }
+             if (line.Contains("@From "))
+            {
+                // whisper message received
+                // Add our whisper to recent whispers for displaying in the scrollviewer.
+                // record the name of who sent the whisper for replying / quick invite
+                int start = line.IndexOf("@From ") + "@From ".Length;
+                // For getting the end of their name we need to look for the first : after the @from message
+                int end = line.Substring(start).IndexOf(":");
+                lastWhisperName = line.Substring(start, end);
+                string lastMessage = line.Substring(end + start + ":".Length);
+                string[] compiledMessage = new string[2] { lastWhisperName, lastMessage };
+
+                recentWhispers.Add(compiledMessage);
+                UpdateDataInUI();
+            }
+            else if (line.Contains(") is now level "))
+            {
+                // Check if character name has not been set yet, if so set the character name. This can also be done from the settings.
+                if (string.IsNullOrEmpty(characterName))
+                {
+                    int start = line.LastIndexOf(": ") + ": ".Length;
+                    int end = line.LastIndexOf(" (");
+                    characterName = line.Substring(start, end - start);
+                }
+                // once we have character name we can see if the line is for them or a party member
+                if(!string.IsNullOrEmpty(characterName) && line.Contains(characterName) && line.Contains(") is now level "))
+                {
+                    // Set our character Class
+                    int start = line.IndexOf("(") + "(".Length;
+                    int end = line.LastIndexOf(")");
+                    characterClass = line.Substring(start, end - start);
+
+
+                    // To avoid magic numbers we will count the length of our string.
+                    string nowLevel = "now level ";
+                    int indexOfLevel = line.IndexOf(nowLevel) + nowLevel.Length;
+
+                    // to get current level we just read the remaining end of the line.                
+                    currentLevel = int.Parse(line.Substring(indexOfLevel));
+                    Logger.LogDebug(CharacterNameTextBlock + " is now level: " + currentLevel.ToString());
+                }
+                
+                UpdateDataInUI();
             }
             else if (line.Contains("You have entered "))
             {
+                // To avoid magic numbers we will count the length of our string.
                 String areaEnter = "You have entered ";
                 int indexOfArea = line.IndexOf(areaEnter) + areaEnter.Length;
                 // to get areaName, we go to index of You have entered in the string, and take the remaining string in the line by going to end of line with a substring.
@@ -139,6 +194,68 @@ namespace PathOfLeagueStart
             else if (line.Contains("@To a: "))
             {
                 //ExecuteCommand(line, line.IndexOf("@To a: ") + 7);
+            }
+        }
+
+        private void SetXpPenalty()
+        {
+            // Check if character level is too far below zone;
+            // Path of exile xp penalty has a safe distance before it starts being calculated.
+            int safeDistance = (3 + (currentLevel / 16));
+            int currentAreaLevel = int.Parse(currentArea.areaLevel);
+
+            if (Math.Abs(currentLevel - currentAreaLevel) > safeDistance)
+            {
+                double xpPenalty =
+                    Math.Pow(
+                        ((currentLevel + 5) /
+                         (currentLevel + 5 + Math.Pow((currentAreaLevel - currentLevel), 2.5))), 1.5);
+                if (currentLevel > currentAreaLevel)
+                {
+                    TextBlock formattedXpPenalty = new TextBlock();
+                    formattedXpPenalty.Inlines.Add("Too high level, you will have an xp penalty multiplier of: ");
+                    formattedXpPenalty.Inlines.Add(new Bold(new Run(xpPenalty.ToString())));                    
+                    XpPenaltyTextBlock.Text = string.Empty;
+                    XpPenaltyTextBlock.Inlines.Add(formattedXpPenalty);
+                }
+
+                if (currentLevel < currentAreaLevel)
+                {
+                    TextBlock formattedXpPenalty = new TextBlock();
+                    formattedXpPenalty.Inlines.Add("Too low level, you will have an xp penalty multiplier of: ");
+                    formattedXpPenalty.Inlines.Add(new Bold(new Run(xpPenalty.ToString())));
+                    XpPenaltyTextBlock.Text = string.Empty;
+                    XpPenaltyTextBlock.Inlines.Add(formattedXpPenalty);
+                }
+                XpPenaltyDockPanel.Background = new SolidColorBrush(Color.FromRgb(253, 173, 92));
+            }
+            else if (Math.Abs(currentLevel - currentAreaLevel) == safeDistance)
+            {
+                if((currentLevel - currentAreaLevel) < 0)
+                {
+                    TextBlock formattedXpPenalty = new TextBlock();
+                    formattedXpPenalty.Inlines.Add("You are at the safe distance low end");
+                    XpPenaltyTextBlock.Text = string.Empty;
+                    XpPenaltyTextBlock.Inlines.Add(formattedXpPenalty);
+                }
+                else
+                {
+                    TextBlock formattedXpPenalty = new TextBlock();
+                    formattedXpPenalty.Inlines.Add("You are at the safe distance high end");
+                    XpPenaltyTextBlock.Text = string.Empty;
+                    XpPenaltyTextBlock.Inlines.Add(formattedXpPenalty);
+                }
+                
+                XpPenaltyDockPanel.Background = new SolidColorBrush(Colors.LightYellow);
+            }
+            else
+            {
+                int distance = Math.Abs(Math.Abs(currentLevel - currentAreaLevel) - safeDistance);
+                TextBlock formattedXpPenalty = new TextBlock();
+                formattedXpPenalty.Inlines.Add("You are within the safe distance by " + distance);
+                XpPenaltyTextBlock.Text = string.Empty;
+                XpPenaltyTextBlock.Inlines.Add(formattedXpPenalty);
+                XpPenaltyDockPanel.Background = new SolidColorBrush(Colors.White);
             }
         }
 
@@ -317,6 +434,11 @@ namespace PathOfLeagueStart
             }
         }
 
+        /// <summary>
+        /// Gets an array of the column and row for a given object
+        /// </summary>
+        /// <param name="objectToFind"> The object you are trying to find in the grid </param>
+        /// <returns> A 2 value array [x, y]</returns>
         private int[] GetGridLocation(object objectToFind)
         {
             UIElement uiElement = (UIElement)objectToFind;
@@ -388,7 +510,29 @@ namespace PathOfLeagueStart
         {
             AreaNameTextBlock.Text = currentArea.name;
             AreaLevelTextBlock.Text = currentArea.areaLevel;
+            CharacterLevelTextBlock.Text = currentLevel.ToString();
+            CharacterNameTextBlock.Text = characterName + " (" + characterClass + ")";
+
+            AddWhispersToListView();
+
+            WhisperNameTextBlock.Text = lastWhisperName;
+
+
             
+            SetXpPenalty();
+        }
+
+        private void AddWhispersToListView()
+        {
+            foreach(string[] stringArray in recentWhispers)
+            {
+                //ListViewItem listViewItem = new ListViewItem();
+                //listViewItem.Content = stringArray[0] + ": " + stringArray[1];                
+                //WhisperLogView.Items.Add(listViewItem);
+                listItems.Add(stringArray[0] + ": " + stringArray[1]);
+            }
+            recentWhispers.Clear();
+
         }
     }
 }

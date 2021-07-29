@@ -5,11 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PathOfLeagueStart"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800">    
     <Grid>
-        <TabControl>
-            <TabItem Header="Main">
-                <Grid Background="#FFE5E5E5" x:Name="MainTabBackground" ShowGridLines="False">
+        <Grid.Background>
+            <ImageBrush ImageSource="Assets/gridStoneBackground.jpg"/>
+        </Grid.Background>
+        <TabControl Background="Gray">
+            <TabItem Header="Main" Background="#FFE5E5E5">
+                <Grid x:Name="MainTabBackground" ShowGridLines="False">
+                    <Grid.Background>
+                        <ImageBrush ImageSource="Assets/gridRockBackground.jpg" Opacity="0.65"/>
+                    </Grid.Background>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="4*"></ColumnDefinition>
                         <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -20,7 +26,17 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Grid x:Name="gridEquipmentIcons" Grid.RowSpan="4" Grid.Row="0" Grid.Column="0" Background="DarkGray" ShowGridLines="False" RenderTransformOrigin="0.5,0.5">
+                    <Border Grid.Column="1" Grid.Row="0" Grid.RowSpan="4" CornerRadius="5" BorderBrush="Goldenrod" BorderThickness="2" >
+                        <Border.Background>
+                            <ImageBrush ImageSource="Assets/gridRockBackground.jpg" Opacity="0.75"/>
+                        </Border.Background>
+
+                    </Border>
+
+                    <Grid x:Name="gridEquipmentIcons" Grid.RowSpan="4" Grid.Row="0" Grid.Column="0" ShowGridLines="False" RenderTransformOrigin="0.5,0.5">
+                        <Grid.Background>
+                            <ImageBrush ImageSource="Assets/gridStoneBackground.jpg" Opacity="0.55"/>
+                        </Grid.Background>
                         <Grid.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform/>
@@ -52,88 +68,88 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <!--#region Inventory Icons -->
-                            <!--#region Helmet Icons -->
-                                <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/helmetIcon.png"/>
-                                <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
-                                <Image Grid.Row="2" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="1" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="2" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="1" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                            <!--#endregion-->
+                        <!--#region Helmet Icons -->
+                        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                        <Image Grid.Row="1" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/helmetIcon.png"/>
+                        <Image Grid.Row="2" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="1" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="2" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="1" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <!--#endregion-->
 
 
 
-                            <!--#region Body Armor Icons -->
-                                <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/bodyArmorIcon.png"/>
-                                <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
-                                <Image Grid.Row="4" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="5" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="6" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="4" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="5" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="6" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                            <!--#endregion-->
+                        <!--#region Body Armor Icons -->
+                        <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                        <Image Grid.Row="4" Grid.RowSpan="4" Grid.Column="3" Grid.ColumnSpan="2" Source="Assets/bodyArmorIcon.png"/>
+                        <Image Grid.Row="4" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="5" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="6" Grid.Column="3" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="4" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="5" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="6" Grid.Column="4" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <!--#endregion-->
 
-                            <!--#region Weapon Icons -->
-                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/weaponIcon.png" />
-                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
-                                <Image Grid.Row="3" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="4" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="5" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="3" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="4" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="5" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                            <!--#endregion-->
+                        <!--#region Weapon Icons -->
+                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="0" Grid.ColumnSpan="2" Source="Assets/weaponIcon.png" />
+                        <Image Grid.Row="3" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="4" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="5" Grid.Column="0" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="3" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="4" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="5" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <!--#endregion-->
 
-                            <!--#region Offhand Icons -->
-                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/offHandIcon.png" />
-                                <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
-                                <Image Grid.Row="3" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="4" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="5" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="3" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="4" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="5" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                            <!--#endregion-->
+                        <!--#region Offhand Icons -->
+                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/largeIconBox.png"/>
+                        <Image Grid.Row="3" Grid.RowSpan="4" Grid.Column="6" Grid.ColumnSpan="2" Source="Assets/offHandIcon.png" />
+                        <Image Grid.Row="3" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="4" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="5" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="3" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="4" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="5" Grid.Column="7" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <!--#endregion-->
 
-                            <!--#region Boots Icons -->
-                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/bootsIcon.png" />
-                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
-                                <Image Grid.Row="7" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="8" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="7" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="8" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                            <!--#endregion-->
+                        <!--#region Boots Icons -->
+                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="5" Grid.ColumnSpan="2" Source="Assets/bootsIcon.png" />
+                        <Image Grid.Row="7" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="8" Grid.Column="5" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="7" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="8" Grid.Column="6" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <!--#endregion-->
 
-                            <!--#region Gloves Icons -->
-                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/glovesIcon.png" />
-                                <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
-                                <Image Grid.Row="7" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="8" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
-                                <Image Grid.Row="7" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                                <Image Grid.Row="8" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
-                            <!--#endregion -->
+                        <!--#region Gloves Icons -->
+                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/mediumIconBox.png"/>
+                        <Image Grid.Row="7" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" Source="Assets/glovesIcon.png" />
+                        <Image Grid.Row="7" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="8" Grid.Column="1" Source="Assets/whiteSocket.png" HorizontalAlignment="Right"/>
+                        <Image Grid.Row="7" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <Image Grid.Row="8" Grid.Column="2" Source="Assets/whiteSocket.png" HorizontalAlignment="Left"/>
+                        <!--#endregion -->
 
-                            <!--#region Amulet Icons -->
-                                <Image Grid.Row="3" Grid.Column="5" Source="Assets/amuletIcon.png"/>
-                                <Image Grid.Row="3" Grid.Column="5" Source="Assets/tinyIconBox.png" />
-                                <Image Grid.Row="3" Grid.Column="5" Source="Assets/whiteSocket.png"/>
-                            <!--#endregion-->
+                        <!--#region Amulet Icons -->
+                        <Image Grid.Row="3" Grid.Column="5" Source="Assets/tinyIconBox.png" />
+                        <Image Grid.Row="3" Grid.Column="5" Source="Assets/amuletIcon.png"/>
+                        <Image Grid.Row="3" Grid.Column="5" Source="Assets/whiteSocket.png"/>
+                        <!--#endregion-->
 
-                            <!--#region Right Ring Icons -->
-                                <Image Grid.Row="5" Grid.Column="5" Source="Assets/ringIcon.png"/>
-                                <Image Grid.Row="5" Grid.Column="5" Source="Assets/tinyIconBox.png" />
-                                <Image Grid.Row="5" Grid.Column="5" Source="Assets/whiteSocket.png"/>
-                            <!--#endregion-->
+                        <!--#region Right Ring Icons -->
+                        <Image Grid.Row="5" Grid.Column="5" Source="Assets/tinyIconBox.png" />
+                        <Image Grid.Row="5" Grid.Column="5" Source="Assets/ringIcon.png"/>
+                        <Image Grid.Row="5" Grid.Column="5" Source="Assets/whiteSocket.png"/>
+                        <!--#endregion-->
 
-                            <!--#region Left Ring Icons -->
-                                <Image Grid.Row="5" Grid.Column="2" Source="Assets/ringIcon.png"/>
-                                <Image Grid.Row="5" Grid.Column="2" Source="Assets/tinyIconBox.png" />
-                                <Image Grid.Row="5" Grid.Column="2" Source="Assets/whiteSocket.png"/>
-                            <!--#endregion-->
+                        <!--#region Left Ring Icons -->
+                        <Image Grid.Row="5" Grid.Column="2" Source="Assets/tinyIconBox.png" />
+                        <Image Grid.Row="5" Grid.Column="2" Source="Assets/ringIcon.png"/>
+                        <Image Grid.Row="5" Grid.Column="2" Source="Assets/whiteSocket.png"/>
+                        <!--#endregion-->
 
                         <!--#endregion-->
-                        <Button x:Name="lockGemsButton" Grid.Row="9" Grid.Column="6" Grid.ColumnSpan="2" Click="lockGemsButton_Click">
+                        <Button x:Name="lockGemsButton" Grid.Row="9" Grid.Column="6" Grid.ColumnSpan="2" Click="lockGemsButton_Click" Background="Gray" Foreground="Goldenrod" BorderBrush="DarkGoldenrod" FontWeight="Medium" FontSize="16">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -142,7 +158,7 @@
                             Lock Gems
                         </Button>
 
-                        <Button x:Name="changeWeaponButton" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Click="changeWeaponButton_Click">
+                        <Button x:Name="changeWeaponButton" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Click="changeWeaponButton_Click" Background="Gray" Foreground="Goldenrod" BorderBrush="DarkGoldenrod" FontWeight="Medium" FontSize="14">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -151,36 +167,148 @@
                             Change Weapon
                         </Button>
                     </Grid>
+                    <Border Grid.Column="1" Grid.Row="0" Padding="2">
+                        <Grid  Grid.Column="1" Grid.Row="0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0" Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition></ColumnDefinition>
-                            <ColumnDefinition></ColumnDefinition>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                            <RowDefinition></RowDefinition>
-                        </Grid.RowDefinitions>
-                        <TextBlock x:Name="AreaNameTextBlock" Grid.Column="0" Grid.Row="0" Text="Area Name"/>
-                        <TextBlock x:Name="AreaLevelTextBlock" Grid.Column="1" Grid.Row="0" Text="Area Level"/>
-                        <TextBlock x:Name="CharacterNameTextBlock" Grid.Column="0" Grid.Row="1" Text="Character Name"/>
-                        <TextBlock x:Name="CharacterLevelTextBlock" Grid.Column="1" Grid.Row="1" Text="Character Level"/>
-                        <TextBlock x:Name="XpPenaltyTextBlock" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Text="Xp Penalty" FontWeight="Bold"></TextBlock>
-                    </Grid>
-                    <Viewbox Grid.Row="1" Grid.Column="1">
-                        <TextBlock>Next Zone<LineBreak/> Next Passive <LineBreak/> Current Quest <LineBreak/></TextBlock>
-                    </Viewbox>
-                    <Viewbox Grid.Row="2" Grid.Column="1">
-                        <TextBlock> Recent whispers<LineBreak/> Name of person to reply or auto invite</TextBlock>
-                    </Viewbox>
-                    <Viewbox Grid.Row="3" Grid.Column="1">
-                        <TextBlock>Maybe display the zone maps or current hotkeys</TextBlock>
-                    </Viewbox>
+                            <Viewbox  Grid.Column="0" Grid.Row="0">
+                                <DockPanel>
+                                    <Label Content="Area Name:" Target="{Binding ElementName=AreaNameTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="AreaNameTextBlock" Text="Area Name" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
 
+
+
+                            <Viewbox Grid.Column="1" Grid.Row="0">
+                                <DockPanel>
+                                    <Label Content="Area Level:" Target="{Binding ElementName=AreaLevelTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="AreaLevelTextBlock" Text="Area Level" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
+
+                            <Viewbox Grid.Column="0" Grid.Row="1">
+                                <DockPanel >
+                                    <Label Content="Character: " Target="{Binding ElementName=CharacterNameTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="CharacterNameTextBlock"  Text="Character Name" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
+
+                            <Viewbox Grid.Column="1" Grid.Row="1">
+                                <DockPanel>
+                                    <Label Content="Character Level: " Target="{Binding ElementName=CharacterLevelTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="CharacterLevelTextBlock"  Text="Character Level" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
+                            
+
+                            <DockPanel x:Name="XpPenaltyDockPanel" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" LastChildFill="True">
+                                <DockPanel.Background>
+                                    <SolidColorBrush Color="AntiqueWhite" Opacity="0.5"/>
+                                </DockPanel.Background>
+                                <Viewbox>
+                                    <Label Content="XP Penalty: " Target="{Binding ElementName=XpPenaltyTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center"></Label>
+                                </Viewbox>
+                                <Viewbox>
+                                    <TextBlock x:Name="XpPenaltyTextBlock" Text="Xp Penalty" FontWeight="Bold" DockPanel.Dock="Right" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                                </Viewbox>
+                            </DockPanel>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="1" Padding="2">
+                        <Grid Grid.Row="1" Grid.Column="1" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+
+                            </Grid.RowDefinitions>
+                            <Viewbox Grid.Column="0" Grid.Row="0">
+                                <DockPanel >
+                                    <Label Content="Next Area: " Target="{Binding ElementName=NextAreaTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="NextAreaTextBlock"  Text="Next Area" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
+
+
+                            <Viewbox Grid.Column="1" Grid.Row="0">
+                                <DockPanel >
+                                    <Label Content="Next Passive: " Target="{Binding ElementName=NextPassiveTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="NextPassiveTextBlock"  Text="Next Passive" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
+
+                            <Viewbox Grid.Column="0" Grid.Row="1">
+                                <DockPanel>
+                                    <Label Content="Current Quest " Target="{Binding ElementName=CurrentQuestTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="CurrentQuestTextBlock"  Text="Next Quest" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
+
+                            <Viewbox Grid.Column="1" Grid.Row="1">
+                                <DockPanel >
+                                    <Label Content="Next Quest: " Target="{Binding ElementName=NextQuestTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="NextQuestTextBlock"  Text="Next Quest" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                </DockPanel>
+                            </Viewbox>
+                        </Grid>
+                    </Border>
+                    <Border Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Padding="2">
+                        <Grid  Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Opacity="0.75" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition></ColumnDefinition>
+                                <ColumnDefinition></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+                                <RowDefinition></RowDefinition>
+
+                            </Grid.RowDefinitions>
+                            <Viewbox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                
+                            </Viewbox>
+                            <Border x:Name="ListViewBorder" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Grid.ColumnSpan="2" BorderBrush="DarkGoldenrod" BorderThickness="0,3">
+                                <ListView x:Name="WhisperLogView" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible" Background="LightGray" Height="{Binding Path=ActualHeight, ElementName=ListViewBorder}">
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"></Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" TextWrapping="Wrap" Foreground="Purple" FontSize="16" ></TextBlock>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </Border>
+
+
+                            <StackPanel Grid.Column="0" Grid.Row="2">
+                                <Label Content="AutoWhisper/Reply " Target="{Binding ElementName=WhisperNameTextBlock}" Foreground="White"></Label>
+                                <TextBlock x:Name="WhisperNameTextBlock"  Text="PersonToWhisper" Margin="5,0,0,0" Foreground="White" />
+                            </StackPanel>
+                            <StackPanel Grid.Column="1" Grid.Row="2">
+                                <Label Content="HotKeys: " Target="{Binding ElementName=HotKeysTextBlock}" Foreground="White"></Label>
+                                <TextBlock x:Name="HotkeyTextBlock" Text="Hotkey" Margin="5,0,0,0" Foreground="White"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
                 </Grid>
+
             </TabItem>
-            <TabItem Header="Settings">
+            <TabItem Header="Settings" Background="#FFE5E5E5">
                 <Grid Background="#FFE5E5E5">
                     <ScrollViewer>
                         <Grid>
