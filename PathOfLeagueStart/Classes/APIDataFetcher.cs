@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace PathOfLeagueStart.Classes
 {
@@ -27,14 +29,67 @@ namespace PathOfLeagueStart.Classes
             // Check if current data is out of data or missing
             //if (localLeague == currentLeague) 
             // Then don't downloadjsondata or adddatatodb
-            if (true)
+            bool isLeagueUpToDate = false;
+            try
+            {
+                // using a webclient we will get our json data from the api call and store the current event league
+                using (WebClient wc = new WebClient())
+                {
+                    // create our api call string
+                    string jsonFile = wc.DownloadString(
+                        "https://www.pathofexile.com/api/leagues?type=main&" +
+                        "realm=pc&" +
+                        "compat=1&" +
+                        // We only want one result
+                        "limit=1&" +
+                        // We don't need the permanent leagues, standard, ssf,  hardcore, ssfhc
+                        "offset=4&" +
+                        "format=json");
+
+
+                    // Make a JArray from parsing the json file.
+                    JArray arrayOfLeague = JArray.Parse(jsonFile);
+
+                    // Check that something was downloaded, if not throw an exception
+                    if (arrayOfLeague.Count == 0)
+                    {
+                        throw new Exception("League array was empty");
+                    }
+
+                    string currentLeague = arrayOfLeague[0]["id"].ToString();
+
+                    // Check against our last league launch
+                    if (Properties.Settings.Default.LastLeagueLaunched == currentLeague)
+                    {
+                        // if we are up to date, then set our bool to true, and don't redownload data
+                        isLeagueUpToDate = true;
+                    }
+                    else
+                    {
+                        // Set our setting for last league launched to this for future checking
+                        Properties.Settings.Default.LastLeagueLaunched = currentLeague;
+                        Properties.Settings.Default.Save();
+                        Logger.LogDebug("Last League Launched is now: " + currentLeague);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Logger.LogError("An error occured while attempting to download skill gem data", e);
+            }
+
+            // if we are out of date, download json data otherwise pull from db
+            // TODO invert this once db is setup
+            if (!isLeagueUpToDate)
             {
                 DownloadJSONData();
-                AddDataToDB();
+                SaveData();
+
+                
             }
             else
             {
-                PullDataFromDB();
+                PullDataFromFile();
             }
 
             
@@ -63,6 +118,15 @@ namespace PathOfLeagueStart.Classes
         public List<Area> AreaList { 
             get { return areaList; }
             set { areaList = value; }
+        }
+
+        /// <summary>
+        /// Used to manually update the data, rather than waiting for league to change.
+        /// </summary>
+        public void ManualUpdateData()
+        {
+            DownloadJSONData();
+            SaveData();
         }
 
         /// <summary>
@@ -352,17 +416,97 @@ namespace PathOfLeagueStart.Classes
         /// <summary>
         /// This will add our lists of data to the database
         /// </summary>
-        private void AddDataToDB()
+        private void SaveData()
         {
-            // First check if
+            // Get our file location to store data
+            string localAppDataFilePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+            // For each of our lists we will serialize it and store in a file.
+            string filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "gemData.json");
+            FileStream fs = File.Open(filePath, FileMode.OpenOrCreate);
+
+            // Serialize the object
+            string gemString = JsonConvert.SerializeObject(allSkillGems, Formatting.Indented);
+
+            // Make our streamwrite for the given file
+            StreamWriter sw = new StreamWriter(fs);
+            // write to the file
+            sw.WriteLine(gemString);
+
+            // flush the streamwriter.
+            sw.Flush();
+
+            // Repeat below changing names
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "weaponData.json");
+            fs = File.Open(filePath, FileMode.OpenOrCreate);
+            string weaponString = JsonConvert.SerializeObject(weaponList, Formatting.Indented);
+            sw = new StreamWriter(fs);
+            sw.WriteLine(weaponString);
+            sw.Flush();
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "areaData.json");
+            fs = File.Open(filePath, FileMode.OpenOrCreate);
+            string areaString = JsonConvert.SerializeObject(areaList, Formatting.Indented);
+            sw = new StreamWriter(fs);
+            sw.WriteLine(areaString);
+            sw.Flush();
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "questRewardsData.json");
+            fs = File.Open(filePath, FileMode.OpenOrCreate);
+            string questRewardsString = JsonConvert.SerializeObject(questRewardsList, Formatting.Indented);
+            sw = new StreamWriter(fs);
+            sw.WriteLine(questRewardsString);
+            sw.Flush();
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "vendorRewardsData.json");
+            fs = File.Open(filePath, FileMode.OpenOrCreate);
+            string vendorRewardsString = JsonConvert.SerializeObject(vendorRewardsList, Formatting.Indented);
+            sw = new StreamWriter(fs);
+            sw.WriteLine(vendorRewardsString);
+            sw.Flush();
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "questData.json");
+            fs = File.Open(filePath, FileMode.OpenOrCreate);
+            string questString = JsonConvert.SerializeObject(questList, Formatting.Indented);
+            sw = new StreamWriter(fs);
+            sw.WriteLine(questString);
+            sw.Flush();
+
         }
 
         /// <summary>
         /// This will fill our lists using our local sqlite db
         /// </summary>
-        private void PullDataFromDB()
+        private void PullDataFromFile()
         {
-            
+            // Get our file location to store data
+            string localAppDataFilePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+            // Get our file location for the json data.
+            string filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "gemData.json");
+            allSkillGems = JsonConvert.DeserializeObject<List<Gem>>(File.ReadAllText(filePath));
+
+
+            // repeat for other data
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "weaponData.json");
+            weaponList = JsonConvert.DeserializeObject<List<Weapon>>(File.ReadAllText(filePath));
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "areaData.json");
+            areaList = JsonConvert.DeserializeObject<List<Area>>(File.ReadAllText(filePath));
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "questRewardsData.json");
+            questRewardsList = JsonConvert.DeserializeObject<List<Quest>>(File.ReadAllText(filePath));
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "vendorRewardsData.json");
+            vendorRewardsList = JsonConvert.DeserializeObject<List<Vendor>>(File.ReadAllText(filePath));
+
+            filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "questData.json");
+            questList = JsonConvert.DeserializeObject<List<Quest>>(File.ReadAllText(filePath));
+
+
+
+
         }
     }
 }

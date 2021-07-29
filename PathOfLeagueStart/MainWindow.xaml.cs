@@ -140,8 +140,6 @@ namespace PathOfLeagueStart
             {
                 //ExecuteCommand(line, line.IndexOf("@To a: ") + 7);
             }
-
-            //UpdateKnownInfo();
         }
 
         private void SetCurrentArea(string currentAreaName)

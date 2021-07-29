@@ -62,7 +62,6 @@
     <Compile Include="Classes\APIDataFetcher.cs" />
     <Compile Include="Classes\Logger.cs" />
     <Compile Include="Data\Area.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="Views\GemSelectionWindow.xaml.cs">
       <DependentUpon>GemSelectionWindow.xaml</DependentUpon>
     </Compile>
