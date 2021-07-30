@@ -32,5 +32,17 @@
     <Setting Name="CustomHotkey" Type="System.String" Scope="User">
       <Value Profile="(Default)">End</Value>
     </Setting>
+    <Setting Name="Friend1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">null</Value>
+    </Setting>
+    <Setting Name="Friend2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">null</Value>
+    </Setting>
+    <Setting Name="Friend3" Type="System.String" Scope="User">
+      <Value Profile="(Default)">null</Value>
+    </Setting>
+    <Setting Name="CustomFunction" Type="System.String" Scope="User">
+      <Value Profile="(Default)">/global 820</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

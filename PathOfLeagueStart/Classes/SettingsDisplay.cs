@@ -28,10 +28,88 @@ namespace PathOfLeagueStart.Data
         }
 
         private string clientTxtFilePath;
-        public string getClientTxtFilePath 
+        public string ClientTxtFilePath 
         { 
             get { return clientTxtFilePath; }
         }
+
+        public string HideoutHotkey 
+        { 
+            get { return Properties.Settings.Default.GoToHideoutHotkey;  }
+            set { Properties.Settings.Default.GoToHideoutHotkey = value; }
+        }
+
+        public string LogOutHotkey
+        {
+            get { return Properties.Settings.Default.LogOutHotkey; }
+            set { Properties.Settings.Default.LogOutHotkey = value; }
+        }
+
+        public string WhisperBackHotkey
+        {
+            get { return Properties.Settings.Default.WhisperBackHotkey; }
+            set { Properties.Settings.Default.WhisperBackHotkey = value; }
+        }
+
+        public string InviteLastPlayerHotkey
+        {
+            get { return Properties.Settings.Default.InviteLastPlayerHotkey; }
+            set { Properties.Settings.Default.InviteLastPlayerHotkey = value; }
+        }
+
+        public string InviteFriend1Hotkey
+        {
+            get { return Properties.Settings.Default.InviteFriend1Hotkey; }
+            set { Properties.Settings.Default.InviteFriend1Hotkey = value; }
+        }
+
+        public string InviteFriend2Hotkey
+        {
+            get { return Properties.Settings.Default.InviteFriend2Hotkey; }
+            set { Properties.Settings.Default.InviteFriend2Hotkey = value; }
+        }
+
+        public string InviteFriend3Hotkey
+        {
+            get { return Properties.Settings.Default.InviteFriend3Hotkey; }
+            set { Properties.Settings.Default.InviteFriend3Hotkey = value; }
+        }
+
+        public string CustomHotkey
+        {
+            get { return Properties.Settings.Default.CustomHotkey; }
+            set { Properties.Settings.Default.CustomHotkey = value; }
+        }
+
+        public string CustomFunction
+        {
+            get { return Properties.Settings.Default.CustomFunction; }
+            set { Properties.Settings.Default.CustomFunction = value; }
+        }
+
+
+        public string Friend1
+        {
+            get { return Properties.Settings.Default.Friend1; }
+            set { Properties.Settings.Default.Friend1 = value; }
+        }
+        public string Friend2
+        {
+            get { return Properties.Settings.Default.Friend2; }
+            set { Properties.Settings.Default.Friend2 = value; }
+        }
+        public string Friend3
+        {
+            get { return Properties.Settings.Default.Friend3; }
+            set { Properties.Settings.Default.Friend3 = value; }
+        }
+
+        public void Save()
+        {
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
+        }
+
 
         /// <summary>
         /// Prompts the user to input a file location for the Client.Txt.
@@ -58,39 +136,6 @@ namespace PathOfLeagueStart.Data
             {
                 Logger.LogError("An error occured while attempting to choose a file location for the Client.txt file.", e);
                 setClientTxtFilePath();
-            }
-        }
-
-        public void SetUpHotkeys(List<Hotkey> hotkeysToSetup)
-        {
-            // Remove all previous hotkeys
-            List<SettingsProperty> settingPropertiesToRemove = new List<SettingsProperty>();
-            foreach (SettingsProperty settingsProperty in Properties.Settings.Default.Properties)
-            {
-                if (settingsProperty.Name.Contains("HotKey"))
-                {
-                    settingPropertiesToRemove.Add(settingsProperty);
-                }
-            }
-            foreach(SettingsProperty settingsProperty in settingPropertiesToRemove)
-            {
-                Properties.Settings.Default.Properties.Remove(settingsProperty.Name);
-            }
-            KeyConverter keyConverter = new KeyConverter();
-            // add all list of properties
-            foreach (Hotkey hotkey in hotkeysToSetup)
-            {
-                
-
-
-                //SettingsProperty sp = new SettingsProperty((string)keyConverter.ConvertTo(hotkey.Key, typeof(string)));
-                //sp.PropertyType = typeof(string);
-                //Properties.Settings.Default.Properties.Add(sp);
-                //Properties.Settings.Default.Save();
-
-               // Properties.Settings.Default.Reload();
-                //Properties.Settings.Default.Properties[sp.Name].DefaultValue = hotkey.Name;
-                //Properties.Settings.Default.Save();
             }
         }
 

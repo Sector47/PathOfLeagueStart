@@ -44,7 +44,6 @@ namespace PathOfLeagueStart
         private Quest currentQuest;
         private List<Quest> allQuests = new List<Quest>();
         private List<string[]> recentWhispers = new List<string[]>();
-        private string CustomHotKeyString;
         // Binding for our whispers listview
         private System.ComponentModel.BindingList<string> listItems = new System.ComponentModel.BindingList<string>();
         private StreamReader logReader;
@@ -66,11 +65,11 @@ namespace PathOfLeagueStart
             CheckConfigFile();
             AddSocketListeners();
             dataFetcher = FetchData();
-            CreateFileWatcher(settings.getClientTxtFilePath);
+            CreateFileWatcher(settings.ClientTxtFilePath);
             StartDispatcherTimer();
             FillQuestList();
             SetZIndexDefault();
-            SaveHotKeys();
+            UpdateSettingsUI();
 
             AttachKeyboardInterceptor(hotkeyHook);
             
@@ -89,59 +88,63 @@ namespace PathOfLeagueStart
 
         private void CheckForHotKeyPress(KeyboardHookEventArgs e)
         {
-            string hotKeyPressed = settings.GetHotKey(e.Key.ToString());
-            if (hotKeyPressed != string.Empty)
+            if (!inSettings)
             {
-                switch (hotKeyPressed)
+                string hotKeyPressed = settings.GetHotKey(e.Key.ToString());
+                if (hotKeyPressed != string.Empty)
                 {
-                    case "GoToHideoutHotkey":
-                        {
-                            GoToHideout();
-                            break;
-                        }
-                    case "LogOutHotkey":
-                        {
-                            LogOut();
-                            break;
-                        }
-                    case "WhisperBackHotkey":
-                        {
-                            WhisperBack();
-                            break;
-                        }
-                    case "InviteLastPlayerHotkey":
-                        {
-                            InviteLastPlayer();
-                            break;
-                        }
-                    case "InviteFriend1Hotkey":
-                        {
-                            InviteFriend(1);
-                            break;
-                        }
-                    case "InviteFriend2Hotkey":
-                        {
-                            InviteFriend(2);
-                            break;
-                        }
-                    case "InviteFriend3Hotkey":
-                        {
-                            InviteFriend(3);
-                            break;
-                        }
-                    case "CustomHotkey":
-                        {
-                            CustomHotKey();
-                            break;
-                        }
+                    switch (hotKeyPressed)
+                    {
+                        case "GoToHideoutHotkey":
+                            {
+                                GoToHideout();
+                                break;
+                            }
+                        case "LogOutHotkey":
+                            {
+                                LogOut();
+                                break;
+                            }
+                        case "WhisperBackHotkey":
+                            {
+                                WhisperBack();
+                                break;
+                            }
+                        case "InviteLastPlayerHotkey":
+                            {
+                                InviteLastPlayer();
+                                break;
+                            }
+                        case "InviteFriend1Hotkey":
+                            {
+                                InviteFriend(1);
+                                break;
+                            }
+                        case "InviteFriend2Hotkey":
+                            {
+                                InviteFriend(2);
+                                break;
+                            }
+                        case "InviteFriend3Hotkey":
+                            {
+                                InviteFriend(3);
+                                break;
+                            }
+                        case "CustomHotkey":
+                            {
+                                CustomHotKey();
+                                break;
+                            }
 
-                    default:
-                        {
-                            Logger.LogDebug("Could not find a method to run for the hotkey: " + hotKeyPressed);
-                            break;
-                        }
+                        default:
+                            {
+                                Logger.LogDebug("Could not find a method to run for the hotkey: " + hotKeyPressed);
+                                break;
+                            }
+                    }
                 }
             }
+            
            
             Logger.LogDebug(e.Key.ToString());
         }
@@ -165,42 +168,53 @@ namespace PathOfLeagueStart
 
         private void InviteLastPlayer()
         {
-            SendKeys.SendWait("~");
-            System.Windows.Clipboard.SetText("/invite " + lastWhisperName);
-            SendKeys.SendWait("^{v}");
-            SendKeys.SendWait("~");
+            if(!string.IsNullOrEmpty(lastWhisperName))
+            {
+                SendKeys.SendWait("~");
+                System.Windows.Clipboard.SetText("/invite " + lastWhisperName);
+                SendKeys.SendWait("^{v}");
+                SendKeys.SendWait("~");
+            }            
         }
 
         private void InviteFriend(int friendToInvite)
         {
-            string friend = GetFriend(friendToInvite);
-            SendKeys.SendWait("~");
-            System.Windows.Clipboard.SetText("/invite " + lastWhisperName);
-            SendKeys.SendWait("^{v}");
-            SendKeys.SendWait("~");
+            string friend = GetFriend(friendToInvite);            
+            if (!string.IsNullOrEmpty(friend))
+            {                
+                SendKeys.SendWait("~");
+                System.Windows.Clipboard.SetText("/invite " + friend);
+                SendKeys.SendWait("^{v}");
+                SendKeys.SendWait("~");
+            }
+            
         }
 
         private void CustomHotKey()
         {
-            SendKeys.SendWait("~");
-            System.Windows.Clipboard.SetText("/" + CustomHotKeyString);
-            SendKeys.SendWait("^{v}");
-            SendKeys.SendWait("~");
+            if (!string.IsNullOrEmpty(settings.CustomFunction))
+            {
+                SendKeys.SendWait("~");
+                System.Windows.Clipboard.SetText(settings.CustomFunction);
+                SendKeys.SendWait("^{v}");
+                SendKeys.SendWait("~");
+            }
         }
 
-
-        private void SaveHotKeys()
-        {
-            List<Hotkey> hotKeyList = new List<Hotkey>();
-            // TODO GRAB FROM SETTINGS PAGE ON SAVE BUTTON CLICK
-            hotKeyList.Add(new Hotkey("GoToHideout", Key.F5));
-            hotKeyList.Add(new Hotkey("LogOut", Key.F6));
-
-            settings.SetUpHotkeys(hotKeyList);
-        }
 
         private string GetFriend(int friendToInvite)
         {
+            switch (friendToInvite)
+            {
+                case 1:
+                    return settings.Friend1;
+                case 2:
+                    return settings.Friend2;
+                case 3:
+                    return settings.Friend3;
+                default:
+                    break;
+            }
             return string.Empty;
         }
 
@@ -933,9 +947,30 @@ namespace PathOfLeagueStart
 
             WhisperNameTextBlock.Text = lastWhisperName;
 
+            
+
 
             
             SetXpPenalty();
+        }
+
+        private void UpdateSettingsUI()
+        {
+            ClientTxtFilePathTextBox.Text = settings.ClientTxtFilePath;
+            HideoutHotkeyTextBox.Text = settings.HideoutHotkey;
+            LogOutHotkeyTextBox.Text = settings.LogOutHotkey;
+            WhisperBackHotkeyTextBox.Text = settings.LogOutHotkey;
+            InviteLastPlayerHotkeyTextBox.Text = settings.InviteLastPlayerHotkey;
+            InviteFriend1HotkeyTextBox.Text = settings.InviteFriend1Hotkey;
+            InviteFriend2HotkeyTextBox.Text = settings.InviteFriend2Hotkey;
+            InviteFriend3HotkeyTextBox.Text = settings.InviteFriend3Hotkey;
+            Friend1NameTextBox.Text = settings.Friend1;
+            Friend2NameTextBox.Text = settings.Friend2;
+            Friend3NameTextBox.Text = settings.Friend3;
+
+
+            CustomHotkeyTextBox.Text = settings.CustomHotkey;
+            CustomFunctionTextBox.Text = settings.CustomFunction;
         }
 
         private void AddWhispersToListView()
@@ -963,6 +998,58 @@ namespace PathOfLeagueStart
                 }
                 
             }
+        }
+
+        private void saveSettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            settings.HideoutHotkey = HideoutHotkeyTextBox.Text;
+            settings.LogOutHotkey = LogOutHotkeyTextBox.Text;
+            settings.LogOutHotkey = WhisperBackHotkeyTextBox.Text;
+            settings.InviteLastPlayerHotkey = InviteLastPlayerHotkeyTextBox.Text;
+            
+            settings.InviteFriend1Hotkey = InviteFriend1HotkeyTextBox.Text;
+            settings.InviteFriend2Hotkey = InviteFriend2HotkeyTextBox.Text;
+            settings.InviteFriend3Hotkey = InviteFriend3HotkeyTextBox.Text;
+
+            settings.Friend1 = Friend1NameTextBox.Text;
+            settings.Friend2 = Friend2NameTextBox.Text;
+            settings.Friend3 = Friend3NameTextBox.Text;
+            settings.CustomHotkey = CustomHotkeyTextBox.Text;
+            settings.CustomFunction = CustomFunctionTextBox.Text;
+            settings.Save();
+            UpdateSettingsUI();
+        }
+
+        private string PromptKeyPress()
+        {
+            string keyPressed = string.Empty;
+
+
+            return keyPressed;
+        }
+
+        private void ClientTxtFilePathTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            settings.setClientTxtFilePath();
+            UpdateSettingsUI();
+        }
+
+        
+
+        private void HotKeyTextBox_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            System.Windows.Controls.TextBox textBox = sender as System.Windows.Controls.TextBox;
+            textBox.Text = "Enter a Key";
+            inSettings = true;
+
+            WaitForKeyPress waitForKeyPress = new WaitForKeyPress();
+            if ((bool)waitForKeyPress.ShowDialog())
+            {
+                inSettings = false;
+            }
+
+            textBox.Text = waitForKeyPress.GetKeyPressed();
+            inSettings = false;
         }
     }
 }

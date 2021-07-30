@@ -323,12 +323,12 @@
                             <StackPanel Grid.Row="0">
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                                        <ColumnDefinition Width="1*"></ColumnDefinition>
                                         <ColumnDefinition Width="4*"></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Column="0">Client.Txt File Path:</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <TextBox x:Name="ClientTxtFilePathTextBox" Grid.Column="2" IsReadOnly="true" PreviewMouseDown="ClientTxtFilePathTextBox_MouseDown" >Location</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
@@ -337,8 +337,8 @@
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Hideout Hotkey:</Label>
+                                    <TextBox x:Name="HideoutHotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">F5</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
@@ -347,8 +347,8 @@
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Logout Hotkey:</Label>
+                                    <TextBox x:Name="LogOutHotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">F10</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
@@ -357,8 +357,8 @@
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Whisper Back Hotkey:</Label>
+                                    <TextBox x:Name="WhisperBackHotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">Add</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
@@ -367,97 +367,87 @@
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Invite Last Player Hotkey:</Label>
+                                    <TextBox x:Name="InviteLastPlayerHotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">NumPad0</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Invite Friend Hotkey 1:</Label>
+                                    <TextBox x:Name="InviteFriend1HotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">NumPad1</TextBox>
+                                    <Label Grid.Column="3">Friend 1 Name:</Label>
+                                    <TextBox x:Name="Friend1NameTextBox" Grid.Column="5">friend1Name</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Invite Friend Hotkey 2:</Label>
+                                    <TextBox x:Name="InviteFriend2HotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">NumPad2</TextBox>
+                                    <Label Grid.Column="3">Friend 2 Name:</Label>
+                                    <TextBox x:Name="Friend2NameTextBox" Grid.Column="5">friend2Name</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Invite Friend Hotkey 3:</Label>
+                                    <TextBox x:Name="InviteFriend3HotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">NumPad3</TextBox>
+                                    <Label Grid.Column="3">Friend 3 Name:</Label>
+                                    <TextBox x:Name="Friend3NameTextBox" Grid.Column="5">friend3Name</TextBox>
                                 </Grid>
                                 <Separator Margin="5"/>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
-                                </Grid>
-                                <Separator Margin="5"/>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition></ColumnDefinition>
+                                        <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                         <ColumnDefinition></ColumnDefinition>
                                     </Grid.ColumnDefinitions>
 
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
+                                    <Label Grid.Column="0">Custom Hotkey:</Label>
+                                    <TextBox x:Name="CustomHotkeyTextBox" Grid.Column="2" PreviewMouseDown="HotKeyTextBox_MouseDown">End</TextBox>
+                                    <Label Grid.Column="3">Custom Hotkey function:</Label>
+                                    <TextBox x:Name="CustomFunctionTextBox" Grid.Column="5">/global 820</TextBox>
                                 </Grid>
-                                <Separator Margin="5"/>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
-                                </Grid>
-                                <Separator Margin="5"/>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
-                                </Grid>
-                                <Separator Margin="5"/>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition></ColumnDefinition>
-                                        <ColumnDefinition></ColumnDefinition>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Grid.Column="0">Client.Txt File Path</Label>
-                                    <TextBox Grid.Column="2">Location</TextBox>
-                                </Grid>
-                                <Separator Margin="5"/>
                             </StackPanel>
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition></ColumnDefinition>
                                     <ColumnDefinition></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <Button Grid.Column="1">Save Settings</Button>
+                                <Button Grid.Column="1" Click="saveSettingsButton_Click"  Background="Gray" Foreground="Goldenrod" BorderBrush="DarkGoldenrod" FontWeight="Medium" FontSize="16" >
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="5"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    Save Settings
+                                </Button>
                             </Grid>
                         </Grid>
                     </ScrollViewer>

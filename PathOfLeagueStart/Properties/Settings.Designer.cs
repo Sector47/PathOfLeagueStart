@@ -142,5 +142,53 @@ namespace PathOfLeagueStart.Properties {
                 this["CustomHotkey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("null")]
+        public string Friend1 {
+            get {
+                return ((string)(this["Friend1"]));
+            }
+            set {
+                this["Friend1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("null")]
+        public string Friend2 {
+            get {
+                return ((string)(this["Friend2"]));
+            }
+            set {
+                this["Friend2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("null")]
+        public string Friend3 {
+            get {
+                return ((string)(this["Friend3"]));
+            }
+            set {
+                this["Friend3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/global 820")]
+        public string CustomFunction {
+            get {
+                return ((string)(this["CustomFunction"]));
+            }
+            set {
+                this["CustomFunction"] = value;
+            }
+        }
     }
 }

@@ -72,6 +72,9 @@
     <Compile Include="Views\GemSelectionWindow.xaml.cs">
       <DependentUpon>GemSelectionWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WaitForKeyPress.xaml.cs">
+      <DependentUpon>WaitForKeyPress.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WeaponSelectionWindow.xaml.cs">
       <DependentUpon>WeaponSelectionWindow.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\GemSelectionWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WaitForKeyPress.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
