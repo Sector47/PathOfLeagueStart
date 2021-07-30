@@ -235,7 +235,7 @@
                                 <RowDefinition></RowDefinition>
 
                             </Grid.RowDefinitions>
-                            <Viewbox Grid.Column="0" Grid.Row="0">
+                            <Viewbox Grid.Column="1" Grid.Row="1">
                                 <DockPanel >
                                     <Label Content="Next Area: " Target="{Binding ElementName=NextAreaTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
                                     <TextBlock x:Name="NextAreaTextBlock"  Text="Next Area" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
@@ -243,21 +243,21 @@
                             </Viewbox>
 
 
-                            <Viewbox Grid.Column="1" Grid.Row="0">
+                            <Viewbox Grid.Column="0" Grid.Row="1">
                                 <DockPanel >
-                                    <Label Content="Next Passive: " Target="{Binding ElementName=NextPassiveTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
-                                    <TextBlock x:Name="NextPassiveTextBlock"  Text="Next Passive" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
+                                    <Label Content="Gems Available: " Target="{Binding ElementName=AvailableGemsTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
+                                    <TextBlock x:Name="AvailableGemsTextBlock"  Text="Gems" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap"/>
                                 </DockPanel>
                             </Viewbox>
 
-                            <Viewbox Grid.Column="0" Grid.Row="1">
+                            <Viewbox Grid.Column="0" Grid.Row="0">
                                 <DockPanel>
                                     <Label Content="Current Quest " Target="{Binding ElementName=CurrentQuestTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
                                     <TextBlock x:Name="CurrentQuestTextBlock"  Text="Next Quest" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>
                                 </DockPanel>
                             </Viewbox>
 
-                            <Viewbox Grid.Column="1" Grid.Row="1">
+                            <Viewbox Grid.Column="1" Grid.Row="0">
                                 <DockPanel >
                                     <Label Content="Next Quest: " Target="{Binding ElementName=NextQuestTextBlock}" DockPanel.Dock="Left" VerticalAlignment="Center" Foreground="White"></Label>
                                     <TextBlock x:Name="NextQuestTextBlock"  Text="Next Quest" DockPanel.Dock="Right" VerticalAlignment="Center" Foreground="White"/>

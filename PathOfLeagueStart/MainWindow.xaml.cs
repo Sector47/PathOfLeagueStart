@@ -42,6 +42,7 @@ namespace PathOfLeagueStart
         private string characterClass = "Scion";
         private string lastWhisperName;
         private Quest currentQuest;
+        private List<string> GemsAvailable = new List<string>();
         private List<Quest> allQuests = new List<Quest>();
         private List<string[]> recentWhispers = new List<string[]>();
         // Binding for our whispers listview
@@ -467,12 +468,13 @@ namespace PathOfLeagueStart
                 if (areasEntered.Find(a => a.name == q.finishZone) != null && !q.isCompleted)
                 {
                     q.isCompleted = true;
+                    completedQuests.Add(q);
                     // All vendor rewards that match the quest that was completed
                     listVr = dataFetcher.VendorRewardsList.Where(vr => vr.questName == q.questName && vr.classes.Contains(characterClass)).ToList();
                     listQr = dataFetcher.QuestRewardsList.Where(qr => qr.questName == q.questName && qr.classes.Contains(characterClass)).ToList();
                 }
 
-                if (areasEntered.Find(a => a.name == q.initialZone) != null && !q.isStarted && !q.isCompleted)
+                if (areasEntered.Find(a => a.name == q.initialZone && completedQuests.Exists(cq => q.prerequisiteQuest == cq.questName || q.prerequisiteQuest == string.Empty)) != null && !q.isStarted && !q.isCompleted)
                 {
                     q.isStarted = true;
                     currentQuest = q;
@@ -495,6 +497,7 @@ namespace PathOfLeagueStart
                 }
             }
             HighLightGems(compiledGemNames);
+            
         }
 
         private void HighLightGems(List<string> gemsToHighlight)
@@ -517,6 +520,10 @@ namespace PathOfLeagueStart
                     if(img.Source.ToString().Contains("Socket") && img.Tag != null && img.Tag.ToString() == gemName)
                     {
                         imagesToAddHighlightTo.Add(img);
+                        if (!GemsAvailable.Contains(gemName))
+                        {
+                            GemsAvailable.Add(gemName);
+                        }
                     }
                 }
             }
@@ -916,6 +923,9 @@ namespace PathOfLeagueStart
         private void HighlightGem_Clicked(Object sender, System.Windows.Input.MouseEventArgs e)
         {
             gridEquipmentIcons.Children.Remove((UIElement)sender);
+            Image img = sender as Image;
+            GemsAvailable.Remove(img.Tag.ToString());
+            UpdateDataInUI();
         }
 
         private void UpdateDataInUI()
@@ -934,6 +944,7 @@ namespace PathOfLeagueStart
                 try
                 {
                     NextQuestTextBlock.Text = allQuests.ElementAt(indexOfCurrentQuest + 1).questName;
+                    NextAreaTextBlock.Text = allQuests.ElementAt(indexOfCurrentQuest + 1).finishZone;
                 }
                 catch
                 {
@@ -946,6 +957,17 @@ namespace PathOfLeagueStart
             AddWhispersToListView();
 
             WhisperNameTextBlock.Text = lastWhisperName;
+            bool didFindAGem = false;
+            AvailableGemsTextBlock.Text = string.Empty;
+            foreach (string gem in GemsAvailable)
+            {
+                AvailableGemsTextBlock.Text += gem + ", ";
+                didFindAGem = true;
+            }
+            if (didFindAGem)
+            {
+                AvailableGemsTextBlock.Text = AvailableGemsTextBlock.Text.Substring(0, AvailableGemsTextBlock.Text.Length - 2);
+            }
 
             
 
