@@ -42,7 +42,7 @@ namespace PathOfLeagueStart.Views
 
         private void BindWeaponData()
         {
-            WeaponListBox.ItemsSource = allWeapons;
+            WeaponListBox.ItemsSource = allWeapons.Where(w => w.classId != null);
         }
 
         private void BindWeaponData(string filter)

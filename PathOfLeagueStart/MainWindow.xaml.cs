@@ -969,11 +969,32 @@ namespace PathOfLeagueStart
                 AvailableGemsTextBlock.Text = AvailableGemsTextBlock.Text.Substring(0, AvailableGemsTextBlock.Text.Length - 2);
             }
 
+
+            try
+            {
+                HighestBaseTextBlock.Text = GetHighestWeapon().name;
+            }
+            catch (Exception e)
+            {
+                Logger.LogDebug(e.ToString());
+            }
+                
+
             
-
-
             
             SetXpPenalty();
+        }
+
+        private Weapon GetHighestWeapon()
+        {
+            Weapon nearest = new Weapon();
+            if(selectedWeapon != null)
+            {
+                nearest = dataFetcher.WeaponList.Where(w => w.classId == selectedWeapon.classId).OrderBy(w => Math.Abs(w.dropLevel - currentLevel)).First();
+            }
+
+            
+            return nearest;
         }
 
         private void UpdateSettingsUI()
@@ -1072,6 +1093,11 @@ namespace PathOfLeagueStart
 
             textBox.Text = waitForKeyPress.GetKeyPressed();
             inSettings = false;
+        }
+
+        private void manualUpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            dataFetcher.ManualUpdateData();
         }
     }
 }

@@ -360,7 +360,7 @@ namespace PathOfLeagueStart.Classes
                         // For now we will assume that as required lvl goes up, that is the best base available.
                         "tables=items&" +
                         // Fields we want are required level, name, class id, and drop level
-                        "fields=items.required_level,items.name,items.class_id&" +
+                        "fields=items.required_level,items.name,items.class_id,items.drop_level,items.class_id&" +
                         // We want items that match the class ids that weapons have
                         "where=" +
                             "(" +
@@ -420,6 +420,7 @@ namespace PathOfLeagueStart.Classes
 
             // For each of our lists we will serialize it and store in a file.
             string filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "gemData.json");
+            File.Delete(filePath);
             FileStream fs = File.Open(filePath, FileMode.OpenOrCreate);
 
             // Serialize the object
@@ -436,6 +437,7 @@ namespace PathOfLeagueStart.Classes
             // Repeat below changing names
 
             filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "weaponData.json");
+            File.Delete(filePath);
             fs = File.Open(filePath, FileMode.OpenOrCreate);
             string weaponString = JsonConvert.SerializeObject(weaponList, Formatting.Indented);
             sw = new StreamWriter(fs);
@@ -443,6 +445,7 @@ namespace PathOfLeagueStart.Classes
             sw.Flush();
 
             filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "areaData.json");
+            File.Delete(filePath);
             fs = File.Open(filePath, FileMode.OpenOrCreate);
             string areaString = JsonConvert.SerializeObject(areaList, Formatting.Indented);
             sw = new StreamWriter(fs);
@@ -450,6 +453,7 @@ namespace PathOfLeagueStart.Classes
             sw.Flush();
 
             filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "questRewardsData.json");
+            File.Delete(filePath);
             fs = File.Open(filePath, FileMode.OpenOrCreate);
             string questRewardsString = JsonConvert.SerializeObject(questRewardsList, Formatting.Indented);
             sw = new StreamWriter(fs);
@@ -457,6 +461,7 @@ namespace PathOfLeagueStart.Classes
             sw.Flush();
 
             filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "vendorRewardsData.json");
+            File.Delete(filePath);
             fs = File.Open(filePath, FileMode.OpenOrCreate);
             string vendorRewardsString = JsonConvert.SerializeObject(vendorRewardsList, Formatting.Indented);
             sw = new StreamWriter(fs);
@@ -464,6 +469,7 @@ namespace PathOfLeagueStart.Classes
             sw.Flush();
 
             filePath = Path.Combine(localAppDataFilePath, "PathOfLeagueStart", "questData.json");
+            File.Delete(filePath);
             fs = File.Open(filePath, FileMode.OpenOrCreate);
             string questString = JsonConvert.SerializeObject(questList, Formatting.Indented);
             sw = new StreamWriter(fs);

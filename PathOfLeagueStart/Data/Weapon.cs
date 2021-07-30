@@ -18,6 +18,9 @@ namespace PathOfLeagueStart
         [JsonProperty("name")]
         public string name { get; set; }
 
+        [JsonProperty("class id")]
+        public string classId { get; set; }
+
         public override string ToString()
         {
             return name;

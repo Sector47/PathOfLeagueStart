@@ -301,8 +301,8 @@
                                 <TextBlock x:Name="WhisperNameTextBlock"  Text="PersonToWhisper" Margin="5,0,0,0" Foreground="White" />
                             </StackPanel>
                             <StackPanel Grid.Column="1" Grid.Row="2">
-                                <Label Content="HotKeys: " Target="{Binding ElementName=HotKeysTextBlock}" Foreground="White"></Label>
-                                <TextBlock x:Name="HotkeyTextBlock" Text="Hotkey" Margin="5,0,0,0" Foreground="White"/>
+                                <Label Content="Highest Base " Target="{Binding ElementName=HighestBaseTextBlock}" Foreground="White"></Label>
+                                <TextBlock x:Name="HighestBaseTextBlock" Text="Hotkey" Margin="5,0,0,0" Foreground="White"/>
                             </StackPanel>
                         </Grid>
                     </Border>
@@ -447,6 +447,14 @@
                                         </Style>
                                     </Button.Resources>
                                     Save Settings
+                                </Button>
+                                <Button Grid.Column="0" Click="manualUpdateButton_Click"  Background="Gray" Foreground="Goldenrod" BorderBrush="DarkGoldenrod" FontWeight="Medium" FontSize="16" >
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="5"/>
+                                        </Style>
+                                    </Button.Resources>
+                                    Manual Api Update
                                 </Button>
                             </Grid>
                         </Grid>
