@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PathOfExile_Helper.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PathOfLeagueStart.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="LastLeagueLaunched" Type="System.String" Scope="User">
@@ -7,6 +7,30 @@
     </Setting>
     <Setting Name="GGGClientFilePath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="GoToHideoutHotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F5</Value>
+    </Setting>
+    <Setting Name="LogOutHotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">F10</Value>
+    </Setting>
+    <Setting Name="WhisperBackHotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Add</Value>
+    </Setting>
+    <Setting Name="InviteLastPlayerHotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NumPad0</Value>
+    </Setting>
+    <Setting Name="InviteFriend1Hotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NumPad1</Value>
+    </Setting>
+    <Setting Name="InviteFriend2Hotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NumPad2</Value>
+    </Setting>
+    <Setting Name="InviteFriend3Hotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NumPad3</Value>
+    </Setting>
+    <Setting Name="CustomHotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">End</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -18,6 +19,11 @@ using PathOfLeagueStart.Data;
 using PathOfLeagueStart.Classes;
 using PathOfLeagueStart.Views;
 using System.Windows.Media.Animation;
+using System.Windows.Forms;
+using System.Text.RegularExpressions;
+using FMUtils.KeyboardHook;
+using System.Configuration;
+using System.Threading;
 
 namespace PathOfLeagueStart
 {
@@ -38,14 +44,21 @@ namespace PathOfLeagueStart
         private Quest currentQuest;
         private List<Quest> allQuests = new List<Quest>();
         private List<string[]> recentWhispers = new List<string[]>();
+        private string CustomHotKeyString;
         // Binding for our whispers listview
         private System.ComponentModel.BindingList<string> listItems = new System.ComponentModel.BindingList<string>();
         private StreamReader logReader;
         private SettingsDisplayData settings;
         private DispatcherTimer dispatcherTimer;
+        private Hook hotkeyHook = new Hook("Global Action Hook");
+        private bool inSettings = false;
+
+
 
         private List<Quest> startedQuests = new List<Quest>();
         private List<Quest> completedQuests = new List<Quest>();
+
+
 
         public MainWindow()
         {
@@ -55,15 +68,171 @@ namespace PathOfLeagueStart
             dataFetcher = FetchData();
             CreateFileWatcher(settings.getClientTxtFilePath);
             StartDispatcherTimer();
-            SetCurrentArea("The Twilight Strand");
             FillQuestList();
             SetZIndexDefault();
+            SaveHotKeys();
+
+            AttachKeyboardInterceptor(hotkeyHook);
+            
+
+            
 
             WhisperLogView.ItemsSource = listItems;
             UpdateDataInUI();
         }
 
-        
+
+        private void AttachKeyboardInterceptor(Hook hookToAttach)
+        {
+            hookToAttach.KeyDownEvent += CheckForHotKeyPress;
+        }
+
+        private void CheckForHotKeyPress(KeyboardHookEventArgs e)
+        {
+            string hotKeyPressed = settings.GetHotKey(e.Key.ToString());
+            if (hotKeyPressed != string.Empty)
+            {
+                switch (hotKeyPressed)
+                {
+                    case "GoToHideoutHotkey":
+                        {
+                            GoToHideout();
+                            break;
+                        }
+                    case "LogOutHotkey":
+                        {
+                            LogOut();
+                            break;
+                        }
+                    case "WhisperBackHotkey":
+                        {
+                            WhisperBack();
+                            break;
+                        }
+                    case "InviteLastPlayerHotkey":
+                        {
+                            InviteLastPlayer();
+                            break;
+                        }
+                    case "InviteFriend1Hotkey":
+                        {
+                            InviteFriend(1);
+                            break;
+                        }
+                    case "InviteFriend2Hotkey":
+                        {
+                            InviteFriend(2);
+                            break;
+                        }
+                    case "InviteFriend3Hotkey":
+                        {
+                            InviteFriend(3);
+                            break;
+                        }
+                    case "CustomHotkey":
+                        {
+                            CustomHotKey();
+                            break;
+                        }
+
+                    default:
+                        {
+                            Logger.LogDebug("Could not find a method to run for the hotkey: " + hotKeyPressed);
+                            break;
+                        }
+                }
+            }
+           
+            Logger.LogDebug(e.Key.ToString());
+        }
+
+        private void WhisperBack()
+        {
+            
+            SendKeys.SendWait("~");
+            System.Windows.Clipboard.SetText("@" + lastWhisperName + " ");
+            SendKeys.SendWait("^{v}");
+            Task.Delay(50).ContinueWith(t => SendBackSpace());
+            SendKeys.SendWait(" ");
+            SendBackSpace();
+            
+        }
+
+        private void SendBackSpace()
+        {
+            SendKeys.SendWait("{BS}");
+        }
+
+        private void InviteLastPlayer()
+        {
+            SendKeys.SendWait("~");
+            System.Windows.Clipboard.SetText("/invite " + lastWhisperName);
+            SendKeys.SendWait("^{v}");
+            SendKeys.SendWait("~");
+        }
+
+        private void InviteFriend(int friendToInvite)
+        {
+            string friend = GetFriend(friendToInvite);
+            SendKeys.SendWait("~");
+            System.Windows.Clipboard.SetText("/invite " + lastWhisperName);
+            SendKeys.SendWait("^{v}");
+            SendKeys.SendWait("~");
+        }
+
+        private void CustomHotKey()
+        {
+            SendKeys.SendWait("~");
+            System.Windows.Clipboard.SetText("/" + CustomHotKeyString);
+            SendKeys.SendWait("^{v}");
+            SendKeys.SendWait("~");
+        }
+
+
+        private void SaveHotKeys()
+        {
+            List<Hotkey> hotKeyList = new List<Hotkey>();
+            // TODO GRAB FROM SETTINGS PAGE ON SAVE BUTTON CLICK
+            hotKeyList.Add(new Hotkey("GoToHideout", Key.F5));
+            hotKeyList.Add(new Hotkey("LogOut", Key.F6));
+
+            settings.SetUpHotkeys(hotKeyList);
+        }
+
+        private string GetFriend(int friendToInvite)
+        {
+            return string.Empty;
+        }
+
+
+
+
+        private void LogOut()
+        {
+            SendKeys.SendWait("~");
+            System.Windows.Clipboard.SetText("/exit");
+            SendKeys.SendWait("^{v}");
+            SendKeys.SendWait("~");
+        }
+
+
+
+         public void GoToHideout()
+         {
+             SendKeys.SendWait("~");
+             System.Windows.Clipboard.SetText("/Hideout");
+             SendKeys.SendWait("^{v}");
+             SendKeys.SendWait("~");
+         }
+
+         private void InviteLastWhisper()
+         {
+             SendKeys.SendWait("~");
+             System.Windows.Clipboard.SetText("/" + lastWhisperName);
+             SendKeys.SendWait("^{v}");
+             SendKeys.SendWait("~");
+         }
+
 
         private void StartDispatcherTimer()
         {
@@ -74,7 +243,7 @@ namespace PathOfLeagueStart
             dispatcherTimer.Tick += new EventHandler(DispatcherTimer_Tick);
 
             // set timer interval to 1 seconds and start timer
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 50);
             dispatcherTimer.Start();
         }
 
@@ -157,6 +326,7 @@ namespace PathOfLeagueStart
                 while ((line = logReader.ReadLine()) != null)
                 {
                     ReadLine(line);
+                    UpdateDataInUI();
                 }
             }
         }
@@ -177,7 +347,7 @@ namespace PathOfLeagueStart
             {
                 UpdateLevel(line);
             }
-            else if (line.Contains("You have entered "))
+            else if (line.Contains("Generating level "))
             {
                 UpdateArea(line);
             }
@@ -189,6 +359,9 @@ namespace PathOfLeagueStart
 
         private void UpdateArea(string line)
         {
+            /*
+             * Note currently using the client.txt debug line of generating level ## area "" with seed if this changes area loading will be broken for a bit. Commenting out the old way which is unable to determine area level. IF I have to revert to this I can fix this by assuming you aren't in an area over 10 levels above you when i setcurrentarea()
+             * 
             // To avoid magic numbers we will count the length of our string.
             String areaEnter = "You have entered ";
             int indexOfArea = line.IndexOf(areaEnter) + areaEnter.Length;
@@ -197,7 +370,29 @@ namespace PathOfLeagueStart
             string currentAreaName = line.Substring(indexOfArea, (line.Length - 1 - areaEnter.Length - line.IndexOf(areaEnter)));
             SetCurrentArea(currentAreaName);
             Logger.LogDebug("Entering Area: " + currentArea);
-            UpdateDataInUI();
+            */
+            // To avoid magic numbers we will count the length of our string.
+            String areaEnter = "Generating level ";
+            int indexOfAreaLevel = line.LastIndexOf(areaEnter) + "Generating level ".Length;
+            // Magic number here of 2 is from the fact that area levels are at most 2 characters long. We are parsing to int so we will either get "##" or "# " which will parse just fine.
+            int maxLengthOfAreaLevel = 2;
+            int currentAreaLevel = GetNumbersFromString(line.Substring(indexOfAreaLevel, maxLengthOfAreaLevel));
+            // to get areaName, we go to index of You have entered in the string, and take the remaining string in the line by going to end of line with a substring.
+            // Line - index location - length of "You have entered " and the line ends with a period we don't want, so -1;
+            // 
+            // Example area generation line. So we can get first index of " and last index of" for our substring perfectly.
+            // Generating level 48 area "The Western Forest" with 
+            // Substring will count the escape character so we have to add 1 and subtract 1 for that, or we can replace them with a non escaped character
+            string currentAreaName = line.Substring(line.IndexOf("\"") + 1, line.LastIndexOf("\"") - line.IndexOf("\"") - 1);
+            SetCurrentArea(currentAreaName, currentAreaLevel);
+            Logger.LogDebug("Entering Area: " + currentArea);
+
+        }
+
+        private int GetNumbersFromString(string text)
+        {
+            int foundNumber = Convert.ToInt32(Regex.Replace(text, "[^0-9]", string.Empty));
+            return foundNumber;
         }
 
         private void UpdateLevel(string line)
@@ -226,8 +421,6 @@ namespace PathOfLeagueStart
                 currentLevel = int.Parse(line.Substring(indexOfLevel));
                 Logger.LogDebug(CharacterNameTextBlock + " is now level: " + currentLevel.ToString());
             }
-
-            UpdateDataInUI();
         }
 
         private void UpdateWhispers(string line)
@@ -243,7 +436,6 @@ namespace PathOfLeagueStart
             string[] compiledMessage = new string[2] { lastWhisperName, lastMessage };
 
             recentWhispers.Add(compiledMessage);
-            UpdateDataInUI();
         }
 
         private void UpdateQuestData()
@@ -251,32 +443,28 @@ namespace PathOfLeagueStart
             // Grab data from entered areas to see if you've received any new quests
             // Add them to list of current quests, ignoring quests that were already added.
 
-            // TODO complete quests if done
+            // Complete quests when they are done, then while we are looping through we mark them down once when they are completed
+            List<Vendor> listVr = new List<Vendor>();
+            List<Quest> listQr = new List<Quest>();
+
+
             foreach (Quest q in allQuests)
             {
-                if (areasEntered.Find(a => a.name == q.finishZone) != null)
+                if (areasEntered.Find(a => a.name == q.finishZone) != null && !q.isCompleted)
                 {
                     q.isCompleted = true;
+                    // All vendor rewards that match the quest that was completed
+                    listVr = dataFetcher.VendorRewardsList.Where(vr => vr.questName == q.questName && vr.classes.Contains(characterClass)).ToList();
+                    listQr = dataFetcher.QuestRewardsList.Where(qr => qr.questName == q.questName && qr.classes.Contains(characterClass)).ToList();
                 }
 
-                if (areasEntered.Find(a => a.name == q.initialZone) != null)
+                if (areasEntered.Find(a => a.name == q.initialZone) != null && !q.isStarted && !q.isCompleted)
                 {
                     q.isStarted = true;
                     currentQuest = q;
                 }
             }
-            List<Vendor> listVr = new List<Vendor>();
-            List<Quest> listQr = new List<Quest>();
 
-            foreach (Quest q in allQuests)
-            {
-                if (q.isCompleted)
-                {
-                    // All vendor rewards that match the quest that was completed
-                   listVr = dataFetcher.VendorRewardsList.Where(vr => vr.questName == q.questName && vr.classes.Contains(characterClass)).ToList();
-                   listQr = dataFetcher.QuestRewardsList.Where(qr => qr.questName == q.questName && qr.classes.Contains(characterClass)).ToList();
-                }
-            }
             List<string> compiledGemNames = new List<string>();
             foreach(Quest q in listQr)
             {
@@ -355,7 +543,9 @@ namespace PathOfLeagueStart
 
 
                 // Add event handler to the glow
-                glowImage.MouseDown += new MouseButtonEventHandler(HighlightGem_Clicked);
+                glowImage.MouseDown += new System.Windows.Input.MouseButtonEventHandler(HighlightGem_Clicked);
+                glowImage.Tag = img.Tag;
+                ToolTipService.SetToolTip(glowImage, glowImage.Tag);
             }
 
             
@@ -366,19 +556,28 @@ namespace PathOfLeagueStart
             // Check if character level is too far below zone;
             // Path of exile xp penalty has a safe distance before it starts being calculated.
             int safeDistance = (3 + (currentLevel / 16));
-            int currentAreaLevel = int.Parse(currentArea.areaLevel);
+            int currentAreaLevel = 0;
+            if(currentArea != null && currentArea.areaLevel != null)
+            {
+                currentAreaLevel = int.Parse(currentArea.areaLevel);
+            }
+
+            int effectiveDifference = Math.Max(Math.Abs(currentLevel - currentAreaLevel) - safeDistance, 0);
 
             if (Math.Abs(currentLevel - currentAreaLevel) > safeDistance)
             {
                 double xpPenalty =
-                    Math.Pow(
+                    Math.Max(Math.Pow(
                         ((currentLevel + 5) /
-                         (currentLevel + 5 + Math.Pow((currentAreaLevel - currentLevel), 2.5))), 1.5);
+                         (currentLevel + 5 + Math.Pow(effectiveDifference, 2.5))), 1.5), 0.01);
+
+                string stringFormattedXpPenaltyValue = String.Format("Xp Penalty: {0:P2}", xpPenalty);
+
                 if (currentLevel > currentAreaLevel)
                 {
                     TextBlock formattedXpPenalty = new TextBlock();
-                    formattedXpPenalty.Inlines.Add("Too high level, you will have an xp penalty multiplier of: ");
-                    formattedXpPenalty.Inlines.Add(new Bold(new Run(xpPenalty.ToString())));                    
+                    formattedXpPenalty.Inlines.Add("Too high level, ");
+                    formattedXpPenalty.Inlines.Add(new Bold(new Run(stringFormattedXpPenaltyValue)));                    
                     XpPenaltyTextBlock.Text = string.Empty;
                     XpPenaltyTextBlock.Inlines.Add(formattedXpPenalty);
                 }
@@ -386,8 +585,8 @@ namespace PathOfLeagueStart
                 if (currentLevel < currentAreaLevel)
                 {
                     TextBlock formattedXpPenalty = new TextBlock();
-                    formattedXpPenalty.Inlines.Add("Too low level, you will have an xp penalty multiplier of: ");
-                    formattedXpPenalty.Inlines.Add(new Bold(new Run(xpPenalty.ToString())));
+                    formattedXpPenalty.Inlines.Add("Too low level, ");
+                    formattedXpPenalty.Inlines.Add(new Bold(new Run(stringFormattedXpPenaltyValue)));
                     XpPenaltyTextBlock.Text = string.Empty;
                     XpPenaltyTextBlock.Inlines.Add(formattedXpPenalty);
                 }
@@ -423,14 +622,39 @@ namespace PathOfLeagueStart
             }
         }
 
+        /// <summary>
+        /// gets the Area data for a given area's name and sets our current area to it.
+        /// </summary>
+        /// <param name="currentAreaName"> The area string we are in. </param>
         private void SetCurrentArea(string currentAreaName)
         {
-            currentArea = dataFetcher.AreaList.FirstOrDefault((a => a.name == currentAreaName));
-            areasEntered.Add(currentArea);
-            UpdateQuestData();
+            // the -current level < 10 means that the area level can't be greater than 10 levels above the character. this hopefully fixes area level
+            currentArea = dataFetcher.AreaList.FirstOrDefault((a => a.name == currentAreaName && int.Parse(a.areaLevel) - currentLevel < 10));
+            // If we found the area set it, if not set to twilight strand to avoid issues.
+            if(currentArea != null)
+            {
+                areasEntered.Add(currentArea);
+                UpdateQuestData();
+            }
         }
 
-        private void SocketIcon_Clicked(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Overloaded version of SetCurrentArea that is used when we know the arealevel, which for now is always but if te debug changes we will go back to the nonoverloaded method.
+        /// </summary>
+        /// <param name="currentAreaName"> The area string we are in. </param>
+        /// <param name="areaLevel"> The level of the area we are in. </param>
+        private void SetCurrentArea(string currentAreaName, int areaLevel)
+        {
+            currentArea = dataFetcher.AreaList.FirstOrDefault((a => a.name == currentAreaName && int.Parse(a.areaLevel) == areaLevel));
+            // If we found the area set it, if not set to twilight strand to avoid issues.
+            if (currentArea != null)
+            {
+                areasEntered.Add(currentArea);
+                UpdateQuestData();
+            }
+        }
+
+            private void SocketIcon_Clicked(object sender, RoutedEventArgs e)
         {
             if (!isSocketsLocked)
             {
@@ -489,6 +713,7 @@ namespace PathOfLeagueStart
                                 gridEquipmentIcons.Children.Add(image);
                                 Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                 Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
+                                Grid.SetZIndex(image, Grid.GetZIndex(socketClicked) + 1);
 
                                 // Make the images horizontal alignment match the alignment of the socket clicked.
                                 image.HorizontalAlignment = socketClicked.HorizontalAlignment;
@@ -549,8 +774,9 @@ namespace PathOfLeagueStart
                                     gridEquipmentIcons.Children.Add(image);
                                     Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                     Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
+                                    Grid.SetZIndex(image, Grid.GetZIndex(socketClicked) + 1);
 
-                                    
+
 
                                     // Make the images horizontal alignment match the alignment of the socket clicked.
                                     image.HorizontalAlignment = socketClicked.HorizontalAlignment;
@@ -649,7 +875,7 @@ namespace PathOfLeagueStart
             isSocketsLocked = !isSocketsLocked;
 
             // And change the text of our button.
-            Button b = (Button)sender;
+            System.Windows.Controls.Button b = (System.Windows.Controls.Button)sender;
             if (isSocketsLocked)
             {
                 b.Content = "Unlock Gems";
@@ -673,18 +899,35 @@ namespace PathOfLeagueStart
 
         }
 
-        private void HighlightGem_Clicked(Object sender, MouseEventArgs e)
+        private void HighlightGem_Clicked(Object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Image img = sender as Image;
-                //img.
+            gridEquipmentIcons.Children.Remove((UIElement)sender);
         }
 
         private void UpdateDataInUI()
         {
-            AreaNameTextBlock.Text = currentArea.name;
-            AreaLevelTextBlock.Text = currentArea.areaLevel;
+            if(currentArea != null)
+            {
+                AreaNameTextBlock.Text = currentArea.name;
+                AreaLevelTextBlock.Text = currentArea.areaLevel;
+            }            
             CharacterLevelTextBlock.Text = currentLevel.ToString();
             CharacterNameTextBlock.Text = characterName + " (" + characterClass + ")";
+            if(currentQuest != null)
+            {
+                CurrentQuestTextBlock.Text = currentQuest.questName;
+                int indexOfCurrentQuest = allQuests.FindIndex(q => q.questName == currentQuest.questName);
+                try
+                {
+                    NextQuestTextBlock.Text = allQuests.ElementAt(indexOfCurrentQuest + 1).questName;
+                }
+                catch
+                {
+                    NextQuestTextBlock.Text = "All quests done.";
+                }
+                
+            }
+            
 
             AddWhispersToListView();
 

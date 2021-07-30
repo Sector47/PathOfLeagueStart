@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 using System.Collections.Specialized;
 using Microsoft.Win32;
 using System.Windows;
+using System.Windows.Input;
 using PathOfLeagueStart.Classes;
+using System.Configuration;
 
 namespace PathOfLeagueStart.Data
 {
@@ -57,6 +59,53 @@ namespace PathOfLeagueStart.Data
                 Logger.LogError("An error occured while attempting to choose a file location for the Client.txt file.", e);
                 setClientTxtFilePath();
             }
+        }
+
+        public void SetUpHotkeys(List<Hotkey> hotkeysToSetup)
+        {
+            // Remove all previous hotkeys
+            List<SettingsProperty> settingPropertiesToRemove = new List<SettingsProperty>();
+            foreach (SettingsProperty settingsProperty in Properties.Settings.Default.Properties)
+            {
+                if (settingsProperty.Name.Contains("HotKey"))
+                {
+                    settingPropertiesToRemove.Add(settingsProperty);
+                }
+            }
+            foreach(SettingsProperty settingsProperty in settingPropertiesToRemove)
+            {
+                Properties.Settings.Default.Properties.Remove(settingsProperty.Name);
+            }
+            KeyConverter keyConverter = new KeyConverter();
+            // add all list of properties
+            foreach (Hotkey hotkey in hotkeysToSetup)
+            {
+                
+
+
+                //SettingsProperty sp = new SettingsProperty((string)keyConverter.ConvertTo(hotkey.Key, typeof(string)));
+                //sp.PropertyType = typeof(string);
+                //Properties.Settings.Default.Properties.Add(sp);
+                //Properties.Settings.Default.Save();
+
+               // Properties.Settings.Default.Reload();
+                //Properties.Settings.Default.Properties[sp.Name].DefaultValue = hotkey.Name;
+                //Properties.Settings.Default.Save();
+            }
+        }
+
+        public string GetHotKey(string keyAsString)
+        {
+
+            foreach(SettingsProperty settingsProperty in Properties.Settings.Default.Properties)
+            {
+                if(Properties.Settings.Default[settingsProperty.Name].ToString() == keyAsString)
+                {
+                    return settingsProperty.Name;
+                }
+                    
+            }
+            return string.Empty;
         }
     }
 }

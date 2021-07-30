@@ -46,5 +46,101 @@ namespace PathOfLeagueStart.Properties {
                 this["GGGClientFilePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F5")]
+        public string GoToHideoutHotkey {
+            get {
+                return ((string)(this["GoToHideoutHotkey"]));
+            }
+            set {
+                this["GoToHideoutHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F10")]
+        public string LogOutHotkey {
+            get {
+                return ((string)(this["LogOutHotkey"]));
+            }
+            set {
+                this["LogOutHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Add")]
+        public string WhisperBackHotkey {
+            get {
+                return ((string)(this["WhisperBackHotkey"]));
+            }
+            set {
+                this["WhisperBackHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NumPad0")]
+        public string InviteLastPlayerHotkey {
+            get {
+                return ((string)(this["InviteLastPlayerHotkey"]));
+            }
+            set {
+                this["InviteLastPlayerHotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NumPad1")]
+        public string InviteFriend1Hotkey {
+            get {
+                return ((string)(this["InviteFriend1Hotkey"]));
+            }
+            set {
+                this["InviteFriend1Hotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NumPad2")]
+        public string InviteFriend2Hotkey {
+            get {
+                return ((string)(this["InviteFriend2Hotkey"]));
+            }
+            set {
+                this["InviteFriend2Hotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("NumPad3")]
+        public string InviteFriend3Hotkey {
+            get {
+                return ((string)(this["InviteFriend3Hotkey"]));
+            }
+            set {
+                this["InviteFriend3Hotkey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("End")]
+        public string CustomHotkey {
+            get {
+                return ((string)(this["CustomHotkey"]));
+            }
+            set {
+                this["CustomHotkey"] = value;
+            }
+        }
     }
 }
