@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800">    
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="Assets/gridStoneBackground.jpg"/>
+            <ImageBrush ImageSource="Assets/gridRockBackground.jpg"/>
         </Grid.Background>
         <TabControl Background="Gray">
             <TabItem Header="Main" Background="#FFE5E5E5">
@@ -159,7 +159,7 @@
                             Lock Gems
                         </Button>
 
-                        <Button x:Name="changeWeaponButton" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Click="changeWeaponButton_Click" Background="Gray" Foreground="Goldenrod" BorderBrush="DarkGoldenrod" FontWeight="Medium" FontSize="14">
+                        <Button x:Name="changeWeaponButton" Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" Click="changeWeaponButton_Click" Background="Gray" Foreground="Goldenrod" BorderBrush="DarkGoldenrod" FontWeight="Medium" FontSize="14" >
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>

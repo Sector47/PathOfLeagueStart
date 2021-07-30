@@ -125,6 +125,7 @@
     <Resource Include="Data\config.txt" />
     <Resource Include="Data\skillGemData.xml" />
     <Resource Include="Data\listBoxData.txt" />
+    <Resource Include="Assets\glowHighlight.png" />
     <Content Include="Data\questProgression.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

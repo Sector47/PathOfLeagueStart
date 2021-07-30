@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using PathOfLeagueStart.Data;
 using PathOfLeagueStart.Classes;
 using PathOfLeagueStart.Views;
+using System.Windows.Media.Animation;
 
 namespace PathOfLeagueStart
 {
@@ -56,6 +57,7 @@ namespace PathOfLeagueStart
             StartDispatcherTimer();
             SetCurrentArea("The Twilight Strand");
             FillQuestList();
+            SetZIndexDefault();
 
             WhisperLogView.ItemsSource = listItems;
             UpdateDataInUI();
@@ -303,6 +305,8 @@ namespace PathOfLeagueStart
 
         private void CreateHighlight(string gemName)
         {
+
+            List<Image> imagesToAddHighlightTo = new List<Image>();
             foreach(Object obj in gridEquipmentIcons.Children)
             {
                 if(obj is Image)
@@ -310,10 +314,51 @@ namespace PathOfLeagueStart
                     Image img = obj as Image;
                     if(img.Source.ToString().Contains("Socket") && img.Tag != null && img.Tag.ToString() == gemName)
                     {
-                        // Create Highlight on socket at same grid location. Delete it on click :)img.Source = new BitmapImage(new Uri(@"/Assets/weaponIcon.png", UriKind.Relative));
+                        imagesToAddHighlightTo.Add(img);
                     }
                 }
             }
+            foreach(Image img in imagesToAddHighlightTo)
+            {
+                Image glowImage = new Image();
+                glowImage.Source = new BitmapImage(new Uri(@"/Assets/glowHighlight.png", UriKind.Relative));
+
+
+
+                // set location in grid to same as the img we are looking at.
+                Grid.SetColumn(glowImage, GetGridLocation(img).ElementAt(0));
+                Grid.SetRow(glowImage, GetGridLocation(img).ElementAt(1));
+                // Create Highlight on socket at same grid location. Delete it on click :)img.Source = new BitmapImage(new Uri(@"/Assets/weaponIcon.png", UriKind.Relative));
+                Grid.SetZIndex(glowImage, Grid.GetZIndex(img));
+                glowImage.HorizontalAlignment = img.HorizontalAlignment;
+                glowImage.Stretch = Stretch.Uniform;
+                glowImage.Margin = new Thickness(-img.RenderSize.Width/4);
+
+
+
+                gridEquipmentIcons.Children.Add(glowImage);
+
+
+                // Set an animation for the image to decrease opacity, reverse and repeat forever
+                DoubleAnimation doubleAnimation = new DoubleAnimation();
+                doubleAnimation.To = 0;
+                doubleAnimation.Duration = TimeSpan.FromSeconds(2);
+                doubleAnimation.FillBehavior = FillBehavior.Stop;
+                doubleAnimation.AutoReverse = true;
+                doubleAnimation.RepeatBehavior = RepeatBehavior.Forever;
+
+                doubleAnimation.Completed += (s, a) => glowImage.Opacity = .25;
+                glowImage.BeginAnimation(UIElement.OpacityProperty, doubleAnimation);
+
+
+
+
+
+                // Add event handler to the glow
+                glowImage.MouseDown += new MouseButtonEventHandler(HighlightGem_Clicked);
+            }
+
+            
         }
 
         private void SetXpPenalty()
@@ -415,7 +460,7 @@ namespace PathOfLeagueStart
                                 gridEquipmentIcons.Children.Add(image);
                                 Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                 Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
-                                
+                                Grid.SetZIndex(image, Grid.GetZIndex(socketClicked) + 1);
 
                                 // Make the images horizontal alignment match the alignment of the socket clicked.
                                 image.HorizontalAlignment = socketClicked.HorizontalAlignment;
@@ -472,6 +517,7 @@ namespace PathOfLeagueStart
                                 gridEquipmentIcons.Children.Add(image);
                                 Grid.SetColumn(image, GetGridLocation(socketClicked).ElementAt(0));
                                 Grid.SetRow(image, GetGridLocation(socketClicked).ElementAt(1));
+                                Grid.SetZIndex(image, Grid.GetZIndex(socketClicked) + 1);
 
                                 // Make the images horizontal alignment match the alignment of the socket clicked.
                                 image.HorizontalAlignment = socketClicked.HorizontalAlignment;
@@ -627,6 +673,12 @@ namespace PathOfLeagueStart
 
         }
 
+        private void HighlightGem_Clicked(Object sender, MouseEventArgs e)
+        {
+            Image img = sender as Image;
+                //img.
+        }
+
         private void UpdateDataInUI()
         {
             AreaNameTextBlock.Text = currentArea.name;
@@ -654,6 +706,20 @@ namespace PathOfLeagueStart
             }
             recentWhispers.Clear();
 
+        }
+
+        private void SetZIndexDefault()
+        {
+            
+            foreach(Object o in gridEquipmentIcons.Children)
+            {
+                if(o is Image)
+                {
+                    Image i = o as Image;
+                    Grid.SetZIndex(i, 1);
+                }
+                
+            }
         }
     }
 }
